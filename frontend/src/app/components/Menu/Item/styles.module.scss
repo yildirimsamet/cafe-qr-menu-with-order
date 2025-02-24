@@ -1,0 +1,147 @@
+@import '@/app/css/_variables.scss';
+
+.item {
+    display: flex;
+    margin: 15px 0 25px;
+    border-bottom: 1px dashed $tertiary-color;
+    background-color: #f3eeee;
+    padding: 20px;
+    min-height: 200px;
+    border-radius: 5px;
+
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+    &Image {
+        margin-right: 15px;
+
+        & img {
+            width: 100px;
+            height: 100px;
+            border-radius: 4px;
+        }
+    }
+
+    &Content {
+        display: flex;
+        flex-direction: column;
+        margin-left: 15px;
+        width: 100%;
+
+        &Name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: $primary-text-color;
+            letter-spacing: 1.3px;
+        }
+
+        &Description {
+            font-size: 14px;
+            margin-bottom: 15px;
+            color: $primary-color;
+        }
+
+        &Size {
+            outline: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            height: 25px;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        &Amount {
+            outline: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            height: 22px;
+            font-size: 14px;
+            position: relative;
+            background-color: #efefef;
+
+            &::before {
+                content: 'Ad.';
+                position: absolute;
+                top: 50%;
+                left: 5px;
+                transform: translateY(-50%);
+                font-size: 14px;
+                color: $primary-color;
+            }
+        }
+
+        &Quantity {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+    
+            &Decrease,
+            &Increase {
+                background: $secondary-text-color;
+                color: white;
+                border: none;
+                width: 28px;
+                height: 28px;
+                font-size: 16px;
+                font-weight: bold;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: 0.3s;
+    
+                &:hover {
+                    background: #e55b00;
+                }
+            }
+    
+            &Amount {
+                font-size: 16px;
+                font-weight: bold;
+                min-width: 40px;
+                text-align: center;
+                padding: 4px 10px;
+                background: white;
+                border-radius: 5px;
+                border: 1px solid #ddd;
+            }
+        }
+
+        &Bottom {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &Price {
+                font-size: 16px;
+                font-weight: bold;
+                color: $primary-text-color;
+                font-style: italic;
+                letter-spacing: 1.5px;
+            }
+
+            &Add {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: none;
+                border-radius: 4px;
+                background-color: $secondary-text-color;
+                color: $secondary-color;
+                font-size: 16px;
+                padding: 5px 10px;
+                font-weight: bold;
+                height: 30px;
+                & svg {
+                    margin-bottom: 3px;
+                    margin-left: 3px;
+                }
+
+                &:active {
+                    background-color: $secondary-color;
+                    color: $secondary-text-color;
+                }
+            }
+        }
+    }
+}

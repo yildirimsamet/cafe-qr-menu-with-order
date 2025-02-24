@@ -1,0 +1,143 @@
+@import '@/app/css/_variables.scss';
+
+.editProducts {
+    position: relative;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+}
+
+.editProductsList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &Item {
+        &Title {
+            font-size: 24px;
+            font-weight: bold;
+            color: $secondary-text-color;
+            margin-bottom: 10px;
+        }
+
+        &Products {
+            &Item {
+                display: grid;
+                grid-template-columns: 80px 1fr 2fr 1fr 1fr auto;
+                align-items: center;
+                background: #fff;
+                border-radius: 10px;
+                padding: 15px;
+                margin-bottom: 10px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                gap: 15px;
+
+                &Image {
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 5px;
+                    object-fit: cover;
+                }
+
+                &Name {
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: #5a3e1b;
+                }
+
+                &Description {
+                    font-size: 14px;
+                    color: #333;
+                }
+
+                &Category {
+                    font-size: 16px;
+                    color: #7d5a3a;
+                    justify-self: center;
+                }
+
+                &Price {
+                    justify-self: center;
+                    font-size: 14px;
+                    color: #333;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    & div {
+                        font-weight: normal;
+                        color: #7d5a3a;
+
+                        & span {
+                            font-weight: bold;
+                            color: $secondary-text-color;
+                        }
+                    }
+                }
+
+                &Actions {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+
+                    & button {
+                        padding: 8px 12px;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+
+                    &Edit {
+                        background-color: #ffa726;
+                        color: white;
+                    }
+
+                    &Delete {
+                        background-color: $danger-color;
+                        color: white;
+                    }
+                }
+
+                &Empty {
+                    font-size: 18px;
+                    color: #7d5a3a;
+                    padding: 15px 25px;
+                    border-radius: 5px;
+                    background: #fff;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .editProductsList {
+        &Item {
+            &Products {
+                &Item {
+                    grid-template-columns: 1fr;
+                    grid-template-rows: auto auto auto auto auto;
+                    gap: 10px;
+
+                    &Image {
+                        justify-self: center;
+                    }
+
+                    &Category {
+                        justify-self: start;
+                    }
+
+                    &Price {
+                        justify-self: start;
+                    }
+
+                    &Actions {
+                        flex-direction: row;
+                        justify-content: flex-end;
+                    }
+                }
+            }
+
+        }
+    }
+}
+

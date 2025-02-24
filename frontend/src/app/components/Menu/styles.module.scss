@@ -1,0 +1,29 @@
+@import '@/app/css/_variables.scss';
+
+.menu {
+    &Title {
+        font-size: 24px;
+        font-weight: bold;
+        color: $secondary-text-color;
+        background-color: $primary-color;
+        letter-spacing: 1.5px;
+        height: 55px;
+        text-align: center;
+        text-transform: uppercase;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 24px;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 100%;
+            height: 0px;
+            border-bottom: 1px dashed $secondary-text-color;
+        }
+    }
+}

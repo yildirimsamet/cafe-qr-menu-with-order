@@ -1,0 +1,48 @@
+# Node
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Next.js
+.next
+out
+build
+dist
+
+# Environment
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# IDE and Editor files
+.idea
+.vscode
+*.swp
+*.swo
+.DS_Store
+
+# Git
+.git
+.gitignore
+
+# Testing
+coverage
+.nyc_output
+
+# Misc
+README.md
+LICENSE
+*.log
+.dockerignore
+Dockerfile
+docker-compose.yml
+
+# Project specific
+frontend/.eslintrc.json
+frontend/jsconfig.json
+frontend/.eslintrc.js
+frontend/next.config.js
+backend/nodemon.json

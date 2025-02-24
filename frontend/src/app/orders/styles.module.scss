@@ -1,0 +1,9 @@
+@import '@/app/css/_variables.scss';
+.orders {
+    display: flex;
+    flex-direction: column;
+    
+    & > div {
+        min-height: 40vh;
+    }
+}

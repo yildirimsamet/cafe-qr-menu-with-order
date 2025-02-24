@@ -1,0 +1,25 @@
+@import '@/app/css/_variables.scss';
+
+.sizes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.size {
+    margin-bottom: 15px;
+    width: 100%;
+
+    & input {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1001px) {
+    .size {
+        & > div {
+            width: 100%;
+        }
+    }
+}

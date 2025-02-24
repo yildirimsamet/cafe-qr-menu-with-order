@@ -1,0 +1,7 @@
+.cursorrules
+node_modules
+.env
+.next
+package-lock.json
+backend/public/assets/images/*
+!backend/public/assets/images/.gitkeep

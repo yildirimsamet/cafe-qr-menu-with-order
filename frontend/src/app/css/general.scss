@@ -1,0 +1,56 @@
+@import '@/app/css/_variables.scss';
+
+body {
+  background-color: $secondary-color;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff6600, #e55b00);
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #e55b00, #c94e00);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ff6600 #f1f1f1;
+}
+
+.swal2-container {
+  z-index: 99999999 !important;
+}
+
+.swal2-confirm {
+  background-color: $secondary-text-color !important;
+}
+
+.swal2-deny {
+  background-color: $primary-color !important;
+}
+
+.display-none {
+  display: none !important;
+}
+
+[id*='qr-canvas'] {
+  width: 250px !important;
+  height: 250px !important;
+}

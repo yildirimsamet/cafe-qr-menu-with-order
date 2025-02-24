@@ -1,0 +1,15 @@
+@import '@/app/css/_variables.scss';
+.category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
+    background-color: $secondary-text-color;
+    color: $secondary-color;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 24px;
+    letter-spacing: 4px;
+    margin-bottom: 6px;
+    cursor: pointer;
+}

@@ -1,0 +1,75 @@
+@import '@/app/css/_variables.scss';
+
+.item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 15px;
+    background: $primary-color;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    align-items: center;
+    text-align: center;
+    position: relative;
+
+    &Delete {
+        position: absolute;
+        right: 6px;
+        top: 6px;
+
+        & svg {
+            fill: $primary-text-color
+        }
+    }
+
+    &Name {
+        font-size: 18px;
+        font-weight: bold;
+        color: $secondary-text-color;
+        margin-bottom: 5px;
+    }
+
+    &Size {
+        font-size: 14px;
+        color: #999;
+        margin-bottom: 5px;
+    }
+
+    &Quantity {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        &Decrease,
+        &Increase {
+            background: $secondary-text-color;
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        &Amount {
+            font-size: 18px;
+            font-weight: bold;
+            min-width: 40px;
+            text-align: center;
+            padding: 4px 10px;
+            background: white;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    }
+
+    &Price {
+        font-size: 16px;
+        font-weight: bold;
+        color: $secondary-text-color;
+    }
+}

@@ -1,0 +1,37 @@
+@import '@/app/css/_variables.scss';
+
+.navLinks {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+
+    &Link {
+        text-decoration: none;
+        color: $secondary-text-color;
+        font-weight: bold;
+        font-size: 1.2rem;
+        text-align: center;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: $primary-text-color;
+        }
+
+        &_active {
+            color: $primary-text-color;
+        }
+    }
+}
+
+@media screen and (max-width: 1001px) {
+    .navLinks {
+        gap: 5px;
+
+        &Link {
+            font-size: 0.7rem;
+        }
+    }
+}

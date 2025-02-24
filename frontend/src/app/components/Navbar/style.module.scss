@@ -1,0 +1,47 @@
+@import '@/app/css/_variables.scss';
+
+.wrapper {
+    height: 70px;
+    background-color: $primary-color;
+    
+    &Inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+    }
+
+    &Left {
+        color: $primary-text-color;
+    }
+
+    &Right {
+        &Button {
+            color: $tertiary-color !important;
+            border: 1px solid $tertiary-color !important;
+            border-radius: 5px !important;
+            padding: 5px 10px !important;
+            cursor: pointer !important;
+            transition: background-color 0.3s ease !important;
+            font-weight: 700 !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+            z-index: 2 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background-color: $primary-color !important;
+        }
+        
+    }
+}
+
+@media screen and (max-width: 1001px) {
+    .wrapper {
+        &Right {
+            &Button {
+                font-size: 0.5rem !important;
+                padding: 4px 8px !important;
+            }
+        }
+    }
+}
