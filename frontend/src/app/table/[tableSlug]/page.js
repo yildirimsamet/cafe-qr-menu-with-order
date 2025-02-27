@@ -12,7 +12,7 @@ const Table = ({ params: { tableSlug } }) => {
     const { state, setState } = useAppContext();
     const [menu, setMenu] = useState([]);
     const [isMenuOpened, setIsMenuOpened] = useState(true);
-    const [isTableValid, setIsTableValid] = useState(false);
+    const [isTableValid, setIsTableValid] = useState(true);
 
     const getTable = async () => {
         try {
@@ -20,11 +20,14 @@ const Table = ({ params: { tableSlug } }) => {
 
             if (data.data) {
                 setIsTableValid(true);
+            } else {
+                setIsTableValid(false);
             }
         } catch (error) {
-            //
+            setIsTableValid(false);
         }
     };
+
     useEffect(() => {
         getTable();
     }, [tableSlug]);
@@ -57,10 +60,18 @@ const Table = ({ params: { tableSlug } }) => {
                 <p className={styles.mainSectionAdress}>Adress 312sk no:2</p>
                 <p className={styles.mainSectionPhone}>0212 545 54 44</p>
             </div>
-            <div className={cn(styles.mainMenu, (isMenuOpened && styles.mainMenu_open))}>
-                <div className={styles.mainMenuClose} onClick={() => setIsMenuOpened(!isMenuOpened)}>Kapat</div>
-                <Menu menu={menu} />
-            </div>
+            {
+                isTableValid ? (
+                    <div className={cn(styles.mainMenu, (isMenuOpened && styles.mainMenu_open))}>
+                        <div className={styles.mainMenuClose} onClick={() => setIsMenuOpened(!isMenuOpened)}>Kapat</div>
+                        <Menu menu={menu} />
+                    </div>
+                ) : (
+                    <div className={styles.mainMenu}>
+                        <div className={styles.mainMenuTableNotFound}>Bu masa mevcut değil</div>
+                    </div>
+                )
+            }
             <button onClick={() => setIsMenuOpened(!isMenuOpened)} className={styles.mainButton}>Menü</button>
         </div>
     );

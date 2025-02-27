@@ -26,16 +26,20 @@ const Item = ({ item }) => {
     }, [item]);
 
     const addToBasket = () => {
-        const existItem = state.basket.find((basketItem) => basketItem.item_id === item.item_id && basketItem.size_id === selectedSize.size_id);
+        const existItem = state.basket.find((basketItem) =>
+            basketItem.item_id === item.item_id &&
+            basketItem.size_id === selectedSize.size_id);
         const newState = { ...state };
 
         if (existItem) {
             newState.basket = state.basket.map((basketItem) => {
-                if (basketItem.item_id === item.item_id && basketItem.size_id === selectedSize.size_id) {
+                if (
+                    basketItem.item_id === item.item_id &&
+                    basketItem.size_id === selectedSize.size_id
+                ) {
                     return {
                         ...basketItem,
                         quantity: basketItem.quantity + Number(quantity),
-                        price: basketItem.price + selectedSize.size_price * Number(quantity),
                     };
                 }
                 return basketItem;
@@ -47,7 +51,7 @@ const Item = ({ item }) => {
                 item_id: item.item_id,
                 size_id: selectedSize.size_id,
                 quantity: Number(quantity),
-                price: selectedSize.size_price * Number(quantity),
+                price: selectedSize.size_price,
             });
         }
 
@@ -59,35 +63,62 @@ const Item = ({ item }) => {
     return (
         <div className={styles.item}>
             <div className={styles.itemImage}>
-                <img src={item.item_image ? `${process.env.NEXT_PUBLIC_API_URL}/assets/images/${item.item_image}` : process.env.NEXT_PUBLIC_STOCK_IMAGE_URL} alt="" />
+                <img
+                    src={
+                        item.item_image
+                            ? `${process.env.NEXT_PUBLIC_API_URL}/assets/images/${item.item_image}`
+                            : process.env.NEXT_PUBLIC_STOCK_IMAGE_URL
+                    }
+                    alt=""
+                />
             </div>
             <div className={styles.itemContent}>
                 <div className={styles.itemContentName}>{item.item_name}</div>
-                <div className={styles.itemContentDescription}>{item.item_description}</div>
-                <select className={styles.itemContentSize} onChange={(e) => {
-                    setSelectedSize(item.sizes.find((size) => size.size_name === e.target.value));
-                }}
+                <div className={styles.itemContentDescription}>
+                    {item.item_description}
+                </div>
+                <select
+                    className={styles.itemContentSize}
+                    onChange={(e) => {
+                        setSelectedSize(item.sizes.find((size) => size.size_name === e.target.value));
+                    }}
                 >
                     {item.sizes?.map((size, index) => {
-                        return <option value={size.size_name} key={index}>{size.size_name}</option>;
+                        return (
+                            <option value={size.size_name} key={index}>
+                                {size.size_name}
+                            </option>
+                        );
                     })}
                 </select>
                 <div className={styles.itemContentQuantity}>
-                    <button className={styles.itemContentQuantityDecrease} onClick={() => updateQuantity(-1)}>-</button>
+                    <button
+                        className={styles.itemContentQuantityDecrease}
+                        onClick={() => updateQuantity(-1)}
+                    >
+                        -
+                    </button>
                     <span className={styles.itemContentQuantityAmount}>{quantity}</span>
-                    <button className={styles.itemContentQuantityIncrease} onClick={() => updateQuantity(1)}>+</button>
+                    <button
+                        className={styles.itemContentQuantityIncrease}
+                        onClick={() => updateQuantity(1)}
+                    >
+                        +
+                    </button>
                 </div>
 
                 <div className={styles.itemContentBottom}>
-                    <div
-                        className={styles.itemContentBottomPrice}>
-                        {(selectedSize?.size_price || 0 * quantity).toFixed(2)}
-                        ₺
+                    <div className={styles.itemContentBottomPrice}>
+                        {(selectedSize?.size_price || 0 * quantity).toFixed(2)}₺
                     </div>
-                    <button onClick={addToBasket} className={cn(styles.itemContentBottomAdd, {
-                        'display-none': !selectedSize,
-                    })}
-                    >Ekle <AddIcon /></button>
+                    <button
+                        onClick={addToBasket}
+                        className={cn(styles.itemContentBottomAdd, {
+                            'display-none': !selectedSize,
+                        })}
+                    >
+                        Ekle <AddIcon />
+                    </button>
                 </div>
             </div>
         </div>

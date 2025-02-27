@@ -14,7 +14,7 @@ const auth = (role) => (req, res, next) => {
         if (decoded) {
             req.user = decoded;
 
-            const roleHierarchy = ['guest', 'waiter', 'admin'];
+            const roleHierarchy = ['guest', 'waiter', 'admin', 'superadmin'];
 
             if (role && roleHierarchy.indexOf(req.user.role) < roleHierarchy.indexOf(role)) {
                 return res.status(403).json({ error: 'Forbidden: insufficient role' });

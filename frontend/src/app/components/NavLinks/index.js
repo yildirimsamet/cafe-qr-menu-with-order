@@ -16,6 +16,12 @@ const NavLinks = ({ className }) => {
             { path: '/users', title: 'Kullanıcılar' },
             { path: '/edit', title: 'Düzenle' },
         ],
+        'superadmin': [
+            { path: '/tables', title: 'Masalar' },
+            { path: '/orders', title: 'Siparişler' },
+            { path: '/users', title: 'Kullanıcılar' },
+            { path: '/edit', title: 'Düzenle' },
+        ],
     };
 
     return (

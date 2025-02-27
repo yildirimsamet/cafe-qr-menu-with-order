@@ -1,23 +1,23 @@
 import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation';
 import { useState, createContext, useEffect } from 'react';
 import axios from '@/app/lib/axios';
+import useCustomRouter from '../hooks/useCustomRouter';
 import { useAppContext } from './appContext';
 
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const router = useRouter();
     const { state, setState } = useAppContext();
+    const [user, setUser] = useState(null);
+    const router = useCustomRouter();
 
     const login = async ({ username, password }, navigate) => {
-        setState({...state, loading: true});
+        setState({ ...state, loading: true });
         await axios.post('/auth/login', { username, password })
-            .then(response => {
-                if (response.status === 200) {
-                    Cookies.set('token', response.data.token);
-                    setUser(response.data.user);
+            .then(async ({ data }) => {
+                if (data.status === 200) {
+                    Cookies.set('token', data.data.token);
+                    setUser(data.data.user);
 
                     if (navigate) {
                         router.push(navigate);
@@ -26,8 +26,8 @@ export const AuthProvider = ({ children }) => {
                 }
             }).catch(error => {
                 console.error(error);
-            }).finally(() => {
-                setState({...state, loading: false});
+            }).finally(async () => {
+                setState({ ...state, loading: false });
             });
     };
 
@@ -48,19 +48,25 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
     };
 
-    useEffect(() => {
+    const checkUser = async (cb) => {
         const token = Cookies.get('token');
 
         if (!user && token) {
-            setState({...state, loading: true});
-            axios.post('/auth/user', { token }).then(response => {
-                if (response.status === 200) {
-                    setUser(response.data.data);
-                }
-            }).finally(() => {
-                setState({...state, loading: false});
-            });
+            setState({ ...state, loading: true });
+            const { data } = await axios.post('/auth/user', { token });
+
+            if (data.status === 200) {
+                setUser(data.data);
+            }
         }
+
+        cb();
+    };
+
+    useEffect(() => {
+        checkUser(() => {
+            setState({ ...state, loading: false });
+        });
     }, []);
 
     return (

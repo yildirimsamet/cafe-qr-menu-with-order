@@ -10,11 +10,12 @@ router.get("/", async (req, res) => {
     JSON_ARRAYAGG(
         JSON_OBJECT(
             'order_group_id', og.id,
+            'order_group_note', og.note,
             'order_id', og.order_id,
             'created_at', og.created_at,
             'tableSlug', o.table_slug,
             'tableName', t.name,
-            'waiterName', u.username,
+            'updatedBy', u.username,
             'items', (
                 SELECT COALESCE(JSON_ARRAYAGG(
                     JSON_OBJECT(
@@ -36,7 +37,7 @@ router.get("/", async (req, res) => {
 FROM order_groups og
 JOIN orders o ON og.order_id = o.id
 JOIN tables t ON o.table_slug = t.slug
-LEFT JOIN users u ON og.waiter_id = u.id
+LEFT JOIN users u ON og.updated_by = u.username
 WHERE o.status = 'active'
 GROUP BY og.status;
         `);
@@ -59,13 +60,13 @@ GROUP BY og.status;
 });
 
 // Update Order Group Status
-const updateOrderGroupStatus = async (order_group_id, status, user_id) => {
+const updateOrderGroupStatus = async (order_group_id, status, username) => {
     let query = "UPDATE order_groups SET status = ?";
     const params = [status];
 
-    if (user_id) {
-        query += ", waiter_id = ?";
-        params.push(user_id);
+    if (username) {
+        query += ", updated_by = ?";
+        params.push(username);
     }
 
     query += " WHERE id = ?";
@@ -79,9 +80,9 @@ const updateOrderGroupStatus = async (order_group_id, status, user_id) => {
 router.put("/order_groups/:id/status", async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
-    const user_id = req?.user?.id;
+    const username = req?.user?.username;
     try {
-        const results = await updateOrderGroupStatus(id, status, user_id);
+        const results = await updateOrderGroupStatus(id, status, username);
 
         res.json({ status: 200, data: results });
     } catch (error) {

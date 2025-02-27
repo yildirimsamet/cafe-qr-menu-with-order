@@ -1,22 +1,33 @@
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { useAppContext } from '../context/appContext';
 import { useAuth } from './useAuth';
+import useCustomRouter from './useCustomRouter';
 
 export function useAuthorization ({
     authorization = '',
     redirectUrl = '/',
 }) {
     const { user } = useAuth();
-    const router = useRouter();
-    const roleHierarchy = ['guest', 'waiter', 'admin'];
+    const router = useCustomRouter();
+    const roleHierarchy = ['guest', 'waiter', 'admin', 'superadmin'];
+    const { state: { loading } } = useAppContext();
 
+    let authCheckTimeOut;
     useEffect(() => {
-        if (authorization && roleHierarchy.indexOf(user?.role) < roleHierarchy.indexOf(authorization)) {
-            if (router.pathname !== redirectUrl) {
-                router.push(redirectUrl);
+        authCheckTimeOut = setTimeout(() => {
+            if (!loading &&
+                authorization &&
+                roleHierarchy.indexOf(user?.role) < roleHierarchy.indexOf(authorization)) {
+                if (router.pathname !== redirectUrl) {
+                    router.push(redirectUrl);
+                }
             }
-        }
-    }, [user, authorization, redirectUrl]);
+        }, 500);
+
+        return () => {
+            clearTimeout(authCheckTimeOut);
+        };
+    }, [user, authorization, redirectUrl, loading]);
 
     return { user };
 }

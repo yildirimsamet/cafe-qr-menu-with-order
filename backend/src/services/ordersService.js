@@ -1,7 +1,7 @@
-import { getActiveOrderIdByTableSlug, createOrderGroup, addOrderItem, createOrder } from '../routes/customer.js';
+import { getActiveOrderIdByTableSlug, createOrderGroup, addOrderItem, createOrder } from '../routes/customerRoute.js';
 
 export const saveOrderToDatabase = async (orderData) => {
-    const { table_slug, items } = orderData;
+    const { table_slug, items, order_note } = orderData;
 
     try {
         // Get or create active order for the table
@@ -16,7 +16,7 @@ export const saveOrderToDatabase = async (orderData) => {
         }
 
         // Create a new order group
-        const orderGroup = await createOrderGroup(order_id);
+        const orderGroup = await createOrderGroup({order_id, note: order_note});
         const order_group_id = orderGroup.insertId;
 
         // Add items to the order group

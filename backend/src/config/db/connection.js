@@ -6,7 +6,6 @@ const connection = await mysql.createConnection({
   database: 'cafe',
   password: 'root',
   connectTimeout: 0,
-  acquireTimeout: 0,
   waitForConnections: true,
 });
 

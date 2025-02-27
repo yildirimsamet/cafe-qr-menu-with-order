@@ -17,9 +17,9 @@ const EditProducts = () => {
     const [isProductAddModelOpened, setIsProductAddModelOpened] = useState(false);
     const [isProductEditModelOpened, setIsProductEditModelOpened] = useState(false);
     const [selectedProductForEdit, setSelectedProductForEdit] = useState({});
-    const { data: products = [], error, mutate } = useSWR('/items', (url) => {
+    const { data: products = [], mutate } = useSWR('/items', (url) => {
         try {
-            return axios.get(url).then(res => res.data);
+            return axios.get(url).then(res => res.data.data);
         } catch (error) {
             return [];
         }
@@ -76,7 +76,7 @@ const EditProducts = () => {
                     setIsProductEditModelOpened={setIsProductEditModelOpened}
                 />}
             <div className={cn(styles.editProductsList, 'container')}>
-                {products.map((productsInfo, index) => {
+                {products?.map((productsInfo, index) => {
                     return (
                         <div key={index} className={styles.editProductsListItem}>
                             <div className={styles.editProductsListItemTitle}>

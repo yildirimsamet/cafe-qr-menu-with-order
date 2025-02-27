@@ -22,7 +22,7 @@ const SendOrders = ({ sendOrders, callback }) => {
                         callback();
                     });
                 } catch (error) {
-                //
+                    //
                 }
             }
         });
@@ -56,8 +56,11 @@ const SendOrders = ({ sendOrders, callback }) => {
                                         </div>
                                     );
                                 })}
+                                {order_group.order_group_note && <div className={styles.sendOrdersListItemNote}>
+                                    <span>Müşteri Notu:</span> <span>{order_group.order_group_note}</span>
+                                </div>}
                                 <div className={styles.sendOrdersListItemWaiter}>
-                                    <span>Son güncelleyen:</span> <span>{order_group.waiterName || 'Yok'}</span>
+                                    <span>Son güncelleyen:</span> <span>{order_group.updatedBy || 'Yok'}</span>
                                 </div>
                                 <div className={styles.sendOrdersListItemStatus}>Gönderildi</div>
                             </div>

@@ -1,14 +1,13 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import LoginForm from './components/Login';
-import RegisterForm from './components/Register';
 import { useAuth } from './hooks/useAuth';
+import useCustomRouter from './hooks/useCustomRouter';
 
 export default function Home () {
     const { user } = useAuth();
-    const router = useRouter();
+    const router = useCustomRouter();
 
     useEffect(() => {
         if (user) {

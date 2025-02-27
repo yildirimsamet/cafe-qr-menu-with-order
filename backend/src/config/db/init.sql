@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `users` (
     id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role ENUM('waiter', 'admin') DEFAULT 'waiter',
+    role ENUM('waiter', 'admin', 'superadmin') DEFAULT 'waiter',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -71,7 +71,8 @@ CREATE TABLE order_groups (
     id SERIAL PRIMARY KEY,
     order_id INT REFERENCES orders(id) ON DELETE CASCADE,
     status VARCHAR(10) CHECK (status IN ('waiting', 'send')),
-    waiter_id INT REFERENCES users(id) ON DELETE
+    note TEXT,
+    updated_by VARCHAR(255) REFERENCES users(username) ON DELETE
     SET
         NULL,
         created_at TIMESTAMP DEFAULT NOW()
@@ -173,4 +174,12 @@ INSERT INTO
     `tables` (name, slug)
 VALUES
     ('Masa 1', 'masa-1'),
-    ('Masa 2', 'masa-2');
+    ('Masa 2', 'masa-2'),
+    ('Masa 3', 'masa-3'),
+    ('Masa 4', 'masa-4'),
+    ('Masa 5', 'masa-5'),
+    ('Masa 6', 'masa-6'),
+    ('Masa 7', 'masa-7'),
+    ('Masa 8', 'masa-8'),
+    ('Masa 9', 'masa-9'),
+    ('Masa 10', 'masa-10');

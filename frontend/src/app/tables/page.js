@@ -340,7 +340,7 @@ const Tables = () => {
                         Tüm QR Kodlar <QrCode2Icon />
                     </button>
                 )}
-                {user?.role === 'admin' && (
+                {(user?.role === 'admin' || user?.role === 'superadmin') && (
                     <button
                         className={styles.tablesTopButtonsAdd}
                         onClick={openAddTableModal}

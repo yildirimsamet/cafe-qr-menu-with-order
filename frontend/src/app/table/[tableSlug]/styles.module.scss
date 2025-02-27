@@ -88,5 +88,24 @@
             cursor: pointer;
             letter-spacing: 2px;
         }
+
+        &TableNotFound {
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            color: $secondary-text-color;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: $secondary-color;
+            z-index: 9999;
+        }
     }
 }

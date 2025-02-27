@@ -34,13 +34,13 @@ const EditUserModal = ({mutate, selectedUserForEdit, isUserEditModelOpened, setI
         try {
             const response = await axios.put(`/auth/update/${selectedUserForEdit.id}`, user);
 
-            if (response.data.status === 200) {
+            if (response.status === 200) {
                 mutate();
 
                 Swal.fire({
                     icon: 'success',
                     title: 'Kullanıcı Başarıyla Düzenlendi',
-                    text: response.data.name,
+                    text: 'Kullanıcı Düzenlendi',
                 }).then(() => {
                     setIsUserEditModelOpened(false);
                 });
@@ -71,7 +71,7 @@ const EditUserModal = ({mutate, selectedUserForEdit, isUserEditModelOpened, setI
     return (
         <Dialog closeAfterTransition={false} open={isUserEditModelOpened} onClose={() => setIsUserEditModelOpened(false)} fullWidth maxWidth="sm">
             <DialogTitle>
-                Ürün Ekle
+                Kullanıcı Güncelle
                 <IconButton onClick={() => setIsUserEditModelOpened(false)} style={{ position: 'absolute', right: 10, top: 10 }}>
                     <CloseIcon />
                 </IconButton>

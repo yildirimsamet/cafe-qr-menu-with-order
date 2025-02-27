@@ -10,15 +10,26 @@
 .category {
     margin-bottom: 15px;
     width: 100%;
+    position: relative;
+
+    & > div {
+        width: 100%;
+    }
 
     & input {
         width: 100%;
+    }
+
+    &Delete {
+        position: absolute;
+        right: 14px;
+        top: 6px;
     }
 }
 
 @media screen and (max-width: 1001px) {
     .category {
-        & > div {
+        &>div {
             width: 100%;
         }
     }

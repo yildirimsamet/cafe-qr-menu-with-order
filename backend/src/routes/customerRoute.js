@@ -2,7 +2,6 @@ import express from "express";
 import connection from "../config/db/connection.js";
 const router = express.Router();
 
-// Create Order
 export const createOrder = async (table_slug) => {
     const [results] = await connection.query(
         "INSERT INTO orders (table_slug, status) VALUES (?, 'active')",
@@ -56,10 +55,10 @@ export const getActiveOrderIdByTableSlug = async (tableSlug) => {
     return results;
 }
 
-export const createOrderGroup = async (order_id) => {
+export const createOrderGroup = async ({ order_id, note = "" }) => {
     const [results] = await connection.query(
-        "INSERT INTO order_groups (order_id, status) VALUES (?, 'waiting')",
-        [order_id]
+        "INSERT INTO order_groups (order_id, status, note) VALUES (?, 'waiting', ?)",
+        [order_id, note]
     );
 
     return results;

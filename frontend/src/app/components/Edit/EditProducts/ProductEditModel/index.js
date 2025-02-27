@@ -136,7 +136,7 @@ const ProductEditModel = ({mutate, selectedProductForEdit, isProductEditModelOpe
     return (
         <Dialog closeAfterTransition={false} open={isProductEditModelOpened} onClose={() => setIsProductEditModelOpened(false)} fullWidth maxWidth="sm">
             <DialogTitle>
-                Ürün Ekle
+                Ürün Güncelle
                 <IconButton onClick={() => setIsProductEditModelOpened(false)} style={{ position: 'absolute', right: 10, top: 10 }}>
                     <CloseIcon />
                 </IconButton>

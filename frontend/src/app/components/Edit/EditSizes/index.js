@@ -5,33 +5,25 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
-import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import TextField from '@mui/material/TextField';
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+import useSWR from 'swr';
 import axios from '@/app/lib/axios';
 import commonStyles from '../common.module.scss';
 import styles from './styles.module.scss';
+import { TextField } from '@mui/material';
 
 const EditSizes = () => {
-    const [sizes, setSizes] = useState([]);
-    const [changedSizes, setChangedSizes] = useState([]);
-
-    const getSizes = async () => {
+    const { data: sizes = [], mutate, isValidating } = useSWR('/sizes', (url) => {
         try {
-            const { data } = await axios.get('/sizes');
-
-            setSizes(data.data);
+            return axios.get(url).then(res => res.data.data);
         } catch (error) {
-            //
+            return [];
         }
-    };
-
-    useEffect(() => {
-        getSizes();
-    }, []);
+    });
+    const [changedSizes, setChangedSizes] = useState([]);
 
     const handleChange = (event, id) => {
         const { value } = event.target;
@@ -67,7 +59,7 @@ const EditSizes = () => {
                 } else {
                     try {
                         return await axios.post('/sizes', { name: value }).then(async (res) => {
-                            await getSizes();
+                            mutate();
                             setChangedSizes([]);
                             return;
                         }).catch((error) => {
@@ -106,8 +98,7 @@ const EditSizes = () => {
                 await axios.put(`/sizes/${changedSizes[i].id}`, { name: changedSizes[i].name });
             }
 
-            await getSizes();
-
+            mutate();
             setChangedSizes([]);
 
             Swal.fire({
@@ -136,7 +127,7 @@ const EditSizes = () => {
                 try {
                     return await axios.delete(`/sizes/${id}`)
                         .then(async (res) => {
-                            setSizes(prev => prev.filter(size => size.id !== id));
+                            mutate();
                             setChangedSizes(prev => prev.filter(size => size.id !== id));
                             return;
                         }).catch((error) => {
@@ -155,27 +146,34 @@ const EditSizes = () => {
                 <button className={commonStyles.addButton} onClick={openSizeAddModel}>
                     Boyut Ekle <AddCircleIcon />
                 </button>
-                <button onClick={handleSave} className={commonStyles.saveButton}>Değişiklikleri Kaydet <SaveAltIcon /></button>
+                <button
+                    onClick={handleSave}
+                    className={commonStyles.saveButton}
+                >
+                    Değişiklikleri Kaydet <SaveAltIcon />
+                </button>
             </div>
             <div className={cn('container', styles.sizes)}>
-                {sizes?.map((size, index) => {
+                {!isValidating && sizes?.map((size, index) => {
                     return (
                         <div key={index} className={styles.size}>
-                            <OutlinedInput label={size.name} defaultValue={size.name} onChange={(event) => {
+                            <TextField slotProps={{
+                                inputLabel: {
+                                    shrink: true,
+                                },
+                            }} label={size.name} defaultValue={size.name} onChange={(event) => {
                                 handleChange(event, size.id);
-                            }} endAdornment={
-                                <InputAdornment>
-                                    <IconButton
-                                        onClick={() => {
-                                            openDeleteSizeModal(size.id);
-                                        }}
-                                        edge="end"
-                                    >
-                                        <DeleteIcon />
-                                    </IconButton>
-                                </InputAdornment>
-                            }
+                            }}
                             />
+                            <IconButton
+                                className={styles.sizeDelete}
+                                onClick={() => {
+                                    openDeleteSizeModal(size.id);
+                                }}
+                                edge="end"
+                            >
+                                <DeleteIcon />
+                            </IconButton>
                         </div>
                     );
                 })}

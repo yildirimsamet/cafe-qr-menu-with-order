@@ -3,17 +3,17 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { createServer } from "http";
 import { Server } from "socket.io";
-import { saveOrderToDatabase } from "./services/orderService.js";
-import usersRoute from "./routes/users.js";
-import tablesRoute from "./routes/tables.js";
-import menuRoute from "./routes/menu.js";
-import ordersRoute from "./routes/orders.js";
-import categoryRoute from "./routes/category.js";
-import sizeRoute from "./routes/size.js";
-import itemsRoute from "./routes/items.js";
-import authRoute from "./routes/auth.js";
-import auth from "./middlewares/auth.js";
-import { createAdmin } from "./services/admin.js";
+import { saveOrderToDatabase } from "./services/ordersService.js";
+import usersRoute from "./routes/usersRoute.js";
+import tablesRoute from "./routes/tablesRoute.js";
+import menuRoute from "./routes/menuRoute.js";
+import ordersRoute from "./routes/ordersRoute.js";
+import categoryRoute from "./routes/categoryRoute.js";
+import sizeRoute from "./routes/sizeRoute.js";
+import itemsRoute from "./routes/itemsRoute.js";
+import authRoute from "./routes/authRoute.js";
+import auth from "./middlewares/authMiddleware.js";
+import { createSuperAdmin } from "./services/superAdminService.js";
 
 dotenv.config();
 
@@ -36,7 +36,7 @@ app.use('/menu', menuRoute);
 
 (async () => {
     try {
-        await createAdmin();
+        await createSuperAdmin();
     } catch (error) {
         console.error("Error creating admin user:", error);
     }

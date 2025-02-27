@@ -9,27 +9,21 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+import useSWR from 'swr';
 import axios from '@/app/lib/axios';
 import commonStyles from '../common.module.scss';
 import styles from './styles.module.scss';
+import { TextField } from '@mui/material';
 
 const EditCategories = () => {
-    const [categories, setCategories] = useState([]);
-    const [changedCategories, setChangedCategories] = useState([]);
-
-    const getCategories = async () => {
+    const { data: categories = [], mutate, isValidating } = useSWR('/categories', (url) => {
         try {
-            const { data } = await axios.get('/categories');
-
-            setCategories(data.data);
+            return axios.get(url).then(res => res.data.data);
         } catch (error) {
-            //
+            return [];
         }
-    };
-
-    useEffect(() => {
-        getCategories();
-    }, []);
+    });
+    const [changedCategories, setChangedCategories] = useState([]);
 
     const handleChange = (event, id) => {
         const { value } = event.target;
@@ -65,7 +59,7 @@ const EditCategories = () => {
                 } else {
                     try {
                         return await axios.post('/categories', { name: value }).then(async (res) => {
-                            await getCategories();
+                            mutate();
                             setChangedCategories([]);
                             return;
                         }).catch((error) => {
@@ -108,8 +102,7 @@ const EditCategories = () => {
                 }
             }
 
-            await getCategories();
-
+            mutate();
             setChangedCategories([]);
 
             Swal.fire({
@@ -138,7 +131,7 @@ const EditCategories = () => {
                 try {
                     return await axios.delete(`/categories/${id}`)
                         .then(async (res) => {
-                            setCategories(prev => prev.filter(category => category.id !== id));
+                            mutate();
                             setChangedCategories(prev => prev.filter(category => category.id !== id));
                             return;
                         }).catch((error) => {
@@ -150,6 +143,7 @@ const EditCategories = () => {
             },
         });
     };
+
     return (
         <div>
             <h1 className={commonStyles.title}>Kategori Düzenle</h1>
@@ -157,27 +151,35 @@ const EditCategories = () => {
                 <button className={commonStyles.addButton} onClick={openCategoryModel}>
                     Kategori Ekle <AddCircleIcon />
                 </button>
-                <button onClick={handleSave} className={commonStyles.saveButton}>Değişiklikleri Kaydet <SaveAltIcon /></button>
+                <button onClick={handleSave}
+                    className={commonStyles.saveButton}
+                >
+                    Değişiklikleri Kaydet <SaveAltIcon />
+                </button>
             </div>
             <div className={cn('container', styles.categories)}>
-                {categories.map((category, index) => {
+                {!isValidating && categories?.map((category, index) => {
                     return (
                         <div key={index} className={styles.category}>
-                            <OutlinedInput label="Kategori Adı" defaultValue={category.name} onChange={(event) => {
-                                handleChange(event, category.id);
-                            }} variant="outlined" endAdornment={
-                                <InputAdornment>
-                                    <IconButton
-                                        onClick={() => {
-                                            openDeleteCategoryModal(category.id);
-                                        }}
-                                        edge="end"
-                                    >
-                                        <DeleteIcon />
-                                    </IconButton>
-                                </InputAdornment>
-                            }
+                            <TextField
+                                slotProps={{
+                                    inputLabel: {
+                                        shrink: true,
+                                    },
+                                }}
+                                label="Kategori Adı" defaultValue={category.name} onChange={(event) => {
+                                    handleChange(event, category.id);
+                                }} variant="outlined"
                             />
+                            <IconButton
+                                onClick={() => {
+                                    openDeleteCategoryModal(category.id);
+                                }}
+                                edge="end"
+                                className={styles.categoryDelete}
+                            >
+                                <DeleteIcon />
+                            </IconButton>
                         </div>
                     );
                 })}

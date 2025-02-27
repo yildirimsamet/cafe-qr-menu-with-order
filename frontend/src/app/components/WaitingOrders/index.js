@@ -2,15 +2,17 @@
 
 import moment from 'moment';
 import Swal from 'sweetalert2';
+import { useAuth } from '@/app/hooks/useAuth';
 import axios from '@/app/lib/axios';
 import styles from './styles.module.scss';
 import 'moment/locale/tr';
 
 const WaitingOrders = ({ waitingOrders, callback }) => {
+    const { user } = useAuth();
     const openPopup = (orderGroupId) => {
         Swal.fire({
             title:
-        'Siparişi gönderilen siparişlere almak istediginizden emin misiniz?',
+                'Siparişi gönderilen siparişlere almak istediginizden emin misiniz?',
             showDenyButton: true,
             confirmButtonText: 'Evet',
             denyButtonText: 'Hayır',
@@ -19,6 +21,7 @@ const WaitingOrders = ({ waitingOrders, callback }) => {
                 axios
                     .put(`/orders/order_groups/${orderGroupId}/status`, {
                         status: 'send',
+                        updatedBy: user?.username,
                     })
                     .then(() => {
                         callback();
@@ -58,8 +61,11 @@ const WaitingOrders = ({ waitingOrders, callback }) => {
                                         </div>
                                     );
                                 })}
+                                {order_group.order_group_note && <div className={styles.waitingOrdersListItemNote}>
+                                    <span>Müşteri Notu:</span> <span>{order_group.order_group_note}</span>
+                                </div>}
                                 <div className={styles.waitingOrdersListItemWaiter}>
-                                    <span>Son güncelleyen:</span> <span>{order_group.waiterName || 'Yok'}</span>
+                                    <span>Son güncelleyen:</span> <span>{order_group.updatedBy || 'Yok'}</span>
                                 </div>
                                 <div className={styles.waitingOrdersListItemStatus}>
                                     Bekliyor

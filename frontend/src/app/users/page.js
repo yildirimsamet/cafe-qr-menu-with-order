@@ -1,5 +1,6 @@
 'use client';
 
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,14 +12,16 @@ import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import axios from '@/app/lib/axios';
 import EditUserModal from '../components/Edit/EditUserModal';
+import UserAddModel from '../components/UserAddModel';
 import { useAuthorization } from '../hooks/useAuthorization';
 import styles from './styles.module.scss';
 
 const Users = () => {
-    useAuthorization({ authorization: 'admin' });
+    const { user: loggedInUser } = useAuthorization({ authorization: 'admin' });
 
     const [users, setUsers] = useState([]);
     const [isUserEditModelOpened, setIsUserEditModelOpened] = useState(false);
+    const [isUserAddModelOpened,  setIsUserAddModelOpened] = useState(false);
     const [selectedUserForEdit, setSelectedUserForEdit] = useState(null);
 
     const getUsers = async () => {
@@ -36,11 +39,18 @@ const Users = () => {
 
     const handleDelete = async (user) => {
         try {
-            if (user.role === 'admin') {
+            if (user.role === 'superadmin') {
                 Swal.fire({
                     icon: 'error',
                     title: 'Hata',
-                    text: 'Bu kullanıcıyı silemezsiniz.',
+                    text: 'Superadmin silinemez.',
+                });
+                return;
+            } else if (user.role === 'admin' && loggedInUser.role == 'admin') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata',
+                    text: 'Bir admin, admin silinemez.',
                 });
                 return;
             }
@@ -75,8 +85,43 @@ const Users = () => {
         }
     };
 
+    const handleUpdate = async (user) => {
+        if (user.role === 'superadmin') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Hata',
+                text: 'Superadmin güncellenemez.',
+            });
+            return;
+        } else if (user.role === 'admin' && loggedInUser.role == 'admin') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Hata',
+                text: 'Bir admin, admini güncelleyemez.',
+            });
+            return;
+        }
+
+        setSelectedUserForEdit(user);
+        setIsUserEditModelOpened(true);
+    };
+
     return (
         <div>
+            <div className={styles.title}>
+                Kullanıcılar
+            </div>
+            <div className={styles.topButtons}>
+                <button
+                    className={styles.topButtonsAdd}
+                    onClick={() => {
+                        setIsUserAddModelOpened(true);
+                    }}
+                >
+                    Kullanıcı Ekle
+                    <AddCircleIcon />
+                </button>
+            </div>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
@@ -97,12 +142,11 @@ const Users = () => {
                                     {user.id}
                                 </TableCell>
                                 <TableCell>{user.username}</TableCell>
-                                <TableCell>{user.role}</TableCell>
+                                <TableCell>{user.role && user.role === 'waiter' ? 'Garson' : user.role}</TableCell>
                                 <TableCell sx={{ width: '250px' }}>
                                     <div className={styles.buttons}>
                                         <button className={styles.buttonsEdit} onClick={() => {
-                                            setSelectedUserForEdit(user);
-                                            setIsUserEditModelOpened(true);
+                                            handleUpdate(user);
                                         }}
                                         >Güncelle</button>
                                         <button className={styles.buttonsDelete} onClick={() => {
@@ -123,6 +167,15 @@ const Users = () => {
                         selectedUserForEdit={selectedUserForEdit}
                         isUserEditModelOpened={isUserEditModelOpened}
                         setIsUserEditModelOpened={setIsUserEditModelOpened}
+                    />
+                )
+            }
+            {
+                isUserAddModelOpened && (
+                    <UserAddModel
+                        mutate={getUsers}
+                        isUserAddModelOpened={isUserAddModelOpened}
+                        setIsUserAddModelOpened={setIsUserAddModelOpened}
                     />
                 )
             }

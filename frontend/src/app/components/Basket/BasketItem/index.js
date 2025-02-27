@@ -24,7 +24,10 @@ const BasketItem = ({ item }) => {
         const newState = { ...state };
 
         newState.basket = state.basket.map((basketItem) => {
-            if (basketItem.item_id === item.item_id && basketItem.size_id === item.size_id) {
+            if (
+                basketItem.item_id === item.item_id &&
+                basketItem.size_id === item.size_id
+            ) {
                 return {
                     ...basketItem,
                     quantity: newQuantity,
@@ -43,7 +46,11 @@ const BasketItem = ({ item }) => {
     const deleteItem = () => {
         const newState = { ...state };
 
-        newState.basket = state.basket.filter((basketItem) => !(basketItem.item_id === item.item_id && basketItem.size_id === item.size_id));
+        newState.basket = state.basket.filter((basketItem) =>
+                !(
+                    basketItem.item_id === item.item_id &&
+                    basketItem.size_id === item.size_id
+                ));
 
         setState(newState);
 
@@ -71,9 +78,19 @@ const BasketItem = ({ item }) => {
             <div className={styles.itemName}>{item.name}</div>
             <div className={styles.itemSize}>{item.size_name}</div>
             <div className={styles.itemQuantity}>
-                <button className={styles.itemQuantityDecrease} onClick={() => updateQuantity(-1)}>-</button>
+                <button
+                    className={styles.itemQuantityDecrease}
+                    onClick={() => updateQuantity(-1)}
+                >
+                    -
+                </button>
                 <span className={styles.itemQuantityAmount}>{quantity}</span>
-                <button className={styles.itemQuantityIncrease} onClick={() => updateQuantity(1)}>+</button>
+                <button
+                    className={styles.itemQuantityIncrease}
+                    onClick={() => updateQuantity(1)}
+                >
+                    +
+                </button>
             </div>
             <div className={styles.itemPrice}>{item.price * quantity} ₺</div>
         </div>
