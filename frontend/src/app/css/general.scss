@@ -1,7 +1,7 @@
 @import '@/app/css/_variables.scss';
 
 body {
-  background-color: $secondary-color;
+  background-color: $text-color-9;
 }
 
 .container {
@@ -15,23 +15,23 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: $scroll-4;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #ff6600, #e55b00);
+  background: linear-gradient(180deg, $scroll-1, $scroll-2);
   border-radius: 10px;
   transition: background 0.3s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #e55b00, #c94e00);
+  background: linear-gradient(180deg, $scroll-2, $scroll-3);
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #ff6600 #f1f1f1;
+  scrollbar-color: $scroll-1 $scroll-4;
 }
 
 .swal2-container {
@@ -39,11 +39,11 @@ body {
 }
 
 .swal2-confirm {
-  background-color: $secondary-text-color !important;
+  background-color: $bg-color-11 !important;
 }
 
 .swal2-deny {
-  background-color: $primary-color !important;
+  background-color: $bg-color-7 !important;
 }
 
 .display-none {

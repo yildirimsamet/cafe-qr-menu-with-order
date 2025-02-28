@@ -3,17 +3,15 @@
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import { TextField } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import cn from 'classnames';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Swal from 'sweetalert2';
 import useSWR from 'swr';
 import axios from '@/app/lib/axios';
 import commonStyles from '../common.module.scss';
 import styles from './styles.module.scss';
-import { TextField } from '@mui/material';
 
 const EditCategories = () => {
     const { data: categories = [], mutate, isValidating } = useSWR('/categories', (url) => {

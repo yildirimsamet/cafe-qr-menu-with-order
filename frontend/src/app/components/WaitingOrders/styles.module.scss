@@ -2,9 +2,10 @@
 
 .waitingOrders {
     position: relative;
+
     &Empty {
         font-size: 18px;
-        color: #7d5a3a;
+        color: $text-color-6;
         padding: 15px 25px;
         border-radius: 5px;
         display: flex;
@@ -17,11 +18,12 @@
         position: absolute;
         z-index: 0;
     }
+
     &Title {
         font-size: 1.5rem;
         font-weight: 700;
-        color: $secondary-text-color;
-        background-color: $tertiary-color;
+        color: $text-color-12;
+        background-color: $text-color-10;
         letter-spacing: 1.5px;
         height: 55px;
         display: flex;
@@ -40,27 +42,27 @@
         padding: 1.5rem;
 
         &Item {
-            border: 1px solid #e0e0e0;
+            border: 1px solid $border-color-3;
             padding: 1.5rem;
             text-align: center;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: #ffffff;
+            background-color: $bg-color-1;
             display: flex;
             flex-direction: column;
 
             &Title {
                 font-size: 1.1rem;
                 font-weight: 700;
-                color: $primary-text-color;
+                color: $text-color-11;
                 margin-bottom: 0.3rem;
             }
 
             &Date {
                 font-size: 0.9rem;
-                color: #aaa;
+                color: $text-color-4;
                 margin-bottom: 1rem;
             }
 
@@ -69,10 +71,10 @@
                 grid-template-columns: 4fr 1fr 1fr;
                 margin-bottom: 0.75rem;
                 font-size: 0.9rem;
-                color: $secondary-text-color;
+                color: $text-color-12;
+                padding: 0 4px;
 
-
-                & > div {
+                &>div {
                     flex: 1;
                     text-align: left;
 
@@ -83,8 +85,8 @@
             }
 
             &Status {
-                background-color: $danger-color;
-                color: #ffffff;
+                background-color: $text-color-14;
+                color: $text-color-5;
                 border: none;
                 padding: 0.5rem 1rem;
                 border-radius: 8px;
@@ -95,9 +97,10 @@
                 margin-top: 10px;
             }
 
-            &Waiter, &Note {
-                color: #7d5a3a;
-                background-color: #f5f5f5;
+            &UpdatedBy,
+            &Note {
+                color: $text-color-6;
+                background-color: $bg-color-2;
                 border: none;
                 padding: 0.5rem 1rem;
                 border-radius: 8px;
@@ -118,10 +121,22 @@
 
             }
 
+            &UpdatedBy {
+                margin-top: 5px;
+            }
+
             &Note {
                 text-align: left;
                 justify-content: flex-start;
                 margin-bottom: 4px;
+
+                & span:first-child {
+                    white-space: nowrap;
+                }
+
+                & span:last-child {
+                    text-align: center;
+                }
             }
         }
 
@@ -136,6 +151,7 @@
     .waitingOrders {
         &List {
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
             &Item {
                 &Item {
                     grid-template-columns: 3fr 1fr 1fr;

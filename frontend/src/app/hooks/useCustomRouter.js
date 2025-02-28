@@ -2,18 +2,18 @@ import { useRouter } from 'next/navigation';
 import { useAppContext } from '../context/appContext';
 
 const useCustomRouter = () => {
-    const { state, setState } = useAppContext();
+    const { setState } = useAppContext();
     const router = useRouter();
     const originalPush = router.push;
     const originalReplace = router.replace;
 
     router.push = (...args) => {
-        setState({...state, loading: true});
+        setState((prev) => ({ ...prev, loading: true }));
         originalPush(...args);
     };
 
     router.replace = (...args) => {
-        setState({...state, loading: true});
+        setState((prev) => ({ ...prev, loading: true }));
         originalReplace(...args);
     };
 

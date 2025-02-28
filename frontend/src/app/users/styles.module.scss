@@ -3,8 +3,8 @@
 .title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: $secondary-text-color;
-    background-color: $tertiary-color;
+    color: $text-color-12;
+    background-color: $text-color-10;
     letter-spacing: 1.5px;
     height: 55px;
     display: flex;
@@ -35,15 +35,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: $success-color;
-        color: $secondary-color;
+        background: $bg-color-12;
+        color: $text-color-9;
 
         & svg {
             margin-left: 5px;
         }
 
         &:hover {
-            background-color: rgba($success-color, 0.8);
+            background-color: rgba($bg-color-12, 0.8);
         }
     }
 }
@@ -67,20 +67,20 @@
     }
 
     &Edit {
-        background-color: $secondary-text-color;
-        color: $secondary-color;
+        background-color: $text-color-12;
+        color: $text-color-9;
 
         &:hover {
-            background-color: $tertiary-color;
+            background-color: $text-color-10;
         }
     }
 
     &Delete {
-        background-color: $danger-color;
-        color: $secondary-color;
+        background-color: $text-color-14;
+        color: $text-color-9;
 
         &:hover {
-            background-color: $tertiary-color;
+            background-color: $text-color-10;
         }
     }
 }

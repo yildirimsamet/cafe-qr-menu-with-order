@@ -13,6 +13,7 @@ export function useAuthorization ({
     const { state: { loading } } = useAppContext();
 
     let authCheckTimeOut;
+
     useEffect(() => {
         authCheckTimeOut = setTimeout(() => {
             if (!loading &&

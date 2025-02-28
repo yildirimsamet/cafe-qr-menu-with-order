@@ -67,7 +67,7 @@ const Item = ({ item }) => {
                     src={
                         item.item_image
                             ? `${process.env.NEXT_PUBLIC_API_URL}/assets/images/${item.item_image}`
-                            : process.env.NEXT_PUBLIC_STOCK_IMAGE_URL
+                            : `${process.env.NEXT_PUBLIC_API_URL}/assets/images/${state?.settings.logo}`
                     }
                     alt=""
                 />

@@ -15,7 +15,7 @@
         &Title {
             font-size: 24px;
             font-weight: bold;
-            color: $secondary-text-color;
+            color: $text-color-12;
             margin-bottom: 10px;
         }
 
@@ -24,7 +24,7 @@
                 display: grid;
                 grid-template-columns: 80px 1fr 2fr 1fr 1fr auto;
                 align-items: center;
-                background: #fff;
+                background: $bg-color-1;
                 border-radius: 10px;
                 padding: 15px;
                 margin-bottom: 10px;
@@ -41,35 +41,35 @@
                 &Name {
                     font-size: 18px;
                     font-weight: bold;
-                    color: #5a3e1b;
+                    color: $text-color-7;
                 }
 
                 &Description {
                     font-size: 14px;
-                    color: #333;
+                    color: $text-color-3;
                 }
 
                 &Category {
                     font-size: 16px;
-                    color: #7d5a3a;
+                    color: $text-color-6;
                     justify-self: center;
                 }
 
                 &Price {
                     justify-self: center;
                     font-size: 14px;
-                    color: #333;
+                    color: $text-color-3;
                     display: flex;
                     flex-direction: column;
                     gap: 10px;
 
                     & div {
                         font-weight: normal;
-                        color: #7d5a3a;
+                        color: $text-color-6;
 
                         & span {
                             font-weight: bold;
-                            color: $secondary-text-color;
+                            color: $text-color-12;
                         }
                     }
                 }
@@ -87,22 +87,22 @@
                     }
 
                     &Edit {
-                        background-color: #ffa726;
-                        color: white;
+                        background-color: $text-color-12;
+                        color: $text-color-5;
                     }
 
                     &Delete {
-                        background-color: $danger-color;
-                        color: white;
+                        background-color: $text-color-14;
+                        color: $text-color-5;
                     }
                 }
 
                 &Empty {
                     font-size: 18px;
-                    color: #7d5a3a;
+                    color: $text-color-6;
                     padding: 15px 25px;
                     border-radius: 5px;
-                    background: #fff;
+                    background: $bg-color-1;
                 }
             }
         }

@@ -3,8 +3,8 @@
 .title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: $secondary-text-color;
-    background-color: $tertiary-color;
+    color: $text-color-12;
+    background-color: $text-color-10;
     letter-spacing: 1.5px;
     height: 55px;
     display: flex;
@@ -26,8 +26,8 @@
 }
 
 .addButton {
-    background: $secondary-text-color;
-    color: $secondary-color;
+    background: $bg-color-11;
+    color: $text-color-9;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -46,8 +46,8 @@
 }
 
 .saveButton {
-    background: $success-color;
-    color: $secondary-color;
+    background: $bg-color-12;
+    color: $text-color-9;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;

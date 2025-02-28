@@ -1,0 +1,27 @@
+@import '@/app/css/_variables.scss';
+
+.content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 2rem;
+
+    &Image, &ImageNotSelected {
+        position: relative;
+        width: 300px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &ImageNotSelected {
+        border: 1px solid $bg-color-11;
+    }
+
+    &Input {
+        width: 350px;
+    }
+}

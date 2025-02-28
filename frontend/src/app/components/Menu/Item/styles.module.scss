@@ -3,8 +3,8 @@
 .item {
     display: flex;
     margin: 15px 0 25px;
-    border-bottom: 1px dashed $tertiary-color;
-    background-color: #f3eeee;
+    border-bottom: 1px dashed $bg-color-9;
+    background-color: $bg-color-3;
     padding: 20px;
     min-height: 200px;
     border-radius: 5px;
@@ -31,19 +31,19 @@
             font-size: 16px;
             font-weight: bold;
             margin-bottom: 5px;
-            color: $primary-text-color;
+            color: $text-color-11;
             letter-spacing: 1.3px;
         }
 
         &Description {
             font-size: 14px;
             margin-bottom: 15px;
-            color: $primary-color;
+            color: $text-color-8;
         }
 
         &Size {
             outline: none;
-            border: 1px solid #ccc;
+            border: 1px solid $border-color-1;
             border-radius: 4px;
             height: 25px;
             font-size: 14px;
@@ -52,12 +52,12 @@
 
         &Amount {
             outline: none;
-            border: 1px solid #ccc;
+            border: 1px solid $border-color-1;
             border-radius: 4px;
             height: 22px;
             font-size: 14px;
             position: relative;
-            background-color: #efefef;
+            background-color: $bg-color-3;
 
             &::before {
                 content: 'Ad.';
@@ -66,7 +66,7 @@
                 left: 5px;
                 transform: translateY(-50%);
                 font-size: 14px;
-                color: $primary-color;
+                color: $text-color-8;
             }
         }
 
@@ -78,8 +78,8 @@
     
             &Decrease,
             &Increase {
-                background: $secondary-text-color;
-                color: white;
+                background: $bg-color-11;
+                color: $text-color-5;
                 border: none;
                 width: 28px;
                 height: 28px;
@@ -90,7 +90,7 @@
                 transition: 0.3s;
     
                 &:hover {
-                    background: #e55b00;
+                    background: $bg-color-11;
                 }
             }
     
@@ -100,9 +100,9 @@
                 min-width: 40px;
                 text-align: center;
                 padding: 4px 10px;
-                background: white;
+                background: $bg-color-1;
                 border-radius: 5px;
-                border: 1px solid #ddd;
+                border: 1px solid $border-color-2;
             }
         }
 
@@ -115,7 +115,7 @@
             &Price {
                 font-size: 16px;
                 font-weight: bold;
-                color: $primary-text-color;
+                color: $text-color-11;
                 font-style: italic;
                 letter-spacing: 1.5px;
             }
@@ -126,8 +126,8 @@
                 align-items: center;
                 border: none;
                 border-radius: 4px;
-                background-color: $secondary-text-color;
-                color: $secondary-color;
+                background-color: $text-color-12;
+                color: $text-color-9;
                 font-size: 16px;
                 padding: 5px 10px;
                 font-weight: bold;
@@ -138,8 +138,8 @@
                 }
 
                 &:active {
-                    background-color: $secondary-color;
-                    color: $secondary-text-color;
+                    background-color: $text-color-9;
+                    color: $text-color-12;
                 }
             }
         }

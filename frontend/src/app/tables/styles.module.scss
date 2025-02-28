@@ -32,17 +32,17 @@
     }
 
     &Add {
-        background: $success-color;
-        color: $secondary-color;
+        background: $bg-color-12;
+        color: $text-color-9;
     }
     &QR {
-        background: $secondary-text-color;
-        color: $secondary-color;
+        background: $bg-color-11;
+        color: $text-color-9;
     }
 }
 
 .table {
-    background: white;
+    background: $bg-color-1;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -57,7 +57,7 @@
         top: 10px;
 
         &Empty, &Active {
-            color: $greyish-color;
+            color: $text-color-2;
             &::before {
                 content: '';
                 position: absolute;
@@ -72,24 +72,24 @@
 
         &Empty {
             &::before {
-                background-color: $danger-color;
+                background-color: $text-color-14;
             }
         }
 
         &Active {
             &::before {
-                background-color: $success-color;
+                background-color: $text-color-13;
             }
         }
     }
     &Title {
         margin: 0;
         font-size: 20px;
-        color: #333;
+        color: $text-color-1;
     }
 
     &Orders {
-        background: #eee;
+        background: $bg-color-6;
         padding: 10px;
         border-radius: 5px;
         margin: 10px 0;
@@ -100,11 +100,11 @@
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             font-size: 14px;
-            color: $secondary-text-color;
+            color: $text-color-12;
 
             &:not(:last-child) {
                 margin-bottom: 10px;
-                border-bottom: 1px dashed #ccc;
+                border-bottom: 1px dashed $border-color-1;
                 padding-bottom: 5px;
             }
 
@@ -117,9 +117,9 @@
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             font-weight: bold;
-            color: $primary-text-color;
+            color: $text-color-11;
             margin-bottom: 15px;
-            border-bottom: 1px solid $greyish-color;
+            border-bottom: 1px solid $bg-color-14;
             padding-bottom: 5px;
 
             & >:last-child {
@@ -129,7 +129,7 @@
 
         &Empty {
             font-size: 14px;
-            color: $greyish-color;
+            color: $text-color-2;
             text-align: center;
             display: flex;
             justify-content: center;
@@ -144,7 +144,7 @@
         display: flex;
         justify-content: space-between;
         margin: 10px 0;
-        color: $primary-text-color;
+        color: $text-color-11;
     }
 
     &Buttons {
@@ -163,20 +163,20 @@
         }
 
         &Finish {
-            background-color: $secondary-text-color;
-            color: $secondary-color;
+            background-color: $text-color-12;
+            color: $text-color-9;
         }
 
         &Qr {
-            background-color: #bbb;
-            color: #fff;
+            background-color: $bg-color-5;
+            color: $text-color-5;
         }
     }
 
     &Delete {
         &Button {
-            background-color: $danger-color;
-            color: $secondary-color;
+            background-color: $text-color-14;
+            color: $text-color-9;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;

@@ -63,6 +63,7 @@ const eslintConfig = [
             'react/jsx-tag-spacing': ['error', { 'closingSlash': 'never', 'beforeSelfClosing': 'always', 'afterOpening': 'never', 'beforeClosing': 'never' }], // JSX etiketlerindeki boşluklar
             'import/no-named-as-default-member': 'off',
             'indent': 'off',
+            'eol-last': 'off',
             // Import/export kuralları
             'import/order': [
                 'warn',

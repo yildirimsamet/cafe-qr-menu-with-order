@@ -412,7 +412,7 @@ const Tables = () => {
                                 <span>
                                     {(
                                         Math.ceil(table.items.reduce(
-                                            (total, item) => total + Number(item.item_price),
+                                            (total, item) => total + Number(item.item_price) * item.item_quantity,
                                             0,
                                         ) * 100) / 100
                                     ).toFixed(2)}

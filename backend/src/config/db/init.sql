@@ -86,6 +86,12 @@ CREATE TABLE order_items (
     item_quantity INT NOT NULL CHECK (item_quantity > 0)
 );
 
+CREATE TABLE settings (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    `key` VARCHAR(255) NOT NULL UNIQUE,
+    `value` LONGTEXT
+);
+
 INSERT INTO
     `categories` (name)
 VALUES
@@ -183,3 +189,59 @@ VALUES
     ('Masa 8', 'masa-8'),
     ('Masa 9', 'masa-9'),
     ('Masa 10', 'masa-10');
+
+INSERT INTO
+    settings (`key`, `value`)
+VALUES
+    ('logo', 'logo.png'),
+    (
+        'stockProductImage',
+        'stockProductImage.png'
+    ),
+    (
+        'colors',
+        '{
+            "text-color-3": "#999999",
+            "text-color-2": "#cccccc",
+            "text-color-1": "#333333",
+            "text-color-4": "#aaaaaa",
+            "text-color-5": "#ffffff",
+            "text-color-6": "#7d5a3a",
+            "text-color-7": "#5a3e1b",
+            "text-color-8": "#1a1a1a",
+            "text-color-9": "#eaeaea",
+            "text-color-10": "#f3c47f",
+            "text-color-11": "#bd2131",
+            "text-color-12": "#c55c1e",
+            "text-color-13": "#4bb543",
+            "text-color-14": "#ff4d4d",
+            "bg-color-1": "#ffffff",
+            "bg-color-2": "#f5f5f5",
+            "bg-color-3": "#efefef",
+            "bg-color-4": "#000000",
+            "bg-color-5": "#bbbbbb",
+            "bg-color-6": "#eeeeee",
+            "bg-color-7": "#1a1a1a",
+            "bg-color-8": "#eaeaea",
+            "bg-color-9": "#f3c47f",
+            "bg-color-10": "#bd2131",
+            "bg-color-11": "#c55c1e",
+            "bg-color-12": "#4bb543",
+            "bg-color-13": "#ff4d4d",
+            "bg-color-14": "#cdcdcd",
+            "scroll-1": "#ff6600",
+            "scroll-2": "#e55b00",
+            "scroll-3": "#c94e00",
+            "scroll-4": "#f1f1f1",
+            "border-color-1": "#cccccc",
+            "border-color-2": "#dddddd",
+            "border-color-3": "#e0e0e0",
+            "border-color-4": "#1a1a1a"
+        }'
+    ),
+    (
+        'adress',
+        '1234sk. no:1 Buca/Izmir'
+    ),
+    ('phone', '0512 345 67 89'),
+    ('companyName', 'XYZ Cafe');

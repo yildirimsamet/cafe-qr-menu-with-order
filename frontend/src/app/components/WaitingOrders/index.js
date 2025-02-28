@@ -6,6 +6,7 @@ import { useAuth } from '@/app/hooks/useAuth';
 import axios from '@/app/lib/axios';
 import styles from './styles.module.scss';
 import 'moment/locale/tr';
+import classNames from 'classnames';
 
 const WaitingOrders = ({ waitingOrders, callback }) => {
     const { user } = useAuth();
@@ -33,7 +34,7 @@ const WaitingOrders = ({ waitingOrders, callback }) => {
         <div className={styles.waitingOrders}>
             <div className={styles.waitingOrdersTitle}>Bekleyen Siparişler</div>
             {waitingOrders.length > 0 ? (
-                <div className={styles.waitingOrdersList}>
+                <div className={classNames(styles.waitingOrdersList, 'container')}>
                     {waitingOrders?.map((order_group, index) => {
                         return (
                             <div
@@ -64,7 +65,7 @@ const WaitingOrders = ({ waitingOrders, callback }) => {
                                 {order_group.order_group_note && <div className={styles.waitingOrdersListItemNote}>
                                     <span>Müşteri Notu:</span> <span>{order_group.order_group_note}</span>
                                 </div>}
-                                <div className={styles.waitingOrdersListItemWaiter}>
+                                <div className={styles.waitingOrdersListItemUpdatedBy}>
                                     <span>Son güncelleyen:</span> <span>{order_group.updatedBy || 'Yok'}</span>
                                 </div>
                                 <div className={styles.waitingOrdersListItemStatus}>

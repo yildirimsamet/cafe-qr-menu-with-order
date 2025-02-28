@@ -10,18 +10,18 @@
 
     &Link {
         text-decoration: none;
-        color: $secondary-text-color;
+        color: $text-color-12;
         font-weight: bold;
         font-size: 1.2rem;
         text-align: center;
         transition: color 0.3s ease;
 
         &:hover {
-            color: $primary-text-color;
+            color: $text-color-11;
         }
 
         &_active {
-            color: $primary-text-color;
+            color: $text-color-11;
         }
     }
 }

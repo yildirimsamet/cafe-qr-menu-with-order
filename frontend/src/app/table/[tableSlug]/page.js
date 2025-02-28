@@ -55,10 +55,10 @@ const Table = ({ params: { tableSlug } }) => {
     return (
         <div className={styles.main}>
             <div className={styles.mainSection}>
-                <img className={styles.mainSectionImage} src={process.env.NEXT_PUBLIC_STOCK_IMAGE_URL} alt="" />
-                <h3 className={styles.mainSectionTitle}>Dükkan Adı</h3>
-                <p className={styles.mainSectionAdress}>Adress 312sk no:2</p>
-                <p className={styles.mainSectionPhone}>0212 545 54 44</p>
+                <img className={styles.mainSectionImage} src={`${process.env.NEXT_PUBLIC_API_URL}/assets/images/${state?.settings?.logo}`} alt="" />
+                <h3 className={styles.mainSectionTitle}>{state?.settings?.companyName}</h3>
+                <p className={styles.mainSectionAdress}>{state?.settings?.adress}</p>
+                <p className={styles.mainSectionPhone}>{state?.settings?.phone}</p>
             </div>
             {
                 isTableValid ? (

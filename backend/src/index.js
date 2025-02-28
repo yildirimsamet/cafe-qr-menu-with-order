@@ -14,6 +14,7 @@ import itemsRoute from "./routes/itemsRoute.js";
 import authRoute from "./routes/authRoute.js";
 import auth from "./middlewares/authMiddleware.js";
 import { createSuperAdmin } from "./services/superAdminService.js";
+import settingsRoute from "./routes/settingsRoute.js";
 
 dotenv.config();
 
@@ -24,15 +25,15 @@ app.use(cors());
 app.use(express.json());
 app.use('/assets/images', express.static('public/assets/images'));
 
-app.use('/auth', auth('user'), authRoute);
-app.use('/users',auth('admin'), usersRoute);
-app.use('/tables',auth('waiter'), tablesRoute);
+app.use('/auth', auth('guest'), authRoute);
+app.use('/users', auth('admin'), usersRoute);
+app.use('/tables', auth('waiter'), tablesRoute);
 app.use('/orders', auth('waiter'), ordersRoute);
-app.use('/categories',auth('admin'), categoryRoute);
-app.use('/sizes',auth('admin'), sizeRoute);
-app.use('/items',auth('admin'), itemsRoute);
+app.use('/categories', auth('admin'), categoryRoute);
+app.use('/sizes', auth('admin'), sizeRoute);
+app.use('/items', auth('admin'), itemsRoute);
 app.use('/menu', menuRoute);
-
+app.use('/settings',auth('guest'), settingsRoute);
 
 (async () => {
     try {

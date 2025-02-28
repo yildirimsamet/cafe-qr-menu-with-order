@@ -27,10 +27,7 @@ const Basket = () => {
             icon: 'success',
         });
 
-        setState({
-            ...state,
-            basket: [],
-        });
+        setState((prev) => ({ ...prev, basket: [] }));
 
         window?.sessionStorage?.setItem('basket', JSON.stringify([]));
     };

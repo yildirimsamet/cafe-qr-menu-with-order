@@ -21,6 +21,7 @@ const NavLinks = ({ className }) => {
             { path: '/orders', title: 'Siparişler' },
             { path: '/users', title: 'Kullanıcılar' },
             { path: '/edit', title: 'Düzenle' },
+            { path: '/settings', title: 'Ayarlar' },
         ],
     };
 

@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import axios from '@/app/lib/axios';
 import styles from './styles.module.scss';
 import 'moment/locale/tr';
+import classNames from 'classnames';
 
 const SendOrders = ({ sendOrders, callback }) => {
     const openPopup = (orderGroupId) => {
@@ -34,7 +35,7 @@ const SendOrders = ({ sendOrders, callback }) => {
         >
             <div className={styles.sendOrdersTitle}>Gönderilen Siparişler</div>
             {
-                sendOrders.length > 0 ? (<div className={styles.sendOrdersList}>
+                sendOrders.length > 0 ? (<div className={classNames(styles.sendOrdersList, 'container')}>
                     {sendOrders?.map((order_group, index) => {
                         return (
                             <div onClick={() => {
@@ -59,7 +60,7 @@ const SendOrders = ({ sendOrders, callback }) => {
                                 {order_group.order_group_note && <div className={styles.sendOrdersListItemNote}>
                                     <span>Müşteri Notu:</span> <span>{order_group.order_group_note}</span>
                                 </div>}
-                                <div className={styles.sendOrdersListItemWaiter}>
+                                <div className={styles.sendOrdersListItemUpdatedBy}>
                                     <span>Son güncelleyen:</span> <span>{order_group.updatedBy || 'Yok'}</span>
                                 </div>
                                 <div className={styles.sendOrdersListItemStatus}>Gönderildi</div>

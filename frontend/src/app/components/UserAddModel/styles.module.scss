@@ -1,8 +1,8 @@
 @import '@/app/css/_variables.scss';
 
 .saveButton {
-    background-color: $secondary-text-color;
-    color: $secondary-color;
+    background-color: $text-color-12;
+    color: $text-color-9;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -17,8 +17,8 @@
 }
 
 .cancelButton {
-    background-color: $secondary-color;
-    color: $secondary-text-color;
+    background-color: $text-color-9;
+    color: $text-color-12;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;

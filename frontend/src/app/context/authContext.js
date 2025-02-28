@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
     const router = useCustomRouter();
 
     const login = async ({ username, password }, navigate) => {
-        setState({ ...state, loading: true });
+        setState((prev) => ({ ...prev, loading: true }));
         await axios.post('/auth/login', { username, password })
             .then(async ({ data }) => {
                 if (data.status === 200) {
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
             }).catch(error => {
                 console.error(error);
             }).finally(async () => {
-                setState({ ...state, loading: false });
+                setState((prev) => ({ ...prev, loading: false }));
             });
     };
 
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
         const token = Cookies.get('token');
 
         if (!user && token) {
-            setState({ ...state, loading: true });
+            setState((prev) => ({ ...prev, loading: true }));
             const { data } = await axios.post('/auth/user', { token });
 
             if (data.status === 200) {
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         checkUser(() => {
-            setState({ ...state, loading: false });
+            setState((prev) => ({ ...prev, loading: false }));
         });
     }, []);
 

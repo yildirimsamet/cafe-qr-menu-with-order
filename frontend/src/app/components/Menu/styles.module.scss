@@ -4,8 +4,8 @@
     &Title {
         font-size: 24px;
         font-weight: bold;
-        color: $secondary-text-color;
-        background-color: $primary-color;
+        color: $text-color-12;
+        background-color: $bg-color-7;
         letter-spacing: 1.5px;
         height: 55px;
         text-align: center;
@@ -23,7 +23,7 @@
             left: 0;
             width: 100%;
             height: 0px;
-            border-bottom: 1px dashed $secondary-text-color;
+            border-bottom: 1px dashed $text-color-12;
         }
     }
 }
