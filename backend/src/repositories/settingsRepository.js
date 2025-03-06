@@ -15,3 +15,28 @@ export const updateLogoImage = async (logo) => {
     )
     return results
 }
+
+export const updateColors = async (colors) => {
+    const [results] = await connection.query(
+        "UPDATE settings SET value = ? WHERE `key` = 'colors'",
+        [colors]
+    )
+    return results
+}
+
+export const updateContactInfo = async ({ address, phoneNumber, companyName }) => {
+    const [addressResult] = await connection.query(
+        "UPDATE settings SET value = ? WHERE `key` = 'address'",
+        [address]
+    );
+    const [phoneNumberResult] = await connection.query(
+        "UPDATE settings SET value = ? WHERE `key` = 'phoneNumber'",
+        [phoneNumber]
+    );
+    const [companyNameResult] = await connection.query(
+        "UPDATE settings SET value = ? WHERE `key` = 'companyName'",
+        [companyName]
+    );
+
+    return !!addressResult.affectedRows && !!phoneNumberResult.affectedRows && !!companyNameResult.affectedRows
+}

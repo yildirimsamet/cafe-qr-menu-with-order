@@ -10,18 +10,20 @@
 
     &Link {
         text-decoration: none;
-        color: $text-color-12;
+        color: var(--text-accent-1);
         font-weight: bold;
         font-size: 1.2rem;
         text-align: center;
         transition: color 0.3s ease;
+        padding-bottom: 5px;
+        transition: all 0.3s ease;
 
         &:hover {
-            color: $text-color-11;
+            filter: brightness(1.4);
         }
 
         &_active {
-            color: $text-color-11;
+            border-bottom: 1px solid var(--text-accent-1);
         }
     }
 }

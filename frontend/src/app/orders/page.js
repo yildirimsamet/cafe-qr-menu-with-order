@@ -30,8 +30,18 @@ const Orders = () => {
         }
     };
 
+    let getOrdersInterval;
+
     useEffect(() => {
         getOrders();
+
+        getOrdersInterval = setInterval(() => {
+            getOrders();
+        }, 10000);
+
+        return () => {
+            clearInterval(getOrdersInterval);
+        };
     }, []);
 
     const orderGroupStatusChange = async (id, status) => {

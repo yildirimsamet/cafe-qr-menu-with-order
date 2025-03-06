@@ -1,12 +1,12 @@
 'use client';
 
+import classNames from 'classnames';
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import { useAuth } from '@/app/hooks/useAuth';
 import axios from '@/app/lib/axios';
 import styles from './styles.module.scss';
 import 'moment/locale/tr';
-import classNames from 'classnames';
 
 const WaitingOrders = ({ waitingOrders, callback }) => {
     const { user } = useAuth();
@@ -50,11 +50,12 @@ const WaitingOrders = ({ waitingOrders, callback }) => {
                                 <div className={styles.waitingOrdersListItemDate}>
                                     {moment(order_group.created_at).locale('tr').fromNow()}
                                 </div>
-                                {order_group.items?.map((item, index) => {
+                                <div className={styles.waitingOrdersListItemItemsWrapper}>
+                                    {order_group.items?.map((item, index) => {
                                     return (
                                         <div
                                             key={index}
-                                            className={styles.waitingOrdersListItemItem}
+                                            className={styles.waitingOrdersListItemItemsWrapperItem}
                                         >
                                             <div>{item.item_name} </div>
                                             <div>{item.item_quantity}</div>
@@ -62,14 +63,18 @@ const WaitingOrders = ({ waitingOrders, callback }) => {
                                         </div>
                                     );
                                 })}
-                                {order_group.order_group_note && <div className={styles.waitingOrdersListItemNote}>
-                                    <span>Müşteri Notu:</span> <span>{order_group.order_group_note}</span>
-                                </div>}
-                                <div className={styles.waitingOrdersListItemUpdatedBy}>
-                                    <span>Son güncelleyen:</span> <span>{order_group.updatedBy || 'Yok'}</span>
                                 </div>
-                                <div className={styles.waitingOrdersListItemStatus}>
-                                    Bekliyor
+                                <div className={styles.waitingOrdersListItemInfo}>
+                                    {order_group.order_group_note &&
+                                    <div className={styles.waitingOrdersListItemInfoNote}>
+                                        <span>Müşteri Notu:</span> <span>{order_group.order_group_note}</span>
+                                    </div>}
+                                    <div className={styles.waitingOrdersListItemInfoUpdatedBy}>
+                                        <span>Son güncelleyen:</span> <span>{order_group.updatedBy || 'Yok'}</span>
+                                    </div>
+                                    <div className={styles.waitingOrdersListItemInfoStatus}>
+                                        Bekliyor
+                                    </div>
                                 </div>
                             </div>
                         );

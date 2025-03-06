@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { createContext, use, useContext, useEffect, useState } from 'react';
+import useSWR from 'swr';
 import axios from '@/app/lib/axios';
 
 const AppContext = createContext();
@@ -13,7 +14,29 @@ export function AppWrapper ({ children }) {
     listItems: [],
     tableSlug: '',
     loading: true,
+    settings: null,
   });
+
+  const { data: globalSettings = {}, mutate } = useSWR('/settings', async (url) => {
+    let settings = {};
+
+    try {
+    settings = await axios.get(url).then((res) => res.data.data);
+
+    setState((prev) => ({ ...prev, settings }));
+
+    localStorage.setItem('settings', JSON.stringify(settings));
+
+    return settings;
+    } catch (error) {
+      //
+    }
+
+  });
+
+  const reFetchSettings = () => {
+    mutate();
+  };
 
   useEffect(() => {
     const handleClick = (event) => {
@@ -34,20 +57,25 @@ export function AppWrapper ({ children }) {
   }, [pathname]);
 
   useEffect(() => {
-    axios.get('/settings').then(({ data }) => {
-      setState((prev) => ({ ...prev, settings: data.data }));
-      return data.data;
-    }).then((data) => {
-      const colors = data?.colors || {};
+    if (Object.keys(globalSettings).length > 0) {
+      setState((prev) => ({ ...prev, settings: globalSettings }));
 
-      Object.keys(colors).forEach((key) => {
-        document.documentElement.style.setProperty(`--${key}`, colors[key]);
+      localStorage.setItem('settings', JSON.stringify(globalSettings));
+
+      const colorSettings = globalSettings.colors;
+
+      Object.keys(colorSettings).forEach((key) => {
+        document.documentElement.style.setProperty(`--${key}`, colorSettings[key]);
       });
-    });
-  }, []);
+    }
+  }, [globalSettings]);
+
+  if (!state.settings) {
+    return <div></div>;
+  }
 
   return (
-      <AppContext.Provider value={{ state, setState }}>
+      <AppContext.Provider value={{ state, setState, reFetchSettings }}>
           {children}
       </AppContext.Provider>
   );

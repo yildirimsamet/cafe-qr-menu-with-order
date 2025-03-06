@@ -1,3 +1,5 @@
+'use client';
+
 import Cookies from 'js-cookie';
 import { useState, createContext, useEffect } from 'react';
 import axios from '@/app/lib/axios';
@@ -53,7 +55,10 @@ export const AuthProvider = ({ children }) => {
 
         if (!user && token) {
             setState((prev) => ({ ...prev, loading: true }));
-            const { data } = await axios.post('/auth/user', { token });
+            const { data } = await axios.post('/auth/user', { token }).catch(error => {
+                console.error(error);
+                logout();
+            });
 
             if (data.status === 200) {
                 setUser(data.data);

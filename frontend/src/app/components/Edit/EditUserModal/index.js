@@ -18,7 +18,11 @@ import axios from '@/app/lib/axios';
 import styles from './styles.module.scss';
 
 const EditUserModal = ({mutate, selectedUserForEdit, isUserEditModelOpened, setIsUserEditModelOpened }) => {
-    const [user, setUser] = useState({...selectedUserForEdit, password: ''});
+    const [user, setUser] = useState({
+        ...selectedUserForEdit,
+        password: '',
+        role: selectedUserForEdit.role === 'superadmin' ? 'superadmin' : selectedUserForEdit.role,
+    });
 
     const handleSave = async () => {
         const errors = checkErrors();
@@ -32,9 +36,9 @@ const EditUserModal = ({mutate, selectedUserForEdit, isUserEditModelOpened, setI
         }
 
         try {
-            const response = await axios.put(`/auth/update/${selectedUserForEdit.id}`, user);
+            const { data } = await axios.put(`/auth/update/${selectedUserForEdit.id}`, user);
 
-            if (response.status === 200) {
+            if (data.status === 200 && data.data) {
                 mutate();
 
                 Swal.fire({
@@ -48,11 +52,17 @@ const EditUserModal = ({mutate, selectedUserForEdit, isUserEditModelOpened, setI
                 Swal.fire({
                     icon: 'error',
                     title: 'Hata',
-                    text: 'Kullanıcı Düzenlenemedi',
+                    text: res.error || 'Kullanıcı düzenlenemedi.',
                 });
             }
         } catch (error) {
-            //
+            Swal.fire({
+                icon: 'error',
+                title: 'Hata',
+                text: error?.response?.data?.error || 'Kullanıcı düzenlenemedi.',
+            });
+
+            setIsUserEditModelOpened(false);
         }
     };
 
@@ -69,7 +79,14 @@ const EditUserModal = ({mutate, selectedUserForEdit, isUserEditModelOpened, setI
     };
 
     return (
-        <Dialog closeAfterTransition={false} open={isUserEditModelOpened} onClose={() => setIsUserEditModelOpened(false)} fullWidth maxWidth="sm">
+        <Dialog
+            closeAfterTransition={false}
+            open={isUserEditModelOpened}
+            onClose={() => setIsUserEditModelOpened(false)}
+            fullWidth
+            maxWidth="sm"
+            slotProps={{ backdrop: { invisible: true } }}
+        >
             <DialogTitle>
                 Kullanıcı Güncelle
                 <IconButton onClick={() => setIsUserEditModelOpened(false)} style={{ position: 'absolute', right: 10, top: 10 }}>
@@ -103,26 +120,30 @@ const EditUserModal = ({mutate, selectedUserForEdit, isUserEditModelOpened, setI
                     value={user.password}
                     onChange={(e) => setUser({ ...user, password: e.target.value })}
                 />
-                <FormControl fullWidth margin="dense">
-                    <InputLabel>Role</InputLabel>
-                    <Select
-                        label="Rol"
-                        slotProps={{
+                {
+                    user?.role !== 'superadmin' && (
+                        <FormControl fullWidth margin="dense">
+                            <InputLabel>Role</InputLabel>
+                            <Select
+                                label="Rol"
+                                slotProps={{
                             inputLabel: {
                                 shrink: false,
                             },
                         }}
-                        value={user?.role}
-                        onChange={(e) => setUser({ ...user, role: e.target.value })}
-                    >
-                        <MenuItem value='admin'>
-                            Admin
-                        </MenuItem>
-                        <MenuItem value='waiter'>
-                            Garson
-                        </MenuItem>
-                    </Select>
-                </FormControl>
+                                value={user?.role}
+                                onChange={(e) => setUser({ ...user, role: e.target.value })}
+                            >
+                                <MenuItem value='admin'>
+                                    Admin
+                                </MenuItem>
+                                <MenuItem value='waiter'>
+                                    Garson
+                                </MenuItem>
+                            </Select>
+                        </FormControl>
+                    )
+                }
             </DialogContent>
             <DialogActions>
                 <Button className={styles.cancelButton} onClick={() => setIsUserEditModelOpened(false)} color="secondary">

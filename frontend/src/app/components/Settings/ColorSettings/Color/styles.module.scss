@@ -1,0 +1,62 @@
+@import '@/app/css/_variables.scss';
+
+.wrapper {
+    position: relative;
+
+    &Content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 50px;
+        font-size: 18px;
+        font-weight: bold;
+        border: 1px solid var(--bg-neutral);
+        padding: 15px 25px;
+        border-radius: 4px;
+        position: relative;
+        transition: 0.3s ease transform;
+        background: var(--bg-4);
+        cursor: pointer;
+        white-space: nowrap;
+
+        &>div:nth-child(2) {
+            border: 2px solid var(--bg-5);
+        }
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+
+        &Error {
+            border: 3px solid var(--danger) !important;
+        }
+
+        &ZIndex {
+            z-index: 1302;
+        }
+    }
+
+    &ColorPickerWrapper {
+        position: absolute;
+        background-color: rgba(var(--bg-2-dark), 0.2);
+        top: -100%;
+        transform: translateY(-82%);
+        z-index: 1302;
+        width: 100%;
+
+        &ColorPicker {
+        width: 100% !important;
+
+        }
+        & input {
+            margin-top: 10px;
+            border: 1px solid var(--bg-4);
+            padding: 10px 15px;
+            outline: none;
+            font-size: 14px;
+            width: 100%;
+            z-index: 1303;
+            position: relative;
+        }
+    }
+}

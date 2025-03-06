@@ -3,8 +3,8 @@
 .title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: $text-color-12;
-    background-color: $text-color-10;
+    color: var(--text-4);
+    background-color: var(--bg-1-darker);
     letter-spacing: 1.5px;
     height: 55px;
     display: flex;
@@ -13,8 +13,6 @@
     margin-bottom: 2rem;
     position: relative;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
 }
 
 .addButtonWrapper {
@@ -26,8 +24,8 @@
 }
 
 .addButton {
-    background: $bg-color-11;
-    color: $text-color-9;
+    background: var(--warning);
+    color: var(--text-3);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -46,8 +44,8 @@
 }
 
 .saveButton {
-    background: $bg-color-12;
-    color: $text-color-9;
+    background: var(--success);
+    color: var(--text-3);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;

@@ -29,6 +29,10 @@ export const getTable = async (req, res) => {
 }
 
 export const addTable = async (req, res) => {
+    if(req?.user?.role !== 'admin' && req?.user?.role !== 'superadmin') {
+        return res.status(403).json({ error: "Forbidden: insufficient role" })
+    }
+
     const { name } = req.body
 
     try {
@@ -46,7 +50,7 @@ export const addTable = async (req, res) => {
 export const deleteTable = async (req, res) => {
     const { slug } = req.params
     
-    if(req?.user?.role !== 'admin') {
+    if(req?.user?.role !== 'admin' && req?.user?.role !== 'superadmin') {
         return res.status(403).json({ error: "Forbidden: insufficient role" })
     }
 

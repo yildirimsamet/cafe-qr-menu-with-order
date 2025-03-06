@@ -2,7 +2,7 @@
 
 .wrapper {
     height: 70px;
-    background-color: $bg-color-7;
+    background-color: var(--bg-1);
     
     &Inner {
         display: flex;
@@ -11,14 +11,10 @@
         height: 100%;
     }
 
-    &Left {
-        color: $text-color-11;
-    }
-
     &Right {
         &Button {
-            color: $text-color-10 !important;
-            border: 1px solid $bg-color-9 !important;
+            color: var(--text-4) !important;
+            border: 1px solid var(--border-2) !important;
             border-radius: 5px !important;
             padding: 5px 10px !important;
             cursor: pointer !important;
@@ -29,7 +25,7 @@
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            background-color: $bg-color-7 !important;
+            background-color: var(--bg-2-dark) !important;
         }
         
     }

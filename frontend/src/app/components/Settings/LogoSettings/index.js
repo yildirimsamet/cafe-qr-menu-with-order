@@ -15,7 +15,7 @@ const LogoSettings = () => {
     const [imageInputName, setImageInputName] = useState('');
 
     useEffect(() => {
-        if (settings?.logo) {
+        if (settings?.logo && !image) {
             setImage(settings.logo);
         }
     }, [settings]);
@@ -93,7 +93,7 @@ const LogoSettings = () => {
                             setImage(null);
                             setImageInputName('');
                         }}
-                        style={{ position: 'absolute', top: -36, right: -36, color: 'red', zIndex: 999999999 }}
+                        style={{ position: 'absolute', top: -36, left: -36, color: 'red', zIndex: 9 }}
                     >
                         <CloseIcon />
                     </IconButton>

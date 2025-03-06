@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useAppContext } from '@/app/context/appContext';
 import { socket } from '@/app/lib/socket';
+import { formatPrice } from '@/app/utils';
 import BasketItem from './BasketItem';
 import styles from './styles.module.scss';
 
@@ -31,10 +32,6 @@ const Basket = () => {
 
         window?.sessionStorage?.setItem('basket', JSON.stringify([]));
     };
-
-    useEffect(() => {
-        console.log(state.basket);
-    }, [state.basket]);
 
     return (
         <div className={styles.basket}>
@@ -73,6 +70,8 @@ const Basket = () => {
                 )}
                 >
                     Siparişi Onayla
+                    {` (${formatPrice(state.basket
+                            .reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2))}₺)`}
                 </button>
             </div>
             <div className={cn(styles.basketBlur)}></div>

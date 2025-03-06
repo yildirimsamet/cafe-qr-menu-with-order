@@ -1,13 +1,14 @@
 @import '@/app/css/_variables.scss';
 
 .wrapper {
+    padding-bottom: 25px;
     min-height: 30vh;
 
     .title {
         font-size: 1.5rem;
         font-weight: 700;
-        color: $text-color-12;
-        background-color: $text-color-10;
+        color: var(--text-3);
+        background-color: var(--bg-1-darker);
         letter-spacing: 1.5px;
         height: 55px;
         display: flex;
@@ -16,8 +17,6 @@
         margin-bottom: 2rem;
         position: relative;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
     }
 
     .topButtons {
@@ -28,8 +27,8 @@
         margin-bottom: 2rem;
 
         & button {
-            background: $bg-color-12;
-            color: $text-color-9;
+            background: var(--success);
+            color: var(--text-3);
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
@@ -47,7 +46,7 @@
             }
 
             &:hover {
-                background-color: lighten($bg-color-12, 5%);
+                filter: brightness(1.1);
             }
         }
     }

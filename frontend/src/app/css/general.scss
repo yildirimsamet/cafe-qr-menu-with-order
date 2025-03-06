@@ -1,11 +1,17 @@
 @import '@/app/css/_variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+  font-family: 'Inter', sans-serif !important;
+  box-sizing: border-box;
+}
 
 body {
-  background-color: $text-color-9;
+  background-color: var(--bg-3);
 }
 
 .container {
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
 }
 
@@ -15,35 +21,37 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: $scroll-4;
+  background: var(--scroll-2);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, $scroll-1, $scroll-2);
+  background: linear-gradient(180deg, var(--scroll-1), var(--scroll-1));
   border-radius: 10px;
   transition: background 0.3s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, $scroll-2, $scroll-3);
+  background: linear-gradient(180deg, var(--scroll-1), var(--scroll-1));
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: $scroll-1 $scroll-4;
+  scrollbar-color: var(--scroll-1) var(--scroll-2);
 }
 
 .swal2-container {
   z-index: 99999999 !important;
 }
 
-.swal2-confirm {
-  background-color: $bg-color-11 !important;
+.swal2-confirm, .MuiButton-containedPrimary {
+  background-color: var(--success) !important;
+  color: var(--text-3) !important;
 }
 
-.swal2-deny {
-  background-color: $bg-color-7 !important;
+.swal2-deny, .swal2-cancel, .MuiButton-text.MuiButton-textSecondary {
+  background-color: var(--danger) !important;
+  color: var(--text-3) !important;
 }
 
 .display-none {
@@ -53,4 +61,28 @@ body {
 [id*='qr-canvas'] {
   width: 250px !important;
   height: 250px !important;
+}
+
+.react-colorful__hue, .react-colorful__alpha {
+  margin-top: 5px !important;
+}
+
+label.Mui-focused{
+  color: var(--border-1) !important;
+}
+
+.MuiInput-underline:after, .MuiFilledInput-underline:after {
+  border-bottom-color: var(--border-1) !important;
+}
+
+.Mui-focused fieldset, .MuiOutlinedInput-root {
+  border-color: var(--border-1) !important;
+}
+
+.MuiInputBase-root:hover .MuiInput-underline:before {
+  border-bottom-color: var(--border-1) !important;
+}
+
+.MuiInputBase-root:hover fieldset {
+  border-color: var(--border-1) !important;
 }

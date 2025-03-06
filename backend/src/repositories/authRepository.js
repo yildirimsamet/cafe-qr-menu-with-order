@@ -13,10 +13,9 @@ export const getUserById = async (id) => {
 };
 
 export const createUser = async ({ username, password, role }) => {
-    const hashedPassword = await bcrypt.hash(password, 10);
     const [results] = await connection.query(
         "INSERT INTO users (username, password, role) VALUES (?, ?, ?)",
-        [username, hashedPassword, role]
+        [username, password, role]
     );
     return results.insertId;
 };

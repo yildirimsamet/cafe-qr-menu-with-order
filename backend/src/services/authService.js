@@ -51,13 +51,9 @@ export const getUserById = async (id) => {
 }
 
 export const updateUser = async (id, { username, password, role }) => {
-    let newPassword;
-
-    if (password) {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        newPassword = hashedPassword;
-    }
-
-    return await authRepository.updateUser(id, { username, password: newPassword, role });
+    return await authRepository.updateUser(id, { username, password, role });
 };
 
+export const deleteUser = async (id) => {
+    return await authRepository.deleteUser(id);
+};

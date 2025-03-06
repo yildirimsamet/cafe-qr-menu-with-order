@@ -7,11 +7,13 @@ import QrCode from 'qrcode';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import useSWR from 'swr';
 import axios from '@/app/lib/axios';
 import { socket } from '@/app/lib/socket';
 import { useAuth } from '../hooks/useAuth';
 import { useAuthorization } from '../hooks/useAuthorization';
 import { useWindowSize } from '../hooks/useWindowSize';
+import { formatPrice } from '../utils';
 import styles from './styles.module.scss';
 
 const MySwal = withReactContent(Swal);
@@ -19,13 +21,12 @@ const MySwal = withReactContent(Swal);
 const Tables = () => {
     const { user } = useAuth();
     useAuthorization({ authorization: 'waiter' });
-    const [tables, setTables] = useState([]);
+    // const [tables, setTables] = useState([]);
     const { isMobile } = useWindowSize();
+    const { data: tables = [], mutate } = useSWR('/tables', async (url) => await axios.get(url).then((res) => res.data.data));
 
     const getTables = async () => {
-        const { data } = await axios.get('/tables');
-
-        setTables(data.data);
+        mutate();
     };
 
     const generateQRCode = (table_name, table_slug) => {
@@ -92,6 +93,7 @@ const Tables = () => {
             showCancelButton: true,
             confirmButtonText: 'Ekle',
             showLoaderOnConfirm: true,
+            cancelButtonText: 'İptal',
             didOpen: () => {
                 const input = Swal.getPopup().querySelector('#swal2-input');
                 input.value = `Masa ${tables.length + 1}`;
@@ -101,7 +103,7 @@ const Tables = () => {
                 const name = Swal.getPopup().querySelector('#swal2-input').value;
                 try {
                     return axios.post('/tables', { name }).then((res) => {
-                        getTables();
+                        mutate();
                         return;
                     }).catch((error) => {
                         Swal.showValidationMessage('Masa Eklenemedi!');
@@ -151,7 +153,7 @@ const Tables = () => {
                                         title: 'Masa Silindi',
                                         showConfirmButton: false,
                                     });
-                                    getTables();
+                                    mutate();
                                     return;
                                 }
 
@@ -175,7 +177,7 @@ const Tables = () => {
     };
 
     useEffect(() => {
-        getTables();
+        mutate();
 
         if (!socket.connected) {
             socket.connect();
@@ -183,7 +185,7 @@ const Tables = () => {
 
         if (!socket.hasListeners('orders')) {
             socket.on('orders', (data) => {
-                getTables();
+                mutate();
             });
         }
 
@@ -215,7 +217,7 @@ const Tables = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 await closeOrder(id);
-                getTables();
+                mutate();
             }
         });
     };
@@ -333,7 +335,7 @@ const Tables = () => {
     };
 
     return (
-        <div>
+        <div className='container'>
             <div className={styles.tablesTopButtons}>
                 {!isMobile && (
                     <button className={styles.tablesTopButtonsQR} onClick={openAllQrModal}>
@@ -390,7 +392,7 @@ const Tables = () => {
                                                 {item.item_quantity}
                                             </div>
                                             <div className={styles.tableOrdersItemPrice}>
-                                                {item.item_price}₺
+                                                {formatPrice(item.item_price)}₺
                                             </div>
                                         </div>
                                     );
@@ -411,11 +413,11 @@ const Tables = () => {
                                 <span>Toplam:</span>
                                 <span>
                                     {(
-                                        Math.ceil(table.items.reduce(
+                                        formatPrice(Math.ceil(table.items.reduce(
                                             (total, item) => total + Number(item.item_price) * item.item_quantity,
                                             0,
-                                        ) * 100) / 100
-                                    ).toFixed(2)}
+                                        ) * 100) / 100)
+                                    )}
                                     ₺
                                 </span>
                             </div>
@@ -437,7 +439,7 @@ const Tables = () => {
                                     QR Kod
                                 </button>
                             </div>
-                            {user?.role === 'admin' && (
+                            {(user?.role === 'admin' || user?.role === 'superadmin') && (
                                 <div className={styles.tableDelete}>
                                     <button
                                         className={styles.tableDeleteButton}

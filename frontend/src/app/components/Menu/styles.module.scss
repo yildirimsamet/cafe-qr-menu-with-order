@@ -2,10 +2,10 @@
 
 .menu {
     &Title {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: bold;
-        color: $text-color-12;
-        background-color: $bg-color-7;
+        color: var(--text-3);
+        background-color: var(--bg-2-darker);
         letter-spacing: 1.5px;
         height: 55px;
         text-align: center;
@@ -23,7 +23,7 @@
             left: 0;
             width: 100%;
             height: 0px;
-            border-bottom: 1px dashed $text-color-12;
+            border-bottom: 1px dashed var(--border-2);
         }
     }
 }

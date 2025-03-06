@@ -3,12 +3,10 @@
 .item {
     display: flex;
     margin: 15px 0 25px;
-    border-bottom: 1px dashed $bg-color-9;
-    background-color: $bg-color-3;
+    background-color: var(--bg-5);
     padding: 20px;
-    min-height: 200px;
+    min-height: 220px;
     border-radius: 5px;
-
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 
     &Image {
@@ -28,36 +26,37 @@
         width: 100%;
 
         &Name {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
-            margin-bottom: 5px;
-            color: $text-color-11;
+            margin-bottom: 8px;
+            color: var(--text-1);
             letter-spacing: 1.3px;
         }
 
         &Description {
-            font-size: 14px;
-            margin-bottom: 15px;
-            color: $text-color-8;
+            font-size: 12px;
+            color: var(--text-2);
+            min-height: 50px;
         }
 
         &Size {
             outline: none;
-            border: 1px solid $border-color-1;
+            border: 1px solid var(--border-neutral);
             border-radius: 4px;
             height: 25px;
-            font-size: 14px;
+            font-size: 12px;
             margin-bottom: 8px;
+            color: var(--text-2);
         }
 
         &Amount {
             outline: none;
-            border: 1px solid $border-color-1;
+            border: 1px solid var(--border-neutral);
             border-radius: 4px;
             height: 22px;
-            font-size: 14px;
+            font-size: 12px;
             position: relative;
-            background-color: $bg-color-3;
+            background-color: var(--bg-4);
 
             &::before {
                 content: 'Ad.';
@@ -65,8 +64,8 @@
                 top: 50%;
                 left: 5px;
                 transform: translateY(-50%);
-                font-size: 14px;
-                color: $text-color-8;
+                font-size: 12px;
+                color: var(--text-color-2);
             }
         }
 
@@ -74,35 +73,36 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
     
             &Decrease,
             &Increase {
-                background: $bg-color-11;
-                color: $text-color-5;
+                background: var(--bg-2);
+                color: var(--text-3);
                 border: none;
                 width: 28px;
                 height: 28px;
-                font-size: 16px;
+                font-size: 14px;
                 font-weight: bold;
                 border-radius: 6px;
                 cursor: pointer;
                 transition: 0.3s;
     
                 &:hover {
-                    background: $bg-color-11;
+                    background: var(--bg-2-darker);
                 }
             }
     
             &Amount {
-                font-size: 16px;
+                font-size: 14px;
                 font-weight: bold;
                 min-width: 40px;
                 text-align: center;
-                padding: 4px 10px;
-                background: $bg-color-1;
+                padding: 6px 10px;
+                background: var(--bg-4);
                 border-radius: 5px;
-                border: 1px solid $border-color-2;
+                border: 1px solid var(--border-neutral);
+                color: var(--bg-2);
             }
         }
 
@@ -113,9 +113,9 @@
             align-items: center;
 
             &Price {
-                font-size: 16px;
+                font-size: 14px;
                 font-weight: bold;
-                color: $text-color-11;
+                color: var(--text-2-dark);
                 font-style: italic;
                 letter-spacing: 1.5px;
             }
@@ -126,9 +126,9 @@
                 align-items: center;
                 border: none;
                 border-radius: 4px;
-                background-color: $text-color-12;
-                color: $text-color-9;
-                font-size: 16px;
+                background-color: var(--success);
+                color: var(--text-4);
+                font-size: 14px;
                 padding: 5px 10px;
                 font-weight: bold;
                 height: 30px;
@@ -138,8 +138,8 @@
                 }
 
                 &:active {
-                    background-color: $text-color-9;
-                    color: $text-color-12;
+                    background-color: var(--bg-1);
+                    color: var(--text-3);
                 }
             }
         }

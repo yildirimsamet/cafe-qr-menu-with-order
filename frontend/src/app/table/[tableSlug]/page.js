@@ -11,7 +11,8 @@ import styles from './styles.module.scss';
 const Table = ({ params: { tableSlug } }) => {
     const { state, setState } = useAppContext();
     const [menu, setMenu] = useState([]);
-    const [isMenuOpened, setIsMenuOpened] = useState(true);
+    const [isMenuOpened, setIsMenuOpened] = useState(false);
+    const [tableInfo, setTableInfo] = useState({});
     const [isTableValid, setIsTableValid] = useState(true);
 
     const getTable = async () => {
@@ -20,6 +21,7 @@ const Table = ({ params: { tableSlug } }) => {
 
             if (data.data) {
                 setIsTableValid(true);
+                setTableInfo(data.data);
             } else {
                 setIsTableValid(false);
             }
@@ -56,9 +58,10 @@ const Table = ({ params: { tableSlug } }) => {
         <div className={styles.main}>
             <div className={styles.mainSection}>
                 <img className={styles.mainSectionImage} src={`${process.env.NEXT_PUBLIC_API_URL}/assets/images/${state?.settings?.logo}`} alt="" />
-                <h3 className={styles.mainSectionTitle}>{state?.settings?.companyName}</h3>
-                <p className={styles.mainSectionAdress}>{state?.settings?.adress}</p>
-                <p className={styles.mainSectionPhone}>{state?.settings?.phone}</p>
+                <p className={styles.mainSectionTableName}>Masa: {tableInfo?.name}</p>
+                <h3 className={styles.mainSectionCompanyName}>{state?.settings?.companyName}</h3>
+                <p className={styles.mainSectionAddress}>{state?.settings?.address}</p>
+                <p className={styles.mainSectionPhoneNumber}>{state?.settings?.phoneNumber}</p>
             </div>
             {
                 isTableValid ? (

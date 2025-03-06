@@ -48,22 +48,26 @@ const SendOrders = ({ sendOrders, callback }) => {
                                 <div className={styles.sendOrdersListItemDate}>
                                     {moment(order_group.created_at).locale('tr').fromNow()}
                                 </div>
-                                {order_group.items?.map((item, index) => {
+                                <div className={styles.sendOrdersListItemItemsWrapper}>
+                                    {order_group.items?.map((item, index) => {
                                     return (
-                                        <div key={index} className={styles.sendOrdersListItemItem}>
+                                        <div key={index} className={styles.sendOrdersListItemItemsWrapperItem}>
                                             <div>{item.item_name} </div>
                                             <div>{item.item_quantity}</div>
                                             <div>{item.item_size}</div>
                                         </div>
                                     );
                                 })}
-                                {order_group.order_group_note && <div className={styles.sendOrdersListItemNote}>
-                                    <span>Müşteri Notu:</span> <span>{order_group.order_group_note}</span>
-                                </div>}
-                                <div className={styles.sendOrdersListItemUpdatedBy}>
-                                    <span>Son güncelleyen:</span> <span>{order_group.updatedBy || 'Yok'}</span>
                                 </div>
-                                <div className={styles.sendOrdersListItemStatus}>Gönderildi</div>
+                                <div className={styles.sendOrdersListItemInfo}>
+                                    {order_group.order_group_note && <div className={styles.sendOrdersListItemInfoNote}>
+                                        <span>Müşteri Notu:</span> <span>{order_group.order_group_note}</span>
+                                    </div>}
+                                    <div className={styles.sendOrdersListItemInfoUpdatedBy}>
+                                        <span>Son güncelleyen:</span> <span>{order_group.updatedBy || 'Yok'}</span>
+                                    </div>
+                                    <div className={styles.sendOrdersListItemInfoStatus}>Gönderildi</div>
+                                </div>
                             </div>
                         );
                     })}

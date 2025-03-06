@@ -3,6 +3,7 @@
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import { TextField } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -13,7 +14,6 @@ import useSWR from 'swr';
 import axios from '@/app/lib/axios';
 import commonStyles from '../common.module.scss';
 import styles from './styles.module.scss';
-import { TextField } from '@mui/material';
 
 const EditSizes = () => {
     const { data: sizes = [], mutate, isValidating } = useSWR('/sizes', (url) => {
@@ -165,15 +165,16 @@ const EditSizes = () => {
                                 handleChange(event, size.id);
                             }}
                             />
-                            <IconButton
-                                className={styles.sizeDelete}
-                                onClick={() => {
+                            <div className={styles.sizeDelete}>
+                                <IconButton
+                                    onClick={() => {
                                     openDeleteSizeModal(size.id);
                                 }}
-                                edge="end"
-                            >
-                                <DeleteIcon />
-                            </IconButton>
+                                    edge="end"
+                                >
+                                    <DeleteIcon />
+                                </IconButton>
+                            </div>
                         </div>
                     );
                 })}

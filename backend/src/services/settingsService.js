@@ -1,5 +1,14 @@
 import * as settingsRepository from '../repositories/settingsRepository.js'
 
+export const updateColors = async (colors) => {
+    try {
+        const results = await settingsRepository.updateColors(colors)
+        return results
+    } catch (error) {
+        throw error
+    }
+}
+
 export const getSettings = async () => {
     try {
         const settings = await settingsRepository.getSettings();
@@ -21,6 +30,15 @@ export const getSettings = async () => {
 export const updateLogoImage = async (logo) => {
     try {
         const results = await settingsRepository.updateLogoImage(logo)
+        return results
+    } catch (error) {
+        throw error
+    }
+}
+
+export const updateContactInfo = async (contactInfo) => {
+    try {
+        const results = await settingsRepository.updateContactInfo(contactInfo)
         return results
     } catch (error) {
         throw error

@@ -7,6 +7,8 @@
     justify-content: center;
     gap: 50px;
     margin-bottom: 2rem;
+    padding-bottom: 25px;
+
 
     &Image, &ImageNotSelected {
         position: relative;
@@ -15,13 +17,22 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        min-height: 200px;
     }
 
     &ImageNotSelected {
-        border: 1px solid $bg-color-11;
+        border: 1px solid var(--border-neutral);
+        background-color: var(--bg-5);
     }
 
     &Input {
         width: 350px;
+        background-color: var(--bg-5);
+    }
+}
+
+@media only screen and (max-width: 1001px) {
+    .content {
+        flex-direction: column;
     }
 }

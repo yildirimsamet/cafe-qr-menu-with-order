@@ -6,7 +6,7 @@ export const createSuperAdmin = async () => {
         const [results] = await connection.query("SELECT * FROM users WHERE role = 'superadmin'");
 
         if (results.length === 0) {
-            const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD, 10);
+            const hashedPassword = bcrypt.hash(process.env.ADMIN_PASSWORD, 10);
             await connection.query(
                 "INSERT INTO users (password, role, username) VALUES (?, 'superadmin', ?)",
                 [hashedPassword, process.env.ADMIN_USERNAME]

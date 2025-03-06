@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import useSWR from 'swr';
 import axios from '@/app/lib/axios';
+import { formatPrice } from '@/app/utils';
 import commonStyles from '../common.module.scss';
 import ProductAddModel from './ProductAddModel';
 import ProductEditModel from './ProductEditModel';
@@ -105,7 +106,9 @@ const EditProducts = () => {
                                                     product.sizes?.map((size, index) => {
                                                         return (
                                                             <div key={index}>
-                                                                {size.size_name}: <span>{size.size_price} ₺</span>
+                                                                {size.size_name}: <span>
+                                                                    {formatPrice(size.size_price)} ₺
+                                                                </span>
                                                             </div>
                                                         );
                                                     })

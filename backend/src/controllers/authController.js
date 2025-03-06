@@ -1,4 +1,5 @@
 import * as authService from '../services/authService.js';
+import * as authRepository from '../repositories/authRepository.js';
 
 export const login = async (req, res) => {
     const { username, password } = req.body;
@@ -36,6 +37,12 @@ export const updateUser = async (req, res) => {
     const { id } = req.params;
     const { username, password, role } = req.body;
 
+    const user = await authRepository.getUserById(id);
+
+    if (user?.role === 'superadmin' && req?.user?.role !== 'superadmin') {
+        return res.status(403).json({ error: "Superadmin ancak superadmin tarafından değiştirilebilir" });
+    }
+
     try {
         const result = await authService.updateUser(id, { username, password, role });
 
@@ -51,6 +58,12 @@ export const updateUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
     const { id } = req.params;
+
+    const user = await authRepository.getUserById(id);
+
+    if (user?.role === 'superadmin') {
+        return res.status(403).json({ error: "Superadmin silinemez" });
+    }
 
     try {
         const result = await authService.deleteUser(id);

@@ -2,10 +2,11 @@
 
 .sendOrders {
     position: relative;
+    background: var(--bg-3);
 
     &Empty {
         font-size: 18px;
-        color: $text-color-6;
+        color: var(--text-1);
         padding: 15px 25px;
         border-radius: 5px;
         display: flex;
@@ -22,8 +23,8 @@
     &Title {
         font-size: 1.5rem;
         font-weight: 700;
-        color: $text-color-12;
-        background-color: $text-color-10;
+        color: var(--text-4);
+        background-color: var(--bg-2-dark);
         letter-spacing: 1.5px;
         height: 55px;
         display: flex;
@@ -32,7 +33,6 @@
         margin-bottom: 1.5rem;
         position: relative;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
     }
 
     &List {
@@ -42,101 +42,110 @@
         padding: 1.5rem;
 
         &Item {
-            border: 1px solid $border-color-3;
             padding: 1.5rem;
             text-align: center;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: $bg-color-1;
+            background-color: var(--bg-4);
             display: flex;
             flex-direction: column;
 
             &Title {
                 font-size: 1.1rem;
                 font-weight: 700;
-                color: $text-color-11;
+                color: var(--text-1);
                 margin-bottom: 0.3rem;
             }
 
             &Date {
                 font-size: 0.9rem;
-                color: $text-color-4;
+                color: var(--text-1-darker);
                 margin-bottom: 1rem;
             }
 
-            &UpdatedBy,
-            &Note {
-                color: $text-color-6;
-                background-color: $bg-color-2;
-                border: none;
-                padding: 0.5rem 1rem;
-                border-radius: 8px;
-                transition: background-color 0.3s ease;
-                margin: auto 0 0 0;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                text-align: right;
-                cursor: default;
-                font-size: 14px;
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
+            &Info {
+                margin-top: auto;
 
-                & span:last-child {
-                    font-weight: bold;
-                    margin-left: 5px;
+                &UpdatedBy,
+                &Note {
+                    color: var(--text-1);
+                    border: none;
+                    padding: 0.5rem 1rem;
+                    border-radius: 8px;
+                    transition: background-color 0.3s ease;
+                    margin: auto 0 0 0;
+                    text-align: right;
+                    cursor: default;
+                    font-size: 14px;
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+
+                    & span:last-child {
+                        font-weight: bold;
+                        margin-left: 5px;
+                    }
+
                 }
 
-            }
-
-            &UpdatedBy {
-                margin-top: 5px;
-            }
-
-            &Note {
-                text-align: left;
-                justify-content: flex-start;
-                margin-bottom: 4px;
-
-                & span:first-child {
-                    white-space: nowrap;
+                &UpdatedBy {
+                    margin-top: 5px;
+                    font-size: 12px;
+                    color: var(--text-1-darker);
                 }
 
-                & span:last-child {
-                    text-align: center;
-                }
-            }
-
-            &Item {
-                display: grid;
-                grid-template-columns: 4fr 1fr 1fr;
-                margin-bottom: 0.75rem;
-                font-size: 0.9rem;
-                color: $text-color-12;
-                padding: 0 4px;
-
-                &>div {
-                    flex: 1;
+                &Note {
                     text-align: left;
+                    justify-content: flex-start;
+                    margin-bottom: 4px;
+                    color: var(--text-1);
 
-                    &:last-child {
-                        justify-self: end;
+                    & span:first-child {
+                        white-space: nowrap;
+                    }
+
+                    & span:last-child {
+                        text-align: center;
                     }
                 }
+
+                &Status {
+                    background-color: var(--success);
+                    color: var(--text-3);
+                    border: none;
+                    padding: 0.5rem 1rem;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+                    font-weight: 700;
+                    margin-top: 10px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
             }
 
-            &Status {
-                background-color: $text-color-13;
-                color: $text-color-5;
-                border: none;
-                padding: 0.5rem 1rem;
+            &ItemsWrapper {
+                margin-bottom: 15px;
                 border-radius: 8px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-                font-weight: 700;
-                margin-top: 10px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                background-color: var(--bg-5);
+
+                &Item {
+                    display: grid;
+                    grid-template-columns: 4fr 1fr 1fr;
+                    font-size: 0.9rem;
+                    color: var(--text-2);
+                    padding: 10px 15px;
+    
+                    &>div {
+                        flex: 1;
+                        text-align: left;
+    
+                        &:last-child {
+                            justify-self: end;
+                        }
+                    }
+                }
             }
         }
 

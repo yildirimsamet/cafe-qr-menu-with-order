@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useAppContext } from '@/app/context/appContext';
 import styles from './styles.module.scss';
+import { formatPrice } from '@/app/utils';
 
 const BasketItem = ({ item }) => {
     const { state, setState } = useAppContext();
@@ -92,7 +93,7 @@ const BasketItem = ({ item }) => {
                     +
                 </button>
             </div>
-            <div className={styles.itemPrice}>{item.price * quantity} ₺</div>
+            <div className={styles.itemPrice}>{formatPrice(item.price * quantity)} ₺</div>
         </div>
     );
 };

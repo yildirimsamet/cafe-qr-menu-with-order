@@ -10,13 +10,6 @@ import 'sweetalert2/src/sweetalert2.scss';
 import { AuthProvider } from './context/authContext';
 
 export default function RootLayout ({ children }) {
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     document.addEventListener('hide.bs.modal', function (event) {
-    //         if (document.activeElement) {
-    //             document.activeElement.blur();
-    //         }
-    //     });
-    // });
     return (
         <html lang="en">
             <body>

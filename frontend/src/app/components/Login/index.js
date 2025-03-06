@@ -25,8 +25,11 @@ const LoginForm = () => {
 
     return (
         <div className={styles.loginForm}>
-            <Container maxWidth="xs">
-                <Box mt={5} p={3} boxShadow={3} borderRadius={2} bgcolor="white">
+            <Typography className={styles.loginFormTitle} variant="h4" align="center" gutterBottom>
+                Giriş Paneli
+            </Typography>
+            <Container maxWidth="sm">
+                <Box mt={5} p={4} boxShadow={3} borderRadius={2} bgcolor="white">
                     <Typography variant="h5" align="center" gutterBottom>
                         Giriş
                     </Typography>

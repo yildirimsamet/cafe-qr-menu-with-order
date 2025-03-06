@@ -25,11 +25,9 @@ const UserAddModel = ({mutate, isUserAddModelOpened, setIsUserAddModelOpened }) 
     });
 
     const handleSave = async () => {
-        console.log('hgandle savce');
         const errors = checkErrors();
 
         if (errors) {
-            console.log('run');
             return Swal.fire({
                 icon: 'error',
                 title: 'Hata',
@@ -38,7 +36,6 @@ const UserAddModel = ({mutate, isUserAddModelOpened, setIsUserAddModelOpened }) 
         }
 
         try {
-            console.log('tsert');
             const response = await axios.post('/auth/register', user);
 
             if (response.data.data) {
@@ -80,7 +77,14 @@ const UserAddModel = ({mutate, isUserAddModelOpened, setIsUserAddModelOpened }) 
     };
 
     return (
-        <Dialog closeAfterTransition={false} open={isUserAddModelOpened} onClose={() => setIsUserAddModelOpened(false)} fullWidth maxWidth="sm">
+        <Dialog
+            closeAfterTransition={false}
+            open={isUserAddModelOpened}
+            onClose={() => setIsUserAddModelOpened(false)}
+            fullWidth
+            maxWidth="sm"
+            slotProps={{ backdrop: { invisible: true } }}
+        >
             <DialogTitle>
                 Kullanıcı Ekle
                 <IconButton onClick={() => setIsUserAddModelOpened(false)} style={{ position: 'absolute', right: 10, top: 10 }}>

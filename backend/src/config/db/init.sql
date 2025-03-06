@@ -180,20 +180,12 @@ INSERT INTO
     `tables` (name, slug)
 VALUES
     ('Masa 1', 'masa-1'),
-    ('Masa 2', 'masa-2'),
-    ('Masa 3', 'masa-3'),
-    ('Masa 4', 'masa-4'),
-    ('Masa 5', 'masa-5'),
-    ('Masa 6', 'masa-6'),
-    ('Masa 7', 'masa-7'),
-    ('Masa 8', 'masa-8'),
-    ('Masa 9', 'masa-9'),
-    ('Masa 10', 'masa-10');
+    ('Masa 2', 'masa-2');
 
 INSERT INTO
     settings (`key`, `value`)
 VALUES
-    ('logo', 'logo.png'),
+    ('logo', ''),
     (
         'stockProductImage',
         'stockProductImage.png'
@@ -201,47 +193,43 @@ VALUES
     (
         'colors',
         '{
-            "text-color-3": "#999999",
-            "text-color-2": "#cccccc",
-            "text-color-1": "#333333",
-            "text-color-4": "#aaaaaa",
-            "text-color-5": "#ffffff",
-            "text-color-6": "#7d5a3a",
-            "text-color-7": "#5a3e1b",
-            "text-color-8": "#1a1a1a",
-            "text-color-9": "#eaeaea",
-            "text-color-10": "#f3c47f",
-            "text-color-11": "#bd2131",
-            "text-color-12": "#c55c1e",
-            "text-color-13": "#4bb543",
-            "text-color-14": "#ff4d4d",
-            "bg-color-1": "#ffffff",
-            "bg-color-2": "#f5f5f5",
-            "bg-color-3": "#efefef",
-            "bg-color-4": "#000000",
-            "bg-color-5": "#bbbbbb",
-            "bg-color-6": "#eeeeee",
-            "bg-color-7": "#1a1a1a",
-            "bg-color-8": "#eaeaea",
-            "bg-color-9": "#f3c47f",
-            "bg-color-10": "#bd2131",
-            "bg-color-11": "#c55c1e",
-            "bg-color-12": "#4bb543",
-            "bg-color-13": "#ff4d4d",
-            "bg-color-14": "#cdcdcd",
-            "scroll-1": "#ff6600",
-            "scroll-2": "#e55b00",
-            "scroll-3": "#c94e00",
-            "scroll-4": "#f1f1f1",
-            "border-color-1": "#cccccc",
-            "border-color-2": "#dddddd",
-            "border-color-3": "#e0e0e0",
-            "border-color-4": "#1a1a1a"
+            "bg-1": "#143642",
+            "bg-1-dark": "#263c41",
+            "bg-1-darker": "#38413f",
+            "bg-2": "#b76935",
+            "bg-2-dark": "#a56336",
+            "bg-2-darker": "#935e38",
+            "bg-3": "#d7d7d7",
+            "bg-4": "#efefef",
+            "bg-5": "#e5e5e5",
+            "text-1": "#336475",
+            "text-1-dark": "#3a5258",
+            "text-1-darker": "#46524f",
+            "text-2": "#b76935",
+            "text-2-dark": "#a56336",
+            "text-2-darker": "#935e38",
+            "text-3": "#ECF2F3",
+            "text-4": "#cbcbcb",
+            "text-accent-1": "#e5ac5c",
+            "text-accent-2": "#D4A96A",
+            "border-1": "#4e8a9e",
+            "border-2": "#8A4B2D",
+            "border-neutral": "#7D8E95",
+            "accent-1": "#e5ac5c",
+            "accent-2": "#D4A96A",
+            "success": "#379b52",
+            "danger": "#d32f2f",
+            "warning": "#c59238"
         }'
     ),
     (
-        'adress',
+        'address',
         '1234sk. no:1 Buca/Izmir'
     ),
-    ('phone', '0512 345 67 89'),
+    ('phoneNumber', '0512 345 67 89'),
     ('companyName', 'XYZ Cafe');
+
+INSERT INTO
+    users (username, password, role)
+VALUES
+    ('superadmin', '$2b$10$dU6x1dNOu9ORbBRFrkLZn.5yj4HpREra7Ezgd7qGQqaq/XuqrEjXu', 'superadmin');

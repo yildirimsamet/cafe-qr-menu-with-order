@@ -1,8 +1,8 @@
 'use client';
 
 import ColorSettings from '../components/Settings/ColorSettings';
+import ContactSettings from '../components/Settings/ContactSettings';
 import LogoSettings from '../components/Settings/LogoSettings';
-import TextSettings from '../components/Settings/TextSettings';
 import { useAuthorization } from '../hooks/useAuthorization';
 
 const Settings = () => {
@@ -12,7 +12,7 @@ const Settings = () => {
         <div>
             <LogoSettings />
             <ColorSettings />
-            <TextSettings />
+            <ContactSettings />
         </div>
     );
 

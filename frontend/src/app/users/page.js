@@ -66,7 +66,7 @@ const Users = () => {
                 if (result.isConfirmed) {
                     axios.delete(`/auth/delete/${user.id}`)
                         .then((res) => {
-                            if (res.status === 200) {
+                            if (res.status === 200 && res.data) {
                                 getUsers();
                                 Swal.fire('Silindi', 'Kullanıcı başarıyla silindi.', 'success');
                             } else {
@@ -86,14 +86,7 @@ const Users = () => {
     };
 
     const handleUpdate = async (user) => {
-        if (user.role === 'superadmin') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Hata',
-                text: 'Superadmin güncellenemez.',
-            });
-            return;
-        } else if (user.role === 'admin' && loggedInUser.role == 'admin') {
+        if (user.role === 'admin' && loggedInUser.role == 'admin') {
             Swal.fire({
                 icon: 'error',
                 title: 'Hata',
@@ -111,55 +104,57 @@ const Users = () => {
             <div className={styles.title}>
                 Kullanıcılar
             </div>
-            <div className={styles.topButtons}>
-                <button
-                    className={styles.topButtonsAdd}
-                    onClick={() => {
+            <div className='container'>
+                <div className={styles.topButtons}>
+                    <button
+                        className={styles.topButtonsAdd}
+                        onClick={() => {
                         setIsUserAddModelOpened(true);
                     }}
-                >
-                    Kullanıcı Ekle
-                    <AddCircleIcon />
-                </button>
-            </div>
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>ID</TableCell>
-                            <TableCell>Kullanıcı Adı</TableCell>
-                            <TableCell>Rol</TableCell>
-                            <TableCell sx={{ width: '250px' }}>Düzenle</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {users.map((user) => (
-                            <TableRow
-                                key={user.id}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {user.id}
-                                </TableCell>
-                                <TableCell>{user.username}</TableCell>
-                                <TableCell>{user.role && user.role === 'waiter' ? 'Garson' : user.role}</TableCell>
-                                <TableCell sx={{ width: '250px' }}>
-                                    <div className={styles.buttons}>
-                                        <button className={styles.buttonsEdit} onClick={() => {
+                    >
+                        Kullanıcı Ekle
+                        <AddCircleIcon />
+                    </button>
+                </div>
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>ID</TableCell>
+                                <TableCell>Kullanıcı Adı</TableCell>
+                                <TableCell>Rol</TableCell>
+                                <TableCell sx={{ width: '250px' }}>Düzenle</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {users.map((user) => (
+                                <TableRow
+                                    key={user.id}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell component="th" scope="row">
+                                        {user.id}
+                                    </TableCell>
+                                    <TableCell>{user.username}</TableCell>
+                                    <TableCell>{user.role && user.role === 'waiter' ? 'Garson' : user.role}</TableCell>
+                                    <TableCell sx={{ width: '250px' }}>
+                                        <div className={styles.buttons}>
+                                            <button className={styles.buttonsEdit} onClick={() => {
                                             handleUpdate(user);
                                         }}
-                                        >Güncelle</button>
-                                        <button className={styles.buttonsDelete} onClick={() => {
+                                            >Güncelle</button>
+                                            <button className={styles.buttonsDelete} onClick={() => {
                                             handleDelete(user);
                                         }}
-                                        >Sil</button>
-                                    </div>
-                                </TableCell>
-                            </TableRow>
+                                            >Sil</button>
+                                        </div>
+                                    </TableCell>
+                                </TableRow>
                         ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
             {
                 isUserEditModelOpened && (
                     <EditUserModal

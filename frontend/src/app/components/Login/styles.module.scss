@@ -3,12 +3,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
+    background-color: var(--bg-1-darker);
+
+    &Title {
+        color: var(--text-3);
+        font-weight: 700;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
 }
 
 .loginButton {
-    background-color: $bg-color-11 !important;
-    color: $text-color-9 !important;
+    background-color: var(--bg-1) !important;
+    color: var(--text-3) !important;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;

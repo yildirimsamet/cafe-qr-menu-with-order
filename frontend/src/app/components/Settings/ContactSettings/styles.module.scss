@@ -1,0 +1,42 @@
+@import '@/app/css/_variables.scss';
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 25px;
+
+    &Item {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+
+        &Title {
+            flex: 1 1 auto;
+            max-width: 150px;
+            font-weight: bold;
+            color: var(--text-1);
+        }
+
+        &Input {
+            background: var(--bg-5);
+            width: 500px;
+            flex: 0 0 auto;
+        }
+    }
+}
+
+@media only screen and (max-width: 1001px) {
+    .content {
+        &Item {
+            flex-direction: column;
+            align-items: flex-start;
+
+            &Input {
+                width: 100%;
+            }
+
+        }
+    }
+}

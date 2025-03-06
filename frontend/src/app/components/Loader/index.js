@@ -7,11 +7,9 @@ const Loader = () => {
     return (
         state?.loading &&
                 (<div className={styles.loader}>
-                    <div className={styles.loaderInner}>
-                        <div className={styles.loaderInnerCorpus}></div>
-                        <div className={styles.loaderInnerSpinner}></div>
-                    </div>
-                    <div className={styles.loaderText}>&nbsp;Yükleniyor ...</div>
+                    <span className={styles.loaderElement}></span>
+                    <span className={styles.loaderElement}></span>
+                    <span className={styles.loaderElement}></span>
                 </div>
                 )
     );

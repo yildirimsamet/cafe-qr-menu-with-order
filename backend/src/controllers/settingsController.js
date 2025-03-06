@@ -50,5 +50,39 @@ export const updateLogoImage = async (req, res) => {
     }
 };
 
+export const updateColors = async (req, res) => {
+    if (req?.user?.role !== 'superadmin') {
+        return res.status(403).json({ error: "Forbidden: insufficient role" })
+    }
+
+    let { colors } = req.body;
+
+    if (typeof colors !== 'string') {
+        colors = JSON.stringify(colors);
+    }
+
+    try {
+        const results = await settingsService.updateColors(colors);
+        res.json({ status: 200, data: results });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+export const updateContactInfo = async (req, res) => {
+    if (req?.user?.role !== 'superadmin') {
+        return res.status(403).json({ error: "Forbidden: insufficient role" })
+    }
+
+    try {
+        const results = await settingsService.updateContactInfo(req.body);
+        res.json({ status: 200, data: results });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 export { upload }
 

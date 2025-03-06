@@ -11,10 +11,12 @@ import {
     InputLabel,
     FormControl,
     IconButton,
+    Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import axios from '@/app/lib/axios';
+import { formatPrice } from '@/app/utils';
 
 const ProductEditModel = ({mutate, selectedProductForEdit, isProductEditModelOpened, setIsProductEditModelOpened }) => {
     const [product, setProduct] = useState({
@@ -134,7 +136,14 @@ const ProductEditModel = ({mutate, selectedProductForEdit, isProductEditModelOpe
     };
 
     return (
-        <Dialog closeAfterTransition={false} open={isProductEditModelOpened} onClose={() => setIsProductEditModelOpened(false)} fullWidth maxWidth="sm">
+        <Dialog
+            closeAfterTransition={false}
+            open={isProductEditModelOpened}
+            onClose={() => setIsProductEditModelOpened(false)}
+            fullWidth
+            maxWidth="sm"
+            slotProps={{ backdrop: { invisible: true } }}
+        >
             <DialogTitle>
                 Ürün Güncelle
                 <IconButton onClick={() => setIsProductEditModelOpened(false)} style={{ position: 'absolute', right: 10, top: 10 }}>
@@ -255,6 +264,9 @@ const ProductEditModel = ({mutate, selectedProductForEdit, isProductEditModelOpe
                         ))}
                     </Select>
                 </FormControl>
+                <Typography margin={1} variant="body2" color="text.secondary" gutterBottom>
+                    Fiyat Örn: 1.234,99 / 9,99 / 123,00
+                </Typography>
                 {product.sizes.map((size) => {
                     return (
                         <TextField
@@ -266,11 +278,11 @@ const ProductEditModel = ({mutate, selectedProductForEdit, isProductEditModelOpe
                             key={size.size_id}
                             label={`Fiyat (${sizes.find((s) => s.id === size.size_id)?.name})`}
                             fullWidth
-                            type="number"
+                            type="text"
                             margin="dense"
-                            value={size.price || ''}
+                            defaultValue={formatPrice(size.price)}
                             onChange={(e) => {
-                                const newPrice = e.target.value;
+                                const newPrice = formatPrice(e.target.value);
                                 const updatedSizes = product.sizes.map((s) =>
                                     s.size_id === size.size_id ? { ...s, price: newPrice } : s);
                                 setProduct({ ...product, sizes: updatedSizes });

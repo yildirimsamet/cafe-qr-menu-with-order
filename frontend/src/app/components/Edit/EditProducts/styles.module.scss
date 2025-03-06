@@ -15,7 +15,7 @@
         &Title {
             font-size: 24px;
             font-weight: bold;
-            color: $text-color-12;
+            color: var(--text-2-darker);
             margin-bottom: 10px;
         }
 
@@ -24,7 +24,7 @@
                 display: grid;
                 grid-template-columns: 80px 1fr 2fr 1fr 1fr auto;
                 align-items: center;
-                background: $bg-color-1;
+                background: var(--bg-4);
                 border-radius: 10px;
                 padding: 15px;
                 margin-bottom: 10px;
@@ -41,35 +41,34 @@
                 &Name {
                     font-size: 18px;
                     font-weight: bold;
-                    color: $text-color-7;
+                    color: var(--text-2-dark);
                 }
 
                 &Description {
                     font-size: 14px;
-                    color: $text-color-3;
+                    color: var(--text-2);
                 }
 
                 &Category {
                     font-size: 16px;
-                    color: $text-color-6;
+                    color: var(--text-2);
                     justify-self: center;
                 }
 
                 &Price {
                     justify-self: center;
                     font-size: 14px;
-                    color: $text-color-3;
+                    color: var(--text-1);
                     display: flex;
                     flex-direction: column;
                     gap: 10px;
 
                     & div {
                         font-weight: normal;
-                        color: $text-color-6;
 
                         & span {
                             font-weight: bold;
-                            color: $text-color-12;
+                            color: var(--text-1-dark);
                         }
                     }
                 }
@@ -87,29 +86,29 @@
                     }
 
                     &Edit {
-                        background-color: $text-color-12;
-                        color: $text-color-5;
+                        background-color: var(--warning);
+                        color: var(--text-3);
                     }
 
                     &Delete {
-                        background-color: $text-color-14;
-                        color: $text-color-5;
+                        background-color: var(--danger);
+                        color: var(--text-3);
                     }
                 }
 
                 &Empty {
                     font-size: 18px;
-                    color: $text-color-6;
+                    color: var(--text-color-5);
                     padding: 15px 25px;
                     border-radius: 5px;
-                    background: $bg-color-1;
+                    background: var(--bg-5);
                 }
             }
         }
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1001px) {
     .editProductsList {
         &Item {
             &Products {
@@ -140,4 +139,3 @@
         }
     }
 }
-

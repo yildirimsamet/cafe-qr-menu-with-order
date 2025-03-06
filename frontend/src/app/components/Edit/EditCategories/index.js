@@ -165,19 +165,23 @@ const EditCategories = () => {
                                         shrink: true,
                                     },
                                 }}
-                                label="Kategori Adı" defaultValue={category.name} onChange={(event) => {
+                                variant="outlined"
+                                label="Kategori Adı"
+                                defaultValue={category.name}
+                                onChange={(event) => {
                                     handleChange(event, category.id);
-                                }} variant="outlined"
+                                }}
                             />
-                            <IconButton
-                                onClick={() => {
+                            <div className={styles.categoryDelete}>
+                                <IconButton
+                                    onClick={() => {
                                     openDeleteCategoryModal(category.id);
                                 }}
-                                edge="end"
-                                className={styles.categoryDelete}
-                            >
-                                <DeleteIcon />
-                            </IconButton>
+                                    edge="end"
+                                >
+                                    <DeleteIcon />
+                                </IconButton>
+                            </div>
                         </div>
                     );
                 })}
