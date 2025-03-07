@@ -13,7 +13,7 @@ const WaitingOrders = ({ waitingOrders, callback }) => {
     const openPopup = (orderGroupId) => {
         Swal.fire({
             title:
-                'Siparişi gönderilen siparişlere almak istediginizden emin misiniz?',
+                '"Gönderilen siparişlere almak istediginizden emin misiniz?"',
             showDenyButton: true,
             confirmButtonText: 'Evet',
             denyButtonText: 'Hayır',

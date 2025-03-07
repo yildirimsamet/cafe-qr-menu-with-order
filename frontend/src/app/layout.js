@@ -11,7 +11,7 @@ import { AuthProvider } from './context/authContext';
 
 export default function RootLayout ({ children }) {
     return (
-        <html lang="en">
+        <html lang="tr">
             <body>
                 <AppWrapper>
                     <AuthProvider>

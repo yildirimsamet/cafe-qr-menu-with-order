@@ -16,6 +16,12 @@ const Basket = () => {
     const [isBasketOpened, setIsBasketOpened] = useState(false);
     const [orderNote, setOrderNote] = useState('');
     const isBasketEmpty = state.basket.length <= 0;
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    useEffect(() => {
+        setTotalPrice(formatPrice(state.basket
+            .reduce((acc, item) => acc + item.quantity * item.price, 0)));
+    }, [state.basket]);
 
     const sendOrderToSocket = () => {
         socket.emit('order-user', { items: state.basket, table_slug: state.tableSlug, order_note: orderNote });
@@ -70,8 +76,7 @@ const Basket = () => {
                 )}
                 >
                     Siparişi Onayla
-                    {` (${formatPrice(state.basket
-                            .reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2))}₺)`}
+                    {` (${totalPrice}₺)`}
                 </button>
             </div>
             <div className={cn(styles.basketBlur)}></div>

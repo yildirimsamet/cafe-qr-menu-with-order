@@ -1,16 +1,16 @@
 'use client';
 
+import classNames from 'classnames';
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import axios from '@/app/lib/axios';
 import styles from './styles.module.scss';
 import 'moment/locale/tr';
-import classNames from 'classnames';
 
 const SendOrders = ({ sendOrders, callback }) => {
     const openPopup = (orderGroupId) => {
         Swal.fire({
-            title: 'Siparişi tekrar bekleyen siparişlere almak istediginizden emin misiniz?',
+            title: '"Bekleyen siparişlere almak istediginizden emin misiniz?"',
             showDenyButton: true,
             confirmButtonText: 'Evet',
             denyButtonText: 'Hayır',

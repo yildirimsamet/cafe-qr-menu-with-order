@@ -64,6 +64,7 @@ const eslintConfig = [
             'import/no-named-as-default-member': 'off',
             'indent': 'off',
             'eol-last': 'off',
+            'react/no-unescaped-entities': 'off',
             // Import/export kuralları
             'import/order': [
                 'warn',

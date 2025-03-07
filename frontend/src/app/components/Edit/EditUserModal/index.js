@@ -123,7 +123,7 @@ const EditUserModal = ({mutate, selectedUserForEdit, isUserEditModelOpened, setI
                 {
                     user?.role !== 'superadmin' && (
                         <FormControl fullWidth margin="dense">
-                            <InputLabel>Role</InputLabel>
+                            <InputLabel>Kullanıcı Rolü</InputLabel>
                             <Select
                                 label="Rol"
                                 slotProps={{

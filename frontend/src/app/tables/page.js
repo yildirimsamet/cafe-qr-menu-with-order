@@ -374,7 +374,7 @@ const Tables = () => {
                                 })}
                             >
                                 <div className={styles.tableOrdersTitles}>
-                                    <div className={styles.tableOrdersTitle}>Urun</div>
+                                    <div className={styles.tableOrdersTitle}>Ürun</div>
                                     <div className={styles.tableOrdersTitle}>Boyut</div>
                                     <div className={styles.tableOrdersTitle}>Adet</div>
                                     <div className={styles.tableOrdersTitle}>Fiyat</div>

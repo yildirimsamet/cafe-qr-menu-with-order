@@ -228,9 +228,9 @@ const ProductAddModal = ({ isProductAddModelOpened, setIsProductAddModelOpened, 
                     </Select>
                 </FormControl>
                 <FormControl fullWidth margin="dense">
-                    <InputLabel>Size'lar</InputLabel>
+                    <InputLabel>Boyutlar</InputLabel>
                     <Select
-                        label="Size'lar"
+                        label="Boyutlar"
                         slotProps={{
                             inputLabel: {
                                 shrink: false,

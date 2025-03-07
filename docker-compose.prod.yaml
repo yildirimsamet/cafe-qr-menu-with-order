@@ -2,36 +2,30 @@ version: '3.8'
 
 services:
   backend:
-    depends_on:
-      mysql:
-        condition: service_healthy
     build:
       context: ./backend
-      target: dev
+      target: prod
     ports:
       - "5000:5000"
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
     networks:
       - app-network
     restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
 
   frontend:
     build:
       context: ./frontend
-      target: dev
+      target: prod
     ports:
       - "3000:3000"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
     networks:
       - app-network
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
 
   mysql:
     image: mysql:8.0
@@ -44,7 +38,6 @@ services:
       - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./backend/src/config/db/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
     healthcheck:
