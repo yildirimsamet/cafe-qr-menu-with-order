@@ -1,6 +1,10 @@
-FROM node:20-alpine as dev
+FROM node:18-alpine as dev
 
 WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    python3 \
+    build-essential
 
 COPY package*.json ./
 
