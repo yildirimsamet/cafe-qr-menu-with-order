@@ -7,6 +7,7 @@ import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import useSWR from 'swr';
+import { useAppContext } from '@/app/context/appContext';
 import axios from '@/app/lib/axios';
 import { formatPrice } from '@/app/utils';
 import commonStyles from '../common.module.scss';
@@ -15,6 +16,8 @@ import ProductEditModel from './ProductEditModel';
 import styles from './styles.module.scss';
 
 const EditProducts = () => {
+    const { state: { settings } } = useAppContext();
+
     const [isProductAddModelOpened, setIsProductAddModelOpened] = useState(false);
     const [isProductEditModelOpened, setIsProductEditModelOpened] = useState(false);
     const [selectedProductForEdit, setSelectedProductForEdit] = useState({});
@@ -87,10 +90,12 @@ const EditProducts = () => {
                                 {productsInfo.items.length > 0 ? productsInfo.items.map((product, index) => {
                                     return (
                                         <div key={index} className={styles.editProductsListItemProductsItem}>
-                                            <img src={product.item_image ?
-                                                `${process.env.NEXT_PUBLIC_API_URL}/assets/images/${product.item_image}`
-                                                : process.env.NEXT_PUBLIC_STOCK_IMAGE_URL} alt="Ürün Resmi"
-                                                    className={styles.editProductsListItemProductsItemImage}
+                                            <img
+                                                src={`${process.env.NEXT_PUBLIC_API_URL}/assets/images/${
+                                                    product.item_image || settings?.logo
+                                                }`}
+                                                alt="Ürün Resmi"
+                                                className={styles.editProductsListItemProductsItemImage}
                                             />
                                             <div className={styles.editProductsListItemProductsItemName}>{
                                                 product.item_name}

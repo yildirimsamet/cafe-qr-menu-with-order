@@ -49,10 +49,15 @@ const io = new Server(server, {
     cors: {
         origin: "*",
         methods: ["GET", "POST"],
+        credentials: true
     },
 });
 
-io.on("connection", (socket) => {
+const apiNamespace = io.of('/api');
+
+apiNamespace.on("connection", (socket) => {
+    console.log("API namespace connected");
+
     socket.on("order-user", async (data, callback) => {
         await saveOrderToDatabase(data);
 
@@ -71,7 +76,6 @@ io.on("connection", (socket) => {
         socket.broadcast.emit("orders", data);
     });
 });
-
 
 server.listen(PORT, () => {
     console.log(`Server running on ${PORT}`);

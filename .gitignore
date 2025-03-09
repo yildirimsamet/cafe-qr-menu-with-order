@@ -3,3 +3,6 @@ node_modules
 .env
 .next
 package-lock.json
+nginx/certs
+nginx/dhparam.pem
+.env.local
