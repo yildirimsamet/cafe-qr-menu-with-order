@@ -21,13 +21,8 @@ const MySwal = withReactContent(Swal);
 const Tables = () => {
     const { user } = useAuth();
     useAuthorization({ authorization: 'waiter' });
-    // const [tables, setTables] = useState([]);
     const { isMobile } = useWindowSize();
     const { data: tables = [], mutate } = useSWR('/tables', async (url) => await axios.get(url).then((res) => res.data.data));
-
-    const getTables = async () => {
-        mutate();
-    };
 
     const generateQRCode = (table_name, table_slug) => {
         MySwal.fire({

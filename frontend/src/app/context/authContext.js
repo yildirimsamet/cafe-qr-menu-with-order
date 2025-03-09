@@ -9,7 +9,7 @@ import { useAppContext } from './appContext';
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-    const { state, setState } = useAppContext();
+    const { setState } = useAppContext();
     const [user, setUser] = useState(null);
     const router = useCustomRouter();
 

@@ -42,7 +42,7 @@ export function AppWrapper ({ children }) {
     const handleClick = (event) => {
       let target = event.target;
       while (target && !target.href) target = target.parentElement;
-      if (target && target.href) {
+      if (target && target.href && target.target !== '_blank') {
         setState((prev) => ({ ...prev, loading: true }));
       }
     };

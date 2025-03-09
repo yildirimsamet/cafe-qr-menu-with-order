@@ -132,12 +132,13 @@
 
                 &Item {
                     display: grid;
-                    grid-template-columns: 4fr 1fr 1fr;
+                    grid-template-columns: 3fr 0.5fr 1fr;
                     font-size: 0.9rem;
                     color: var(--text-2);
                     padding: 10px 15px;
     
                     &>div {
+                        white-space: nowrap;
                         flex: 1;
                         text-align: left;
     

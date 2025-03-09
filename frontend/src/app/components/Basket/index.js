@@ -21,7 +21,7 @@ const Basket = () => {
     useEffect(() => {
         setTotalPrice(formatPrice(state.basket
             .reduce((acc, item) => acc + item.quantity * item.price, 0)));
-    }, [state.basket]);
+    }, [state]);
 
     const sendOrderToSocket = () => {
         socket.emit('order-user', { items: state.basket, table_slug: state.tableSlug, order_note: orderNote });
