@@ -1,18 +1,18 @@
-import styles from './styles.module.scss';
-import Link from 'next/link';
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import PrintIcon from '@mui/icons-material/Print';
+import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import cn from 'classnames';
-import { formatPrice } from '@/app/utils';
-import useNotificaion from '@/app/hooks/useNotification';
+import moment from 'moment';
+import Link from 'next/link';
 import QrCode from 'qrcode';
+import { useState } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { useAuth } from '@/app/hooks/useAuth';
+import useNotificaion from '@/app/hooks/useNotification';
 import axios from '@/app/lib/axios';
-import PrintIcon from '@mui/icons-material/Print';
-import { useState } from 'react';
-import { Dialog, DialogContent, DialogTitle } from '@mui/material';
-import moment from 'moment';
+import { formatPrice } from '@/app/utils';
+import styles from './styles.module.scss';
 import 'moment/locale/tr';
 
 const MySwal = withReactContent(Swal);
@@ -42,7 +42,7 @@ const Table = ({ table, mutate }) => {
                 icon: 'error',
                 title: 'Bir hata oluştu.',
                 text: result.message,
-            })
+            });
         }
 
         setIsLastOrdersListOpen(true);
@@ -73,7 +73,7 @@ const Table = ({ table, mutate }) => {
                 );
             },
             preConfirm: () => {
-                function printCanvas() {
+                function printCanvas () {
                     const canvas = document.getElementById('qr-canvas');
                     const imgData = canvas.toDataURL('image/png');
 
@@ -195,9 +195,12 @@ const Table = ({ table, mutate }) => {
         <div className={styles.table}>
             <div className={styles.tableHeader}>
                 <h2 className={styles.tableHeaderTitle}>{table.table_name}
-                    <ListAltIcon onClick={() => {
+                    <ListAltIcon
+                        onClick={() => {
                         handleOpenLastOrdersList();
-                    }} className={styles.tableHeaderTitleListIcon} />
+                    }}
+                        className={styles.tableHeaderTitleListIcon}
+                    />
                 </h2>
                 <div
                     className={cn(
@@ -223,7 +226,10 @@ const Table = ({ table, mutate }) => {
                 </div>
                 {table.items.map((item, index) => {
                     return (
-                        <div key={index} className={styles.tableOrdersItem}>
+                        <div
+                            key={index}
+                            className={styles.tableOrdersItem}
+                        >
                             <div className={styles.tableOrdersItemName}>
                                 {item.item_name}
                             </div>
@@ -282,7 +288,10 @@ const Table = ({ table, mutate }) => {
                 </button>
             </div>
             <div className={styles.tableFooter}>
-                <Link href={`/table/${table.table_slug}`} className={styles.tableFooterOrder} >Masaya Sipariş Ver</Link>
+                <Link
+                    href={`/table/${table.table_slug}`}
+                    className={styles.tableFooterOrder}
+                >Masaya Sipariş Ver</Link>
                 {(user?.role === 'admin' || user?.role === 'superadmin') && (
                     <div className={styles.tableFooterDelete}>
                         <button
@@ -298,19 +307,29 @@ const Table = ({ table, mutate }) => {
             </div>
             {
                 isLastOrdersListOpen && (
-                    <Dialog open={isLastOrdersListOpen} onClose={() => setIsLastOrdersListOpen(false)} fullWidth>
+                    <Dialog
+                        open={isLastOrdersListOpen}
+                        onClose={() => setIsLastOrdersListOpen(false)}
+                        fullWidth
+                    >
                         <DialogTitle>Son Siparişler <span className={styles.lastOrdersPopupTitleTime}>{'(son 18 saat)'}</span></DialogTitle>
                         <DialogContent>
                             {lastOrders.length > 0 ? (
                                 lastOrders.map((order, index) => (
-                                    <div key={index} className={styles.lastOrder}>
+                                    <div
+                                        key={index}
+                                        className={styles.lastOrder}
+                                    >
                                         <div className={styles.lastOrderDate}>
                                             {moment(order.done_at).subtract(3, 'hours').locale('tr').format('HH:mm:ss DD.MM.YYYY')}
                                         </div>
                                         <div className={styles.lastOrderItems}>
                                             {
                                                 order.items.map((item, index) => (
-                                                    <div key={index} className={styles.lastOrderItemsItem}>
+                                                    <div
+                                                        key={index}
+                                                        className={styles.lastOrderItemsItem}
+                                                    >
                                                         <div className={styles.lastOrderItemsItemName}>
                                                             {item.item_name}
                                                         </div>
@@ -343,6 +362,6 @@ const Table = ({ table, mutate }) => {
             }
         </div>
     );
-}
+};
 
 export default Table;

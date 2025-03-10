@@ -57,11 +57,13 @@ const Color = ({ name, value, isValidHexColor, setChangedColors }) => {
     };
 
     return (
-        <div onClick={() => {
+        <div
+            onClick={() => {
             if (!isColorEditModalOpened) {
                 setIsColorEditModalOpened(true);
             }
-        }} className={styles.wrapper}
+        }}
+            className={styles.wrapper}
         >
             <div className={styles.wrapperOverlay}></div>
             <div className={styles.wrapperColorPickerWrapper}>

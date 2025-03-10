@@ -57,7 +57,11 @@ const Table = ({ params: { tableSlug } }) => {
     return (
         <div className={styles.main}>
             <div className={styles.mainSection}>
-                <img className={styles.mainSectionImage} src={`${process.env.NEXT_PUBLIC_API_URL}/assets/images/${state?.settings?.logo}`} alt="" />
+                <img
+                    className={styles.mainSectionImage}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/assets/images/${state?.settings?.logo}`}
+                    alt=""
+                />
                 <p className={styles.mainSectionTableName}>Masa: {tableInfo?.name}</p>
                 <h3 className={styles.mainSectionCompanyName}>{state?.settings?.companyName}</h3>
                 <p className={styles.mainSectionAddress}>{state?.settings?.address}</p>
@@ -66,7 +70,10 @@ const Table = ({ params: { tableSlug } }) => {
             {
                 isTableValid ? (
                     <div className={cn(styles.mainMenu, (isMenuOpened && styles.mainMenu_open))}>
-                        <div className={styles.mainMenuClose} onClick={() => setIsMenuOpened(!isMenuOpened)}>Kapat</div>
+                        <div
+                            className={styles.mainMenuClose}
+                            onClick={() => setIsMenuOpened(!isMenuOpened)}
+                        >Kapat</div>
                         <Menu menu={menu} />
                     </div>
                 ) : (
@@ -75,7 +82,10 @@ const Table = ({ params: { tableSlug } }) => {
                     </div>
                 )
             }
-            <button onClick={() => setIsMenuOpened(!isMenuOpened)} className={styles.mainButton}>Menü</button>
+            <button
+                onClick={() => setIsMenuOpened(!isMenuOpened)}
+                className={styles.mainButton}
+            >Menü</button>
         </div>
     );
 };

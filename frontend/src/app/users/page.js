@@ -14,8 +14,8 @@ import axios from '@/app/lib/axios';
 import EditUserModal from '../components/Edit/EditUserModal';
 import UserAddModel from '../components/UserAddModel';
 import { useAuthorization } from '../hooks/useAuthorization';
-import styles from './styles.module.scss';
 import useNotificaion from '../hooks/useNotification';
+import styles from './styles.module.scss';
 
 const Users = () => {
     useNotificaion();
@@ -119,7 +119,10 @@ const Users = () => {
                     </button>
                 </div>
                 <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <Table
+                        sx={{ minWidth: 650 }}
+                        aria-label="simple table"
+                    >
                         <TableHead>
                             <TableRow>
                                 <TableCell>ID</TableCell>
@@ -134,18 +137,25 @@ const Users = () => {
                                     key={user.id}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
-                                    <TableCell component="th" scope="row">
+                                    <TableCell
+                                        component="th"
+                                        scope="row"
+                                    >
                                         {user.id}
                                     </TableCell>
                                     <TableCell>{user.username}</TableCell>
                                     <TableCell>{user.role && user.role === 'waiter' ? 'Garson' : user.role}</TableCell>
                                     <TableCell sx={{ width: '250px' }}>
                                         <div className={styles.buttons}>
-                                            <button className={styles.buttonsEdit} onClick={() => {
+                                            <button
+                                                className={styles.buttonsEdit}
+                                                onClick={() => {
                                             handleUpdate(user);
                                         }}
                                             >Güncelle</button>
-                                            <button className={styles.buttonsDelete} onClick={() => {
+                                            <button
+                                                className={styles.buttonsDelete}
+                                                onClick={() => {
                                             handleDelete(user);
                                         }}
                                             >Sil</button>

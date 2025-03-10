@@ -10,11 +10,16 @@ const Items = ({ isItemsMenuOpened, setIsItemsMenuOpened }) => {
     return (
         <div className={cn(styles.items, {[styles.items_open]: isItemsMenuOpened})}>
             {listItems.map((item, index) => {
-                return <Item key={index} item={item} />;
+                return <Item
+                    key={index}
+                    item={item}
+                />;
             })}
-            <button onClick={() => {
+            <button
+                onClick={() => {
                 setIsItemsMenuOpened(false);
-            }} className={cn(styles.itemsBack, {[styles.itemsBack_open]: isItemsMenuOpened})}
+            }}
+                className={cn(styles.itemsBack, {[styles.itemsBack_open]: isItemsMenuOpened})}
             >{'< Menü'}</button>
         </div>
     );

@@ -87,7 +87,10 @@ const UserAddModel = ({mutate, isUserAddModelOpened, setIsUserAddModelOpened }) 
         >
             <DialogTitle>
                 Kullanıcı Ekle
-                <IconButton onClick={() => setIsUserAddModelOpened(false)} style={{ position: 'absolute', right: 10, top: 10 }}>
+                <IconButton
+                    onClick={() => setIsUserAddModelOpened(false)}
+                    style={{ position: 'absolute', right: 10, top: 10 }}
+                >
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
@@ -118,7 +121,10 @@ const UserAddModel = ({mutate, isUserAddModelOpened, setIsUserAddModelOpened }) 
                     value={user.password}
                     onChange={(e) => setUser({ ...user, password: e.target.value })}
                 />
-                <FormControl fullWidth margin="dense">
+                <FormControl
+                    fullWidth
+                    margin="dense"
+                >
                     <InputLabel>Role</InputLabel>
                     <Select
                         label="Rol"
@@ -140,10 +146,19 @@ const UserAddModel = ({mutate, isUserAddModelOpened, setIsUserAddModelOpened }) 
                 </FormControl>
             </DialogContent>
             <DialogActions>
-                <Button className={styles.cancelButton} onClick={() => setIsUserAddModelOpened(false)} color="secondary">
+                <Button
+                    className={styles.cancelButton}
+                    onClick={() => setIsUserAddModelOpened(false)}
+                    color="secondary"
+                >
                     İptal
                 </Button>
-                <Button className={styles.saveButton} onClick={() => handleSave()} color="primary" variant="contained">
+                <Button
+                    className={styles.saveButton}
+                    onClick={() => handleSave()}
+                    color="primary"
+                    variant="contained"
+                >
                     Kaydet
                 </Button>
             </DialogActions>

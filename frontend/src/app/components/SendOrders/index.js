@@ -38,9 +38,12 @@ const SendOrders = ({ sendOrders, callback }) => {
                 sendOrders.length > 0 ? (<div className={classNames(styles.sendOrdersList, 'container')}>
                     {sendOrders?.map((order_group, index) => {
                         return (
-                            <div onClick={() => {
+                            <div
+                                onClick={() => {
                                 openPopup(order_group.order_group_id);
-                            }} key={index} className={styles.sendOrdersListItem}
+                            }}
+                                key={index}
+                                className={styles.sendOrdersListItem}
                             >
                                 <div className={styles.sendOrdersListItemTitle}>
                                     Masa Adı: {order_group.tableName}
@@ -51,7 +54,10 @@ const SendOrders = ({ sendOrders, callback }) => {
                                 <div className={styles.sendOrdersListItemItemsWrapper}>
                                     {order_group.items?.map((item, index) => {
                                     return (
-                                        <div key={index} className={styles.sendOrdersListItemItemsWrapperItem}>
+                                        <div
+                                            key={index}
+                                            className={styles.sendOrdersListItemItemsWrapperItem}
+                                        >
                                             <div>{item.item_name} </div>
                                             <div>{item.item_quantity}</div>
                                             <div>{item.item_size}</div>

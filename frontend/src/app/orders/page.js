@@ -5,8 +5,8 @@ import axios from '@/app/lib/axios';
 import SendOrders from '../components/SendOrders';
 import WaitingOrders from '../components/WaitingOrders';
 import { useAuthorization } from '../hooks/useAuthorization';
-import styles from './styles.module.scss';
 import useNotificaion from '../hooks/useNotification';
+import styles from './styles.module.scss';
 
 const Orders = () => {
     const { socket, notificationCallback } = useNotificaion();
@@ -53,12 +53,16 @@ const Orders = () => {
 
     return (
         <div className={styles.orders}>
-            <WaitingOrders waitingOrders={waitingOrders} callback={() => {
+            <WaitingOrders
+                waitingOrders={waitingOrders}
+                callback={() => {
                 orderGroupStatusChange();
                 getOrders();
             }}
             />
-            <SendOrders sendOrders={sendOrders} callback={() => {
+            <SendOrders
+                sendOrders={sendOrders}
+                callback={() => {
                 orderGroupStatusChange();
                 getOrders();
             }}

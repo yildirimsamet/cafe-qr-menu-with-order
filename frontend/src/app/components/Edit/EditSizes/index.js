@@ -143,7 +143,10 @@ const EditSizes = () => {
         <div>
             <h1 className={commonStyles.title}>Boyut Düzenle</h1>
             <div className={cn('container', commonStyles.addButtonWrapper)}>
-                <button className={commonStyles.addButton} onClick={openSizeAddModel}>
+                <button
+                    className={commonStyles.addButton}
+                    onClick={openSizeAddModel}
+                >
                     Boyut Ekle <AddCircleIcon />
                 </button>
                 <button
@@ -156,12 +159,19 @@ const EditSizes = () => {
             <div className={cn('container', styles.sizes)}>
                 {!isValidating && sizes?.map((size, index) => {
                     return (
-                        <div key={index} className={styles.size}>
-                            <TextField slotProps={{
+                        <div
+                            key={index}
+                            className={styles.size}
+                        >
+                            <TextField
+                                slotProps={{
                                 inputLabel: {
                                     shrink: true,
                                 },
-                            }} label={size.name} defaultValue={size.name} onChange={(event) => {
+                            }}
+                                label={size.name}
+                                defaultValue={size.name}
+                                onChange={(event) => {
                                 handleChange(event, size.id);
                             }}
                             />

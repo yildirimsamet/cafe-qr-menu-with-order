@@ -1,6 +1,6 @@
-import {dirname} from 'path';
-import {fileURLToPath} from 'url';
-import {FlatCompat} from '@eslint/eslintrc';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { FlatCompat } from '@eslint/eslintrc';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -11,9 +11,13 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
     ...compat.config({
+        ignorePatterns: ['node_modules', 'public', '.next', '.vercel', 'dist'],
         parserOptions: {
             ecmaVersion: 'latest',
             sourceType: 'module',
+            ecmaFeatures: {
+                jsx: true,
+            },
         },
         extends: [
             'next/core-web-vitals',
@@ -24,61 +28,69 @@ const eslintConfig = [
             'plugin:@next/next/recommended',
             'prettier',
         ],
-        plugins: ['react', 'react-hooks', 'jsx-a11y', 'import'],
+        plugins: ['react', 'react-hooks', 'jsx-a11y', 'import', 'prettier'],
         rules: {
-            // Temel formatlama kuralları
-            'semi': ['error', 'always'], // Noktalı virgül kullanımı
-            'indent': ['error', 4], // Girinti için 4 boşluk
-            'quotes': ['error', 'single'], // Tek tırnak kullanımı
-            'brace-style': ['error', '1tbs'], // Süslü parantezlerin aynı satırda başlaması
-            'comma-dangle': ['error', 'always-multiline'], // Çok satırlı dizilerde son elemandan sonra virgül
-            'comma-spacing': ['error', { 'before': false, 'after': true }], // Virgül sonrası boşluk
-            'keyword-spacing': ['error', { 'before': true, 'after': true }], // Anahtar kelimelerden sonra boşluk
-            'space-before-blocks': ['error', 'always'], // Bloklardan önce boşluk
-            'space-before-function-paren': ['error', 'always'], // Fonksiyon parantezlerinden önce boşluk
-            'space-infix-ops': 'error', // Operatörlerin etrafında boşluk
-            'arrow-spacing': 'error', // Ok fonksiyonlarında boşluk
-            'no-trailing-spaces': 'error', // Satır sonunda boşluk bırakma
-            'no-multiple-empty-lines': ['error', { 'max': 1 }], // Birden fazla boş satır bırakma
-            'no-mixed-spaces-and-tabs': 'error', // Boşluk ve tab karışımı
-            'no-tabs': 'error', // Tab kullanımını yasakla
-            'eol-last': ['error', 'always'], // Dosya sonunda boş satır bırak
-
-            // Satır uzunluğu ve okunabilirlik
-            'max-len': ['error', { 'code': 120, 'ignoreComments': true, 'ignoreStrings': true }], // Satır uzunluğu sınırı
-            'function-paren-newline': ['error', 'multiline'], // Çok satırlı fonksiyonlarda parantezleri yeni satıra al
-            'object-curly-newline': ['error', { 'multiline': true, 'consistent': true }], // Çok satırlı objelerde süslü parantezleri yeni satıra al
-            'array-bracket-newline': ['error', { 'multiline': true }], // Çok satırlı dizilerde köşeli parantezleri yeni satıra al
-
-            // React ve JSX kuralları
+            semi: ['error', 'always'],
+            indent: ['error', 4],
+            quotes: ['error', 'single'],
+            'brace-style': ['error', '1tbs'],
+            'comma-dangle': ['error', 'always-multiline'],
+            'comma-spacing': ['error', { before: false, after: true }],
+            'keyword-spacing': ['error', { before: true, after: true }],
+            'space-before-blocks': ['error', 'always'],
+            'space-before-function-paren': ['error', 'always'],
+            'space-infix-ops': 'error',
+            'arrow-spacing': 'error',
+            'no-trailing-spaces': 'error',
+            'no-multiple-empty-lines': ['error', { max: 1 }],
+            'no-mixed-spaces-and-tabs': 'error',
+            'no-tabs': 'error',
+            'eol-last': ['error', 'always'],
+            'max-len': ['error', { code: 120, ignoreComments: true, ignoreStrings: true }],
+            'function-paren-newline': ['error', 'multiline'],
+            'object-curly-newline': ['error', { multiline: true, consistent: true }],
+            'array-bracket-newline': ['error', { multiline: true }],
             'react/react-in-jsx-scope': 'off',
             'react-hooks/exhaustive-deps': 'off',
             'react/prop-types': 'off',
             'jsx-a11y/no-static-element-interactions': 'off',
             '@next/next/no-img-element': 'off',
             'jsx-a11y/click-events-have-key-events': 'off',
-            'react/jsx-indent': ['error', 4], // JSX girintisi
-            'react/jsx-indent-props': ['error', 4], // JSX prop'larının girintisi
-            'react/jsx-closing-bracket-location': ['error', 'line-aligned'], // JSX kapanış parantezlerinin hizalanması
-            'react/jsx-tag-spacing': ['error', { 'closingSlash': 'never', 'beforeSelfClosing': 'always', 'afterOpening': 'never', 'beforeClosing': 'never' }], // JSX etiketlerindeki boşluklar
+            'react/jsx-indent': ['error', 4],
+            'react/jsx-indent-props': ['error', 4],
+            'react/jsx-first-prop-new-line': ['error', 'multiline'],
+            'react/jsx-max-props-per-line': ['error', { maximum: 1 }],
+            'react/jsx-closing-bracket-location': ['error', 'line-aligned'],
+            'react/jsx-tag-spacing': [
+                'error',
+                {
+                    closingSlash: 'never',
+                    beforeSelfClosing: 'always',
+                    afterOpening: 'never',
+                    beforeClosing: 'never',
+                },
+            ],
             'import/no-named-as-default-member': 'off',
-            'indent': 'off',
+            indent: 'off',
             'eol-last': 'off',
             'react/no-unescaped-entities': 'off',
-            // Import/export kuralları
             'import/order': [
                 'warn',
                 {
-                    'groups': ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-                    'alphabetize': { 'order': 'asc', 'caseInsensitive': true },
+                    groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+                    alphabetize: { order: 'asc', caseInsensitive: true },
                 },
             ],
-            'import/newline-after-import': ['error', { 'count': 1 }], // Import'lardan sonra boş satır bırak
+            'import/newline-after-import': ['error', { count: 1 }],
         },
         settings: {
             react: {
                 version: 'detect',
             },
+            next: {
+                rootDir: 'src',
+            },
+            rootDir: ['.'],
             'import/resolver': {
                 alias: {
                     map: [['@', './src']],

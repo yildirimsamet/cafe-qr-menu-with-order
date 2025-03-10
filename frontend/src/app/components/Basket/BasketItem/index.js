@@ -4,8 +4,8 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useAppContext } from '@/app/context/appContext';
-import styles from './styles.module.scss';
 import { formatPrice } from '@/app/utils';
+import styles from './styles.module.scss';
 
 const BasketItem = ({ item }) => {
     const { state, setState } = useAppContext();
@@ -73,7 +73,10 @@ const BasketItem = ({ item }) => {
 
     return (
         <div className={styles.item}>
-            <div onClick={openDeleteModal} className={styles.itemDelete}>
+            <div
+                onClick={openDeleteModal}
+                className={styles.itemDelete}
+            >
                 <DeleteForeverIcon />
             </div>
             <div className={styles.itemName}>{item.name}</div>

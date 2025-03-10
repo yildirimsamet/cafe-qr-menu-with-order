@@ -8,11 +8,11 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import useSWR from 'swr';
 import axios from '@/app/lib/axios';
+import Table from '../components/Table';
 import { useAuth } from '../hooks/useAuth';
 import { useAuthorization } from '../hooks/useAuthorization';
 import { useWindowSize } from '../hooks/useWindowSize';
 import styles from './styles.module.scss';
-import Table from '../components/Table';
 
 const MySwal = withReactContent(Swal);
 
@@ -52,11 +52,9 @@ const Tables = () => {
         });
     };
 
-
     useEffect(() => {
         mutate();
     }, []);
-
 
     const openAllQrModal = () => {
         MySwal.fire({
@@ -114,7 +112,7 @@ const Tables = () => {
                 });
             },
             preConfirm: () => {
-                function printAllQrCodes() {
+                function printAllQrCodes () {
                     const qrCanvases = tables.map((_, index) => document.getElementById(`qr-canvas-${index}`));
                     const qrSize = 150;
                     const margin = 10;
@@ -174,7 +172,10 @@ const Tables = () => {
         <div className='container'>
             <div className={styles.tablesTopButtons}>
                 {!isMobile && (
-                    <button className={styles.tablesTopButtonsQR} onClick={openAllQrModal}>
+                    <button
+                        className={styles.tablesTopButtonsQR}
+                        onClick={openAllQrModal}
+                    >
                         Tüm QR Kodlar <QrCode2Icon />
                     </button>
                 )}
@@ -190,7 +191,11 @@ const Tables = () => {
             </div>
             <div className={styles.tablesWrapper}>
                 {tables.map((table, index) => {
-                    return (<Table key={index} table={table} mutate={mutate} />);
+                    return (<Table
+                        key={index}
+                        table={table}
+                        mutate={mutate}
+                    />);
                 })}
             </div>
         </div>

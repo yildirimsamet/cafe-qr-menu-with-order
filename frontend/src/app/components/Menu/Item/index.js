@@ -85,7 +85,10 @@ const Item = ({ item }) => {
                 >
                     {item.sizes?.map((size, index) => {
                         return (
-                            <option value={size.size_name} key={index}>
+                            <option
+                                value={size.size_name}
+                                key={index}
+                            >
                                 {size.size_name}
                             </option>
                         );

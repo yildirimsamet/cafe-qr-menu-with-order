@@ -97,9 +97,12 @@ const LogoSettings = () => {
                     >
                         <CloseIcon />
                     </IconButton>
-                    <img src={
+                    <img
+                        src={
                         typeof image === 'string' ? process.env.NEXT_PUBLIC_API_URL + '/assets/images/' + image : URL.createObjectURL(image)
-                    } alt="Resim" style={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'contain' }}
+                    }
+                        alt="Resim"
+                        style={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'contain' }}
                     />
                 </div> : <div className={styles.contentImageNotSelected}>Resim Seçilmedi</div>}
                 <TextField

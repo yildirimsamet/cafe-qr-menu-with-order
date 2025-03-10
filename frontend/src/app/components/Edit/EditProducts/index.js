@@ -62,7 +62,10 @@ const EditProducts = () => {
         <div className={styles.editProducts}>
             <h1 className={commonStyles.title}>Ürün Düzenle</h1>
             <div className={cn('container', commonStyles.addButtonWrapper)}>
-                <button className={commonStyles.addButton} onClick={openProductAddModel}>
+                <button
+                    className={commonStyles.addButton}
+                    onClick={openProductAddModel}
+                >
                     Ürün Ekle <AddCircleIcon />
                 </button>
             </div>
@@ -82,14 +85,20 @@ const EditProducts = () => {
             <div className={cn(styles.editProductsList, 'container')}>
                 {products?.map((productsInfo, index) => {
                     return (
-                        <div key={index} className={styles.editProductsListItem}>
+                        <div
+                            key={index}
+                            className={styles.editProductsListItem}
+                        >
                             <div className={styles.editProductsListItemTitle}>
                                 {productsInfo.category_name}
                             </div>
                             <div className={styles.editProductsListItemProducts}>
                                 {productsInfo.items.length > 0 ? productsInfo.items.map((product, index) => {
                                     return (
-                                        <div key={index} className={styles.editProductsListItemProductsItem}>
+                                        <div
+                                            key={index}
+                                            className={styles.editProductsListItemProductsItem}
+                                        >
                                             <img
                                                 src={`${process.env.NEXT_PUBLIC_API_URL}/assets/images/${
                                                     product.item_image || settings?.logo
@@ -120,7 +129,8 @@ const EditProducts = () => {
                                                 }
                                             </div>
                                             <div className={styles.editProductsListItemProductsItemActions}>
-                                                <button onClick={
+                                                <button
+                                                    onClick={
                                                     () => {
                                                         setSelectedProductForEdit({
                                                             ...product, category: {
@@ -130,11 +140,14 @@ const EditProducts = () => {
                                                         });
                                                         setIsProductEditModelOpened(true);
                                                     }
-                                                } className={styles.editProductsListItemProductsItemActionsEdit}
+                                                }
+                                                    className={styles.editProductsListItemProductsItemActionsEdit}
                                                 >Düzenle</button>
-                                                <button onClick={() => {
+                                                <button
+                                                    onClick={() => {
                                                     openProductDeleteModel(product.item_id);
-                                                }} className={styles.editProductsListItemProductsItemActionsDelete}
+                                                }}
+                                                    className={styles.editProductsListItemProductsItemActionsDelete}
                                                 >Sil</button>
                                             </div>
                                         </div>

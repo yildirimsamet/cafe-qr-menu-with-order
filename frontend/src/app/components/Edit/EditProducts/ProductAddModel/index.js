@@ -140,12 +140,16 @@ const ProductAddModal = ({ isProductAddModelOpened, setIsProductAddModelOpened, 
             open={isProductAddModelOpened}
             closeAfterTransition={false}
             onClose={() => setIsProductAddModelOpened(false)}
-            fullWidth maxWidth="sm"
+            fullWidth
+            maxWidth="sm"
             slotProps={{ backdrop: { invisible: true } }}
         >
             <DialogTitle>
                 Ürün Ekle
-                <IconButton onClick={() => setIsProductAddModelOpened(false)} style={{ position: 'absolute', right: 10, top: 10 }}>
+                <IconButton
+                    onClick={() => setIsProductAddModelOpened(false)}
+                    style={{ position: 'absolute', right: 10, top: 10 }}
+                >
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
@@ -206,9 +210,16 @@ const ProductAddModal = ({ isProductAddModelOpened, setIsProductAddModelOpened, 
                     >
                         <CloseIcon />
                     </IconButton>
-                    <img src={URL.createObjectURL(product.image)} alt="Resim" style={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'contain' }} />
+                    <img
+                        src={URL.createObjectURL(product.image)}
+                        alt="Resim"
+                        style={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'contain' }}
+                    />
                 </div>}
-                <FormControl fullWidth margin="dense">
+                <FormControl
+                    fullWidth
+                    margin="dense"
+                >
                     <InputLabel>Kategori</InputLabel>
                     <Select
                         label="Kategori"
@@ -221,13 +232,19 @@ const ProductAddModal = ({ isProductAddModelOpened, setIsProductAddModelOpened, 
                         onChange={(e) => setProduct({ ...product, category: e.target.value })}
                     >
                         {categories.map((cat) => (
-                            <MenuItem key={cat.id} value={cat.id}>
+                            <MenuItem
+                                key={cat.id}
+                                value={cat.id}
+                            >
                                 {cat.name}
                             </MenuItem>
                         ))}
                     </Select>
                 </FormControl>
-                <FormControl fullWidth margin="dense">
+                <FormControl
+                    fullWidth
+                    margin="dense"
+                >
                     <InputLabel>Boyutlar</InputLabel>
                     <Select
                         label="Boyutlar"
@@ -253,7 +270,8 @@ const ProductAddModal = ({ isProductAddModelOpened, setIsProductAddModelOpened, 
                                     const isSelected = product.sizes.some(s => s.size_id === size.id);
                                     handleSizeChange(size.id, isSelected);
                                 }}
-                                key={size.id} value={size.id}
+                                key={size.id}
+                                value={size.id}
                             >
                                 {size.name}
                             </MenuItem>
@@ -262,7 +280,12 @@ const ProductAddModal = ({ isProductAddModelOpened, setIsProductAddModelOpened, 
                 </FormControl>
                 {
                     product.sizes.length > 0 && (
-                        <Typography margin={1} variant="body2" color="text.secondary" gutterBottom>
+                        <Typography
+                            margin={1}
+                            variant="body2"
+                            color="text.secondary"
+                            gutterBottom
+                        >
                             Fiyat Örn: 1.234,99 / 9,99 / 123,00
                         </Typography>
                     )
@@ -290,10 +313,17 @@ const ProductAddModal = ({ isProductAddModelOpened, setIsProductAddModelOpened, 
                 ))}
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => setIsProductAddModelOpened(false)} color="secondary">
+                <Button
+                    onClick={() => setIsProductAddModelOpened(false)}
+                    color="secondary"
+                >
                     İptal
                 </Button>
-                <Button onClick={handleSave} color="primary" variant="contained">
+                <Button
+                    onClick={handleSave}
+                    color="primary"
+                    variant="contained"
+                >
                     Kaydet
                 </Button>
             </DialogActions>

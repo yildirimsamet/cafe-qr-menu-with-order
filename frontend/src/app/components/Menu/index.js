@@ -16,10 +16,13 @@ const Menu = ({ menu }) => {
             <Basket />
             <div className={styles.menuTitle}>Menü</div>
             {menu.map((category, index) => {
-                return <Category onClick={() => {
+                return <Category
+                    onClick={() => {
                     setState((prev) => ({ ...prev, listItems: category.items }));
                     setIsItemsMenuOpened(true);
-                }} key={index} category={category}
+                }}
+                    key={index}
+                    category={category}
                 />;
             })}
             <Items

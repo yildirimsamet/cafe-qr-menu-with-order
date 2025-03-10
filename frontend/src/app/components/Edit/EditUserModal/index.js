@@ -89,7 +89,10 @@ const EditUserModal = ({mutate, selectedUserForEdit, isUserEditModelOpened, setI
         >
             <DialogTitle>
                 Kullanıcı Güncelle
-                <IconButton onClick={() => setIsUserEditModelOpened(false)} style={{ position: 'absolute', right: 10, top: 10 }}>
+                <IconButton
+                    onClick={() => setIsUserEditModelOpened(false)}
+                    style={{ position: 'absolute', right: 10, top: 10 }}
+                >
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
@@ -122,7 +125,10 @@ const EditUserModal = ({mutate, selectedUserForEdit, isUserEditModelOpened, setI
                 />
                 {
                     user?.role !== 'superadmin' && (
-                        <FormControl fullWidth margin="dense">
+                        <FormControl
+                            fullWidth
+                            margin="dense"
+                        >
                             <InputLabel>Kullanıcı Rolü</InputLabel>
                             <Select
                                 label="Rol"
@@ -146,10 +152,19 @@ const EditUserModal = ({mutate, selectedUserForEdit, isUserEditModelOpened, setI
                 }
             </DialogContent>
             <DialogActions>
-                <Button className={styles.cancelButton} onClick={() => setIsUserEditModelOpened(false)} color="secondary">
+                <Button
+                    className={styles.cancelButton}
+                    onClick={() => setIsUserEditModelOpened(false)}
+                    color="secondary"
+                >
                     İptal
                 </Button>
-                <Button className={styles.saveButton} onClick={handleSave} color="primary" variant="contained">
+                <Button
+                    className={styles.saveButton}
+                    onClick={handleSave}
+                    color="primary"
+                    variant="contained"
+                >
                     Kaydet
                 </Button>
             </DialogActions>

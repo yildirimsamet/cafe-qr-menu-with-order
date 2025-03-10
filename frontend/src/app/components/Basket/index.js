@@ -56,7 +56,10 @@ const Basket = () => {
                 ) : (
                     <div>
                         {state.basket.map((item, index) => {
-                            return <BasketItem key={index} item={item} />;
+                            return <BasketItem
+                                key={index}
+                                item={item}
+                            />;
                         })}
                         <div className={styles.basketItemsOrderNote}>
                             <input
@@ -70,7 +73,9 @@ const Basket = () => {
                         </div>
                     </div>
                 )}
-                <button onClick={sendOrderToSocket} className={cn(
+                <button
+                    onClick={sendOrderToSocket}
+                    className={cn(
                     styles.basketItemsOrder,
                     { [styles.basketItemsOrder_open]: (!isBasketEmpty && isBasketOpened) },
                 )}

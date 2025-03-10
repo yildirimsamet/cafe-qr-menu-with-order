@@ -146,10 +146,14 @@ const EditCategories = () => {
         <div>
             <h1 className={commonStyles.title}>Kategori Düzenle</h1>
             <div className={cn('container', commonStyles.addButtonWrapper)}>
-                <button className={commonStyles.addButton} onClick={openCategoryModel}>
+                <button
+                    className={commonStyles.addButton}
+                    onClick={openCategoryModel}
+                >
                     Kategori Ekle <AddCircleIcon />
                 </button>
-                <button onClick={handleSave}
+                <button
+                    onClick={handleSave}
                     className={commonStyles.saveButton}
                 >
                     Değişiklikleri Kaydet <SaveAltIcon />
@@ -158,7 +162,10 @@ const EditCategories = () => {
             <div className={cn('container', styles.categories)}>
                 {!isValidating && categories?.map((category, index) => {
                     return (
-                        <div key={index} className={styles.category}>
+                        <div
+                            key={index}
+                            className={styles.category}
+                        >
                             <TextField
                                 slotProps={{
                                     inputLabel: {

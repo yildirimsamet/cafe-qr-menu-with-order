@@ -146,7 +146,10 @@ const ProductEditModel = ({mutate, selectedProductForEdit, isProductEditModelOpe
         >
             <DialogTitle>
                 Ürün Güncelle
-                <IconButton onClick={() => setIsProductEditModelOpened(false)} style={{ position: 'absolute', right: 10, top: 10 }}>
+                <IconButton
+                    onClick={() => setIsProductEditModelOpened(false)}
+                    style={{ position: 'absolute', right: 10, top: 10 }}
+                >
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
@@ -207,12 +210,18 @@ const ProductEditModel = ({mutate, selectedProductForEdit, isProductEditModelOpe
                     >
                         <CloseIcon />
                     </IconButton>
-                    <img src={
+                    <img
+                        src={
                         typeof product.image === 'string' ? process.env.NEXT_PUBLIC_API_URL + '/assets/images/' + product.image : URL.createObjectURL(product.image)
-                    } alt="Resim" style={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'contain' }}
+                    }
+                        alt="Resim"
+                        style={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'contain' }}
                     />
                 </div>}
-                <FormControl fullWidth margin="dense">
+                <FormControl
+                    fullWidth
+                    margin="dense"
+                >
                     <InputLabel>Kategori</InputLabel>
                     <Select
                         label="Kategori"
@@ -225,13 +234,19 @@ const ProductEditModel = ({mutate, selectedProductForEdit, isProductEditModelOpe
                         onChange={(e) => setProduct({ ...product, category: e.target.value })}
                     >
                         {categories.map((cat) => (
-                            <MenuItem key={cat.id} value={cat.id}>
+                            <MenuItem
+                                key={cat.id}
+                                value={cat.id}
+                            >
                                 {cat.name}
                             </MenuItem>
                         ))}
                     </Select>
                 </FormControl>
-                <FormControl fullWidth margin="dense">
+                <FormControl
+                    fullWidth
+                    margin="dense"
+                >
                     <InputLabel>Boyutlar</InputLabel>
                     <Select
                         label="Boyutlar"
@@ -257,14 +272,20 @@ const ProductEditModel = ({mutate, selectedProductForEdit, isProductEditModelOpe
                                     const isSelected = product.sizes.some(s => s.size_id === size.id);
                                     handleSizeChange(size.id, isSelected);
                                 }}
-                                key={size.id} value={size.id}
+                                key={size.id}
+                                value={size.id}
                             >
                                 {size.name}
                             </MenuItem>
                         ))}
                     </Select>
                 </FormControl>
-                <Typography margin={1} variant="body2" color="text.secondary" gutterBottom>
+                <Typography
+                    margin={1}
+                    variant="body2"
+                    color="text.secondary"
+                    gutterBottom
+                >
                     Fiyat Örn: 1.234,99 / 9,99 / 123,00
                 </Typography>
                 {product.sizes.map((size) => {
@@ -292,10 +313,17 @@ const ProductEditModel = ({mutate, selectedProductForEdit, isProductEditModelOpe
                 })}
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => setIsProductEditModelOpened(false)} color="secondary">
+                <Button
+                    onClick={() => setIsProductEditModelOpened(false)}
+                    color="secondary"
+                >
                     İptal
                 </Button>
-                <Button onClick={handleSave} color="primary" variant="contained">
+                <Button
+                    onClick={handleSave}
+                    color="primary"
+                    variant="contained"
+                >
                     Kaydet
                 </Button>
             </DialogActions>
