@@ -2,8 +2,6 @@
 node_modules
 .next
 package-lock.json
-nginx/certs
-nginx/dhparam.pem
 .env
 .env.local
 .env.production
