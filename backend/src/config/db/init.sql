@@ -64,6 +64,7 @@ CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     table_slug VARCHAR(255) NOT NULL,
     status VARCHAR(10) CHECK (status IN ('active', 'done')),
+    done_at TIMESTAMP DEFAULT NULL,
     created_at TIMESTAMP DEFAULT NOW()
 );
 

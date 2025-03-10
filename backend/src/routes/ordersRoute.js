@@ -93,9 +93,11 @@ router.put("/order_groups/:id/status", async (req, res) => {
 
 // Complete Order
 const completeOrder = async (order_id) => {
+    const now = new Date(Date.now() + (3 * 60 * 60 * 1000)).toISOString().slice(0, 19).replace('T', ' ');
+
     const [results] = await connection.query(
-        "UPDATE orders SET status = 'done' WHERE id = ?",
-        [order_id]
+        "UPDATE orders SET status = 'done', done_at = ? WHERE id = ?",
+        [now, order_id]
     );
 
     return results;
@@ -113,5 +115,37 @@ router.put("/:id/done", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
+router.get(`/last/:table_slug`, async (req, res) => {
+    const { table_slug } = req.params;
+    try {
+        const [results] = await connection.query(`
+        SELECT 
+            o.id AS order_id,
+            o.table_slug,
+            o.done_at,
+            JSON_ARRAYAGG(
+                JSON_OBJECT(
+                    'item_name', i.name,
+                    'item_size', s.name,
+                    'item_price', isz.price,
+                    'item_quantity', oi.item_quantity
+                )
+            ) AS items
+        FROM orders o
+        LEFT JOIN order_groups og ON o.id = og.order_id AND og.status = 'send'
+        LEFT JOIN order_items oi ON og.id = oi.order_group_id
+        LEFT JOIN items i ON oi.item_id = i.id
+        LEFT JOIN sizes s ON oi.item_size_id = s.id
+        LEFT JOIN item_sizes isz ON oi.item_id = isz.item_id AND oi.item_size_id = isz.size_id
+        WHERE o.status = 'done' AND o.table_slug = ? AND o.done_at >= DATE_SUB(NOW(), INTERVAL 18 HOUR)
+        GROUP BY o.id
+        `, [table_slug]);
+        res.json({ status: 200, data: results });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+})
 
 export default router;

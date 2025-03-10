@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import axios from '@/app/lib/axios';
-import { socket } from '@/app/lib/socket';
 import SendOrders from '../components/SendOrders';
 import WaitingOrders from '../components/WaitingOrders';
 import { useAuthorization } from '../hooks/useAuthorization';
 import styles from './styles.module.scss';
+import useNotificaion from '../hooks/useNotification';
 
 const Orders = () => {
+    const { socket, notificationCallback } = useNotificaion();
     useAuthorization({ authorization: 'waiter' });
     const [waitingOrders, setWaitingOrders] = useState([]);
     const [sendOrders, setSendOrders] = useState([]);
@@ -44,32 +45,11 @@ const Orders = () => {
         };
     }, []);
 
-    const orderGroupStatusChange = async (id, status) => {
-        socket.emit('order', 'update');
+    const orderGroupStatusChange = async () => {
+        notificationCallback(() => {
+            socket.emit('order', 'update');
+        });
     };
-
-    useEffect(() => {
-        if (!socket.connected) {
-            socket.connect();
-        }
-
-        if (!socket.hasListeners('orders')) {
-            socket.on('orders', (data) => {
-                playSound();
-                setTimeout(() => {
-                    playSound();
-                }, 175);
-                getOrders();
-            });
-        }
-
-        return () => {
-            if (socket.connected) {
-                socket.off('orders');
-                socket.disconnect();
-            }
-        };
-    }, []);
 
     return (
         <div className={styles.orders}>

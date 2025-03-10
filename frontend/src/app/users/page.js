@@ -15,8 +15,10 @@ import EditUserModal from '../components/Edit/EditUserModal';
 import UserAddModel from '../components/UserAddModel';
 import { useAuthorization } from '../hooks/useAuthorization';
 import styles from './styles.module.scss';
+import useNotificaion from '../hooks/useNotification';
 
 const Users = () => {
+    useNotificaion();
     const { user: loggedInUser } = useAuthorization({ authorization: 'admin' });
 
     const [users, setUsers] = useState([]);

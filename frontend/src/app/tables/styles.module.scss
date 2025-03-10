@@ -14,7 +14,8 @@
     justify-content: flex-end;
     padding: 25px 0;
 
-    &Add, &QR {
+    &Add,
+    &QR {
         border: none;
         padding: 10px 20px;
         border-radius: 5px;
@@ -36,161 +37,10 @@
         background: var(--success);
         color: var(--text-3);
     }
+
     &QR {
         background: var(--bg-1-dark);
         color: var(--text-3);
-    }
-}
-
-.table {
-    background: var(--bg-4);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.15);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-height: 200px;
-
-    &Status {
-        position: absolute;
-        right: 25px;
-        top: 10px;
-
-        &Empty, &Active {
-            color: var(--text-1-dark);
-            &::before {
-                content: '';
-                position: absolute;
-                top: 2px;
-                right: -16px;
-                width: 12px;
-                height: 12px;
-                border-radius: 5px;
-                opacity: 0.8;
-            }
-        }
-
-        &Empty {
-            &::before {
-                background-color: var(--danger);
-            }
-        }
-
-        &Active {
-            &::before {
-                background-color: var(--success);
-            }
-        }
-    }
-    &Title {
-        margin: 0;
-        font-size: 20px;
-        color: var(--text-2-darker);
-        font-weight: bold;
-    }
-
-    &Orders {
-        background: var(--bg-5);
-        padding: 10px;
-        border-radius: 5px;
-        margin: 10px 0;
-        height: 175px;
-        overflow-y: auto;
-
-        &Item {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            font-size: 14px;
-            color: var(--text-2-darker);
-
-            &:not(:last-child) {
-                margin-bottom: 10px;
-                border-bottom: 1px dashed var(--bg-2-darker);
-                padding-bottom: 6px;
-            }
-
-            & >:last-child {
-                justify-self: end;
-            }
-        }
-
-        &Titles {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            font-weight: bold;
-            color: var(--text-1-darker);
-            margin-bottom: 15px;
-            padding-bottom: 5px;
-
-            & >:last-child {
-                justify-self: end;
-            }
-        }
-
-        &Empty {
-            font-size: 16px;
-            color: var(--text-2);
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-grow: 1;
-            min-height: 100px;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
-    }
-
-    &Total {
-        font-weight: bold;
-        font-size: 16px;
-        display: flex;
-        justify-content: space-between;
-        margin: 10px 0;
-        color: var(--text-2-darker);
-    }
-
-    &Buttons {
-        display: flex;
-        gap: 10px;
-        margin-top: auto;
-        margin-bottom: 5px;
-
-        & button {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        &Finish {
-            background-color: var(--warning);
-            color: var(--text-3);
-        }
-
-        &Qr {
-            background-color: var(--bg-1-dark);
-            color: var(--text-3);
-        }
-    }
-
-    &Delete {
-        &Button {
-            background-color: var(--danger);
-            color: var(--text-3);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-weight: 700;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            float: right;
-            margin-top: 8px;
-        }
     }
 }
 

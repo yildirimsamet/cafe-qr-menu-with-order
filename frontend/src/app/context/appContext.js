@@ -53,7 +53,9 @@ export function AppWrapper ({ children }) {
 
   useEffect(() => {
     // useCustomRouter set loading to true so we need to set it back to false for every page change
-    setState((prev) => ({ ...prev, loading: false }));
+    setTimeout(() => {
+      setState((prev) => ({ ...prev, loading: false }));
+    }, 100);
   }, [pathname]);
 
   useEffect(() => {
