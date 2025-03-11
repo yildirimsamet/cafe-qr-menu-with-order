@@ -1,4 +1,5 @@
 import connection from "../config/db/connection.js"
+import { deleteImage } from "../../utils/index.js"
 
 export const getAllItems = async () => {
     const [results] = await connection.query(`
@@ -30,11 +31,11 @@ export const getAllItems = async () => {
 }
 
 export const createItem = async ({ name, description, category_id, image }) => {
-    const [result] = await connection.query(
+    const [results] = await connection.query(
         "INSERT INTO items (name, description, category_id, image) VALUES (?, ?, ?, ?)",
         [name, description, category_id, image]
     )
-    return result
+    return results
 }
 
 export const addItemSizes = async (item_id, sizes) => {
@@ -42,23 +43,28 @@ export const addItemSizes = async (item_id, sizes) => {
         const { size_id, price } = sizeInfo;
 
         return connection.query(
-            "INSERT INTO item_sizes (item_id, size_id, price) VALUES (?, ?, ?)", 
+            "INSERT INTO item_sizes (item_id, size_id, price) VALUES (?, ?, ?)",
             [item_id, size_id, price]
         )
     })
-    
+
     return await Promise.all(queries)
 }
 
 export const deleteItem = async (id) => {
-    const [result] = await connection.query(
+    const [results] = await connection.query(
         "DELETE FROM items WHERE id = ?",
         [id]
     )
-    return result
+    return results
 }
 
 export const editItem = async ({ id, name, description, category_id, image }) => {
+    const [[{ image: oldItemImageName }]] = await connection.query(
+        "SELECT image FROM items WHERE id = ?",
+        [id]
+    );
+
     let query = "UPDATE items SET name = ?, description = ?, category_id = ?"
     let params = [name, description, category_id]
 
@@ -70,14 +76,19 @@ export const editItem = async ({ id, name, description, category_id, image }) =>
     query += " WHERE id = ?"
     params.push(id)
 
-    const [result] = await connection.query(query, params)
-    return result
+    const [results] = await connection.query(query, params)
+
+    if (results.affectedRows && image && oldItemImageName) {
+        deleteImage(oldItemImageName);
+    }
+
+    return results
 }
 
 export const deleteItemSizes = async (item_id) => {
-    const [result] = await connection.query(
+    const [results] = await connection.query(
         "DELETE FROM item_sizes WHERE item_id = ?",
         [item_id]
     )
-    return result
+    return results
 }

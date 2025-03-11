@@ -1,3 +1,4 @@
+import { deleteImage } from "../../utils/index.js";
 import connection from "../config/db/connection.js"
 
 export const getSettings = async () => {
@@ -9,10 +10,20 @@ export const getSettings = async () => {
 }
 
 export const updateLogoImage = async (logo) => {
+    const [[{ value: oldLogo }]] = await connection.query(
+        "SELECT value FROM settings WHERE `key` = 'logo'"
+    );
+
+
     const [results] = await connection.query(
         "UPDATE settings SET value = ? WHERE `key` = 'logo'",
         [logo]
     )
+
+    if (results.affectedRows && oldLogo) {
+        deleteImage(oldLogo);
+    }
+
     return results
 }
 

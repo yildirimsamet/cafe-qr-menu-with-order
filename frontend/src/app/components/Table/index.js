@@ -197,8 +197,8 @@ const Table = ({ table, mutate }) => {
                 <h2 className={styles.tableHeaderTitle}>{table.table_name}
                     <ListAltIcon
                         onClick={() => {
-                        handleOpenLastOrdersList();
-                    }}
+                            handleOpenLastOrdersList();
+                        }}
                         className={styles.tableHeaderTitleListIcon}
                     />
                 </h2>
@@ -311,6 +311,8 @@ const Table = ({ table, mutate }) => {
                         open={isLastOrdersListOpen}
                         onClose={() => setIsLastOrdersListOpen(false)}
                         fullWidth
+                        slotProps={{ backdrop: { invisible: true } }}
+                        closeAfterTransition={true}
                     >
                         <DialogTitle>Son Siparişler <span className={styles.lastOrdersPopupTitleTime}>{'(son 18 saat)'}</span></DialogTitle>
                         <DialogContent>

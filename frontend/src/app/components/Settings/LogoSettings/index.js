@@ -112,6 +112,9 @@ const LogoSettings = () => {
                         inputLabel: {
                             shrink: true,
                         },
+                        backdrop: {
+                            invisible: true,
+                        },
                     }}
                     label="Resim"
                     value={imageInputName}
