@@ -3,11 +3,13 @@
 import classNames from 'classnames';
 import moment from 'moment';
 import Swal from 'sweetalert2';
+import { useAppContext } from '@/app/context/appContext';
 import axios from '@/app/lib/axios';
 import styles from './styles.module.scss';
 import 'moment/locale/tr';
 
 const SendOrders = ({ sendOrders, callback }) => {
+    const { state : { settings }} = useAppContext();
     const openPopup = (orderGroupId) => {
         Swal.fire({
             title: '"Bekleyen siparişlere almak istediginizden emin misiniz?"',
@@ -58,7 +60,17 @@ const SendOrders = ({ sendOrders, callback }) => {
                                             key={index}
                                             className={styles.sendOrdersListItemItemsWrapperItem}
                                         >
-                                            <div>{item.item_name} </div>
+                                            <div>
+                                                <img
+                                                    src={`${
+                                                        process.env.NEXT_PUBLIC_API_URL}/assets/images/${
+                                                            item.item_image || settings?.logo
+                                                        }`
+                                                    }
+                                                    alt={item.item_name}
+                                                />
+                                                {item.item_name}
+                                            </div>
                                             <div>{item.item_quantity}</div>
                                             <div>{item.item_size}</div>
                                         </div>
@@ -70,7 +82,7 @@ const SendOrders = ({ sendOrders, callback }) => {
                                         <span>Müşteri Notu:</span> <span>{order_group.order_group_note}</span>
                                     </div>}
                                     <div className={styles.sendOrdersListItemInfoUpdatedBy}>
-                                        <span>Son güncelleyen:</span> <span>{order_group.updatedBy || 'Yok'}</span>
+                                        <span>Güncelleyen:</span> <span>{order_group.updatedBy || 'Yok'}</span>
                                     </div>
                                     <div className={styles.sendOrdersListItemInfoStatus}>Gönderildi</div>
                                 </div>

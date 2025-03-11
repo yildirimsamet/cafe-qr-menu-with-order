@@ -134,7 +134,7 @@ VALUES
         3,
         'Türk Kahvesi',
         'Sıcak türk hahvesi kahve',
-        'turk_kahvesi.jpg',
+        '',
         1
     ),
     (
@@ -155,7 +155,7 @@ VALUES
         6,
         'Tuborg Gold',
         'Tuborg Gold Bira',
-        'tuborg_gold.jpeg',
+        '',
         4
     ),
     (7, 'Efes Pilsen ', 'Efes Bira', '', 4);
@@ -186,11 +186,7 @@ VALUES
 INSERT INTO
     settings (`key`, `value`)
 VALUES
-    ('logo', ''),
-    (
-        'stockProductImage',
-        'stockProductImage.png'
-    ),
+    ('logo', 'default_logo.webp'),
     (
         'colors',
         '{
@@ -233,4 +229,8 @@ VALUES
 INSERT INTO
     users (username, password, role)
 VALUES
-    ('superadmin', '$2b$10$dU6x1dNOu9ORbBRFrkLZn.5yj4HpREra7Ezgd7qGQqaq/XuqrEjXu', 'superadmin');
+    (
+        'superadmin',
+        '$2b$10$dU6x1dNOu9ORbBRFrkLZn.5yj4HpREra7Ezgd7qGQqaq/XuqrEjXu',
+        'superadmin'
+    );

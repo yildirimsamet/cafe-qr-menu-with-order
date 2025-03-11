@@ -7,13 +7,13 @@ import { useAppContext } from '@/app/context/appContext';
 import Category from './Category';
 import styles from './styles.module.scss';
 
-const Menu = ({ menu }) => {
+const Menu = ({ menu, tableInfo }) => {
     const [isItemsMenuOpened, setIsItemsMenuOpened] = useState(false);
     const { setState } = useAppContext();
 
     return (
         <div className={styles.menu}>
-            <Basket />
+            <Basket tableInfo={tableInfo} />
             <div className={styles.menuTitle}>Menü</div>
             {menu.map((category, index) => {
                 return <Category

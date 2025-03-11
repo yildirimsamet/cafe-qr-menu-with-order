@@ -11,7 +11,7 @@ import { formatPrice } from '@/app/utils';
 import BasketItem from './BasketItem';
 import styles from './styles.module.scss';
 
-const Basket = () => {
+const Basket = ({ tableInfo }) => {
     const { state, setState } = useAppContext();
     const [isBasketOpened, setIsBasketOpened] = useState(false);
     const [orderNote, setOrderNote] = useState('');
@@ -24,7 +24,12 @@ const Basket = () => {
     }, [state]);
 
     const sendOrderToSocket = () => {
-        socket.emit('order-user', { items: state.basket, table_slug: state.tableSlug, order_note: orderNote });
+        socket.emit('order-user', {
+            items: state.basket,
+            table_slug: state.tableSlug,
+            order_note: orderNote,
+            table_name: tableInfo.name,
+        });
 
         setOrderNote('');
         setIsBasketOpened(false);

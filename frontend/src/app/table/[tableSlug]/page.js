@@ -74,7 +74,10 @@ const Table = ({ params: { tableSlug } }) => {
                             className={styles.mainMenuClose}
                             onClick={() => setIsMenuOpened(!isMenuOpened)}
                         >Kapat</div>
-                        <Menu menu={menu} />
+                        <Menu
+                            menu={menu}
+                            tableInfo={tableInfo}
+                        />
                     </div>
                 ) : (
                     <div className={styles.mainMenu}>

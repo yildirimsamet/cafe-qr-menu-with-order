@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { socket } from '@/app/lib/socket';
+import styles from './styles.module.scss';
 
 const useNotificaion = () => {
     const playSound = () => {
@@ -19,6 +21,17 @@ const useNotificaion = () => {
                     setTimeout(() => {
                         try {
                             playSound();
+
+                            toast(<div className={styles.toastWrapper}>
+                                <div className={styles.toastWrapperTitle}>
+                                    <span>{data.table_name}</span> yeni sipariş.
+                                </div>
+                                {data.order_note &&
+                                    <div className={styles.toastWrapperNote}>
+                                        <span>Müşteri notu:</span> {data.order_note}
+                                    </div>
+                                }
+                            </div>);
                         } catch (error) {
 
                         }

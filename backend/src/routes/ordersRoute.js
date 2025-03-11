@@ -20,6 +20,7 @@ router.get("/", async (req, res) => {
                 SELECT COALESCE(JSON_ARRAYAGG(
                     JSON_OBJECT(
                         'item_id', i.id,
+                        'item_image', i.image,
                         'item_name', i.name,
                         'item_size', s.name,
                         'item_price', isz.price,

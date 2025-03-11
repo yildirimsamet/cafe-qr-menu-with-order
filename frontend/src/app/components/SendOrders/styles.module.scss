@@ -136,11 +136,22 @@
                     font-size: 0.9rem;
                     color: var(--text-2);
                     padding: 10px 15px;
-    
+                    max-height: 760px;
+
+                    & img {
+                        margin-right: 10px;
+                        max-height: 40px;
+                        max-width: 40px;
+                        width: auto;
+                    }
+
                     &>div {
+                        align-self: center;
                         white-space: nowrap;
                         flex: 1;
                         text-align: left;
+                        display: flex;
+                        align-items: center;
     
                         &:last-child {
                             justify-self: end;

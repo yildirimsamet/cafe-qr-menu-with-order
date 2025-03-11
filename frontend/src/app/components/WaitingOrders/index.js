@@ -3,6 +3,7 @@
 import classNames from 'classnames';
 import moment from 'moment';
 import Swal from 'sweetalert2';
+import { useAppContext } from '@/app/context/appContext';
 import { useAuth } from '@/app/hooks/useAuth';
 import axios from '@/app/lib/axios';
 import styles from './styles.module.scss';
@@ -10,6 +11,7 @@ import 'moment/locale/tr';
 
 const WaitingOrders = ({ waitingOrders, callback }) => {
     const { user } = useAuth();
+    const { state : { settings }} = useAppContext();
     const openPopup = (orderGroupId) => {
         Swal.fire({
             title:
@@ -57,7 +59,18 @@ const WaitingOrders = ({ waitingOrders, callback }) => {
                                             key={index}
                                             className={styles.waitingOrdersListItemItemsWrapperItem}
                                         >
-                                            <div>{item.item_name} </div>
+
+                                            <div>
+                                                <img
+                                                    src={`${
+                                                        process.env.NEXT_PUBLIC_API_URL}/assets/images/${
+                                                            item.item_image || settings?.logo
+                                                        }`
+                                                    }
+                                                    alt={item.item_name}
+                                                />
+                                                {item.item_name}
+                                            </div>
                                             <div>{item.item_quantity}</div>
                                             <div>{item.item_size}</div>
                                         </div>
@@ -70,7 +83,7 @@ const WaitingOrders = ({ waitingOrders, callback }) => {
                                         <span>Müşteri Notu:</span> <span>{order_group.order_group_note}</span>
                                     </div>}
                                     <div className={styles.waitingOrdersListItemInfoUpdatedBy}>
-                                        <span>Son güncelleyen:</span> <span>{order_group.updatedBy || 'Yok'}</span>
+                                        <span>Güncelleyen:</span> <span>{order_group.updatedBy || 'Yok'}</span>
                                     </div>
                                     <div className={styles.waitingOrdersListItemInfoStatus}>
                                         Bekliyor

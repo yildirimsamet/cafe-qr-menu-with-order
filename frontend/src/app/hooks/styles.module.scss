@@ -1,0 +1,25 @@
+.toastWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+
+    &Title {
+        width: 100%;
+        text-align: left;
+        font-size: 16px;
+        color: var(--text-1);
+    }
+
+    &Note {
+        width: 100%;
+        text-align: left;
+        font-size: 14px ;
+        color: var(--text-2);
+    }
+
+    & span {
+        font-weight: bold;
+    }
+}

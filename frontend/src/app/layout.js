@@ -3,6 +3,7 @@
 import '@/app/css/reset.scss';
 import '@/app/css/general.scss';
 import { AppProgressProvider as ProgressProvider } from '@bprogress/next';
+import { ToastContainer } from 'react-toastify';
 import { AppWrapper } from '@/app/context/appContext';
 import Loader from './components/Loader';
 import NavBar from './components/Navbar';
@@ -25,6 +26,7 @@ export default function RootLayout ({ children }) {
                             <div>
                                 <NavBar />
                                 {children}
+                                <ToastContainer />
                             </div>
                         </ProgressProvider>
                     </AuthProvider>
