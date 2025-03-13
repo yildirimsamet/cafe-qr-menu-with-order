@@ -56,6 +56,7 @@ const eslintConfig = [
             'jsx-a11y/no-static-element-interactions': 'off',
             '@next/next/no-img-element': 'off',
             'jsx-a11y/click-events-have-key-events': 'off',
+            'import/no-unresolved': 'off',
             'react/jsx-indent': ['error', 4],
             'react/jsx-indent-props': ['error', 4],
             'react/jsx-first-prop-new-line': ['error', 'multiline'],

@@ -1,15 +1,63 @@
 @import '@/app/css/_variables.scss';
+
 .category {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 55px;
-    background-color: var(--bg-1-dark);
+    height: 70px;
+    background: linear-gradient(135deg, var(--bg-1-dark) 0%, var(--bg-1) 100%);
     color: var(--text-3);
     text-transform: uppercase;
-    font-weight: bold;
-    font-size: 24px;
-    letter-spacing: 4px;
-    margin-bottom: 6px;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
     cursor: pointer;
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+        );
+        transition: 0.5s;
+    }
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15),
+                    0 4px 6px -2px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-1-dark) 100%);
+
+        &::before {
+            left: 100%;
+        }
+    }
+
+    &:active {
+        transform: translateY(-1px);
+        box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.1),
+                    0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    @media (max-width: 1001px) {
+        height: 60px;
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
 }

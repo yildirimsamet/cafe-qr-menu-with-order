@@ -1,29 +1,38 @@
 @import '@/app/css/_variables.scss';
 
 .menu {
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+
     &Title {
-        font-size: 22px;
-        font-weight: bold;
+        font-size: 28px;
+        font-weight: 600;
         color: var(--text-3);
-        background-color: var(--bg-2-darker);
-        letter-spacing: 1.5px;
-        height: 55px;
+        background-color: var(--bg-2-dark);
+        letter-spacing: 2px;
+        height: 70px;
         text-align: center;
         text-transform: uppercase;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-bottom: 24px;
+        margin-bottom: 32px;
         position: relative;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
 
         &::after {
             content: '';
             position: absolute;
-            bottom: -12px;
-            left: 0;
-            width: 100%;
+            bottom: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
             height: 0px;
-            border-bottom: 1px dashed var(--border-2);
+            border-bottom: 2px dashed var(--border-2);
+            opacity: 0.6;
         }
     }
 }
