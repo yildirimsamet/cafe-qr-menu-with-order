@@ -1,33 +1,17 @@
 services:
-  nginx:
-    build:
-      context: ./nginx
-      target: ${NODE_ENV:-development}
-    ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - frontend
-      - backend
-    volumes:
-      - ./nginx/certs:/etc/nginx/certs
-      - ./nginx/dhparam.pem:/etc/nginx/dhparam.pem
-      - /var/www/certbot:/var/www/certbot
-    environment:
-      - NODE_ENV=${NODE_ENV}
-
   frontend:
     build:
       context: ./frontend
       target: ${NODE_ENV:-development}
     environment:
       - NODE_ENV=${NODE_ENV}
-      - NEXT_PUBLIC_API_URL=https://cafeqrmenu.online/api
     depends_on:
       - backend
     volumes:
       - ./frontend:/app
       - /app/node_modules
+    ports:
+      - "3000:3000"
 
   backend:
     build:
@@ -45,6 +29,8 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
+    ports:
+      - "5000:5000"
 
   mysql:
     image: mysql:8.0

@@ -21,7 +21,6 @@
         right: 0;
         background: var(--bg-1);
         z-index: -1;
-        border-bottom: 1px solid var(--border-neutral);
     }
 
     &Icon {
@@ -51,9 +50,9 @@
     }
 
     &Items {
-        border-top: 1px dashed var(--border-neutral);
+        border-top: 2px dashed var(--border-neutral);
         position: absolute;
-        top: 55px;
+        top: 58px;
         left: 100%;
         width: 100%;
         background: var(--bg-1);
