@@ -30,9 +30,9 @@
         width: 100%;
 
         &Name {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             color: var(--text-1);
             letter-spacing: 1.3px;
         }
@@ -47,9 +47,9 @@
             outline: none;
             border: 1px solid var(--border-neutral);
             height: 35px;
-            font-size: 12px;
+            font-size: 14px;
             margin-bottom: 12px;
-            color: var(--text-2);
+            color: var(--text-1-dark);
             border-radius: 5px;
         }
 
@@ -80,19 +80,20 @@
     
             &Decrease,
             &Increase {
-                background: var(--bg-2);
+                background: var(--bg-1);
                 color: var(--text-3);
                 border: none;
                 width: 35px;
-                height: 28px;
+                height: 30px;
+                line-height: 30px;
                 font-size: 14px;
                 font-weight: bold;
                 border-radius: 6px;
                 cursor: pointer;
                 transition: 0.3s;
-    
+
                 &:hover {
-                    background: var(--bg-2-darker);
+                    background: var(--bg-1-darker);
                 }
             }
     
@@ -100,11 +101,11 @@
                 font-size: 14px;
                 font-weight: bold;
                 text-align: center;
-                padding: 6px 10px;
+                padding: 8px 10px;
                 background: var(--bg-4);
                 border-radius: 5px;
                 border: 1px solid var(--border-neutral);
-                color: var(--bg-2);
+                color: var(--text-1);
                 height: 100%;
                 width: 55px;
                 display: flex;
@@ -121,7 +122,7 @@
             padding: 10px 10px 0 10px;
 
             &Price {
-                font-size: 14px;
+                font-size: 18px;
                 font-weight: bold;
                 color: var(--text-2-dark);
                 font-style: italic;
@@ -134,7 +135,7 @@
                 align-items: center;
                 border: none;
                 border-radius: 5px;
-                background-color: var(--success);
+                background-color: var(--bg-1);
                 color: var(--text-3);
                 font-size: 14px;
                 padding: 6px 12px;
@@ -144,8 +145,8 @@
                 }
 
                 &:active {
-                    background-color: var(--bg-1);
-                    color: var(--text-3);
+                    background-color: var(--bg-1-darker);
+                    color: var(--text-4);
                 }
             }
         }
