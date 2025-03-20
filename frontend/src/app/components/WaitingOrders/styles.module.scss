@@ -51,6 +51,23 @@
             background-color: var(--bg-4);
             display: flex;
             flex-direction: column;
+            position: relative;
+
+            &Delete {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+                color: var(--danger);
+                & svg {
+                    font-size: 22px;
+                }
+
+                &:hover {
+                    filter: brightness(1.2);
+                    transform: scale(1.2);
+                }
+            }
 
             &Title {
                 font-size: 1.1rem;
@@ -161,7 +178,7 @@
         }
 
         &Item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-2px);
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
         }
     }

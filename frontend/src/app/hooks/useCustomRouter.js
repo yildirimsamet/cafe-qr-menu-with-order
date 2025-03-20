@@ -10,12 +10,20 @@ const useCustomRouter = () => {
     const originalReplace = router.replace;
 
     router.push = (...args) => {
-        setState((prev) => ({ ...prev, loading: true }));
+        const pathname = args[0] || '/';
+
+        if (pathname !== window.location.pathname) {
+            setState((prev) => ({ ...prev, loading: true }));
+        }
         originalPush(...args);
     };
 
     router.replace = (...args) => {
-        setState((prev) => ({ ...prev, loading: true }));
+        const pathname = args[0] || '/';
+
+        if (pathname !== window.location.pathname) {
+            setState((prev) => ({ ...prev, loading: true }));
+        }
         originalReplace(...args);
     };
 

@@ -92,6 +92,32 @@ router.put("/order_groups/:id/status", async (req, res) => {
     }
 });
 
+// Delete Order Group
+const deleteOrderGroup = async (order_group_id) => {
+    const [results] = await connection.query(
+        "DELETE FROM order_groups WHERE id = ?",
+        [order_group_id]
+    );
+
+    const [results2] = await connection.query(
+        "DELETE FROM order_items WHERE order_group_id = ?",
+        [order_group_id]
+    );
+
+    return !!results && !!results2;
+}
+
+router.delete("/order_groups/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        const results = await deleteOrderGroup(id);
+        res.json({ status: 200, data: results });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 // Complete Order
 const completeOrder = async (order_id) => {
     const now = new Date(Date.now() + (3 * 60 * 60 * 1000)).toISOString().slice(0, 19).replace('T', ' ');

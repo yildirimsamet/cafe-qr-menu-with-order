@@ -94,6 +94,20 @@
                         background-color: var(--danger);
                         color: var(--text-3);
                     }
+
+                    &ChangeStock {
+                        background-color: var(--bg-1);
+                        color: var(--text-3);
+
+                        & span {
+                            font-weight: bold;
+                        }
+                    }
+
+                    &ChangeStock_active {
+                        background-color: var(--success);
+                        color: var(--text-3);
+                    }
                 }
 
                 &Empty {

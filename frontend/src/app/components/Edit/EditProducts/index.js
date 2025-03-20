@@ -58,6 +58,37 @@ const EditProducts = () => {
         });
     };
 
+    const changeStockStatus = async ({ id, in_stock }) => {
+        Swal.fire({
+            title: 'Durumu değiştirmek istediğinizden emin misiniz?',
+            showDenyButton: true,
+            confirmButtonText: 'Evet',
+            denyButtonText: 'Hayır',
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    await axios.put(`/items/change-stock-status/${id}`, { in_stock }).then(({ data }) => {
+                        if (data.data && data.status === 200) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Başarılı',
+                                text: 'Ürün durumu değiştirildi.',
+                            });
+                            mutate();
+                        }
+                    }).catch(err => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Bir hata oluştu.',
+                            text: 'Ürün durumu değiştirirken bir hata olştu.',
+                        });
+                    });
+                } catch (error) {
+                    return;
+                }
+            }
+        });
+    };
     return (
         <div className={styles.editProducts}>
             <h1 className={commonStyles.title}>Ürün Düzenle</h1>
@@ -100,9 +131,8 @@ const EditProducts = () => {
                                             className={styles.editProductsListItemProductsItem}
                                         >
                                             <img
-                                                src={`${process.env.NEXT_PUBLIC_API_URL}/assets/images/${
-                                                    product.item_image || settings?.logo
-                                                }`}
+                                                src={`${process.env.NEXT_PUBLIC_API_URL}/assets/images/${product.item_image || settings?.logo
+                                                    }`}
                                                 alt="Ürün Resmi"
                                                 className={styles.editProductsListItemProductsItemImage}
                                             />
@@ -130,23 +160,29 @@ const EditProducts = () => {
                                             </div>
                                             <div className={styles.editProductsListItemProductsItemActions}>
                                                 <button
+                                                    onClick={() => {
+                                                        changeStockStatus({ id: product.item_id, in_stock: !product.item_in_stock })
+                                                    }}
+                                                    className={cn(styles.editProductsListItemProductsItemActionsChangeStock, {[styles.editProductsListItemProductsItemActionsChangeStock_active]: product.item_in_stock})}
+                                                >Durum: <span>{product.item_in_stock ? 'Aktif' : 'Pasif'}</span></button>
+                                                <button
                                                     onClick={
-                                                    () => {
-                                                        setSelectedProductForEdit({
-                                                            ...product, category: {
-                                                                category_id: productsInfo.category_id,
-                                                                category_name: productsInfo.category_name,
-                                                            },
-                                                        });
-                                                        setIsProductEditModelOpened(true);
+                                                        () => {
+                                                            setSelectedProductForEdit({
+                                                                ...product, category: {
+                                                                    category_id: productsInfo.category_id,
+                                                                    category_name: productsInfo.category_name,
+                                                                },
+                                                            });
+                                                            setIsProductEditModelOpened(true);
+                                                        }
                                                     }
-                                                }
                                                     className={styles.editProductsListItemProductsItemActionsEdit}
                                                 >Düzenle</button>
                                                 <button
                                                     onClick={() => {
-                                                    openProductDeleteModel(product.item_id);
-                                                }}
+                                                        openProductDeleteModel(product.item_id);
+                                                    }}
                                                     className={styles.editProductsListItemProductsItemActionsDelete}
                                                 >Sil</button>
                                             </div>

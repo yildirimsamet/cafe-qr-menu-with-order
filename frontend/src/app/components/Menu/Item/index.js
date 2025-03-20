@@ -61,68 +61,73 @@ const Item = ({ item }) => {
     };
 
     return (
-        <div className={styles.item}>
-            <div className={styles.itemImage}>
-                <img
-                    src={
-                        item.item_image
-                            ? `${process.env.NEXT_PUBLIC_API_URL}/assets/images/${item.item_image}`
-                            : `${process.env.NEXT_PUBLIC_API_URL}/assets/images/${state?.settings.logo}`
-                    }
-                    alt=""
-                />
-            </div>
-            <div className={styles.itemContent}>
-                <div className={styles.itemContentName}>{item.item_name}</div>
-                <div className={styles.itemContentDescription}>
-                    {item.item_description}
+        <div className={styles.container}>
+            <div className={cn(styles.item, { [styles.outOfStock]: !item.item_in_stock })}>
+                <div className={styles.itemImage}>
+                    <img
+                        src={
+                            item.item_image
+                                ? `${process.env.NEXT_PUBLIC_API_URL}/assets/images/${item.item_image}`
+                                : `${process.env.NEXT_PUBLIC_API_URL}/assets/images/${state?.settings.logo}`
+                        }
+                        alt=""
+                    />
                 </div>
-                <select
-                    className={styles.itemContentSize}
-                    onChange={(e) => {
-                        setSelectedSize(item.sizes.find((size) => size.size_name === e.target.value));
-                    }}
-                >
-                    {item.sizes?.map((size, index) => {
-                        return (
-                            <option
-                                value={size.size_name}
-                                key={index}
-                            >
-                                {size.size_name}
-                            </option>
-                        );
-                    })}
-                </select>
-                <div className={styles.itemContentQuantity}>
-                    <button
-                        className={styles.itemContentQuantityDecrease}
-                        onClick={() => updateQuantity(-1)}
-                    >
-                        -
-                    </button>
-                    <span className={styles.itemContentQuantityAmount}>{quantity}</span>
-                    <button
-                        className={styles.itemContentQuantityIncrease}
-                        onClick={() => updateQuantity(1)}
-                    >
-                        +
-                    </button>
-                </div>
-
-                <div className={styles.itemContentBottom}>
-                    <div className={styles.itemContentBottomPrice}>
-                        {(selectedSize?.size_price || 0 * quantity).toFixed(2)}₺
+                <div className={styles.itemContent}>
+                    <div className={styles.itemContentName}>{item.item_name}</div>
+                    <div className={styles.itemContentDescription}>
+                        {item.item_description}
                     </div>
-                    <button
-                        onClick={addToBasket}
-                        className={cn(styles.itemContentBottomAdd, {
-                            'display-none': !selectedSize,
-                        })}
+                    <select
+                        className={styles.itemContentSize}
+                        onChange={(e) => {
+                            setSelectedSize(item.sizes.find((size) => size.size_name === e.target.value));
+                        }}
                     >
-                        Ekle <AddIcon />
-                    </button>
+                        {item.sizes?.map((size, index) => {
+                            return (
+                                <option
+                                    value={size.size_name}
+                                    key={index}
+                                >
+                                    {size.size_name}
+                                </option>
+                            );
+                        })}
+                    </select>
+                    <div className={styles.itemContentQuantity}>
+                        <button
+                            className={styles.itemContentQuantityDecrease}
+                            onClick={() => updateQuantity(-1)}
+                        >
+                            -
+                        </button>
+                        <span className={styles.itemContentQuantityAmount}>{quantity}</span>
+                        <button
+                            className={styles.itemContentQuantityIncrease}
+                            onClick={() => updateQuantity(1)}
+                        >
+                            +
+                        </button>
+                    </div>
+
+                    <div className={styles.itemContentBottom}>
+                        <div className={styles.itemContentBottomPrice}>
+                            {(selectedSize?.size_price || 0 * quantity).toFixed(2)}₺
+                        </div>
+                        <button
+                            onClick={addToBasket}
+                            className={cn(styles.itemContentBottomAdd, {
+                                'display-none': !selectedSize,
+                            })}
+                        >
+                            Ekle <AddIcon />
+                        </button>
+                    </div>
                 </div>
+            </div>
+            <div style={{ display: 'none' }} className={cn({ [styles.outOfStockText]: !item.item_in_stock })}>
+                Tükendi
             </div>
         </div>
     );

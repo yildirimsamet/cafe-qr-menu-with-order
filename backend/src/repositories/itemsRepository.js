@@ -1,6 +1,14 @@
 import connection from "../config/db/connection.js"
 import { deleteImage } from "../../utils/index.js"
 
+export const changeStockStatus = async ({ id, in_stock }) => {
+    const [results] = await connection.query(
+        "UPDATE items SET in_stock = ? WHERE id = ?",
+        [in_stock, id]
+    )
+    return !!results.affectedRows
+}
+
 export const getAllItems = async () => {
     const [results] = await connection.query(`
         SELECT
@@ -12,6 +20,7 @@ export const getAllItems = async () => {
                     'item_name', i.name,
                     'item_description', i.description,
                     'item_image', i.image,
+                    'item_in_stock', i.in_stock,
                     'sizes', (
                         SELECT JSON_ARRAYAGG(
                             JSON_OBJECT(

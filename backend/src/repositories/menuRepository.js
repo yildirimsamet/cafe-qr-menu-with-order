@@ -11,6 +11,7 @@ export const getMenu = async () => {
                     'item_name', i.name,
                     'item_description', i.description,
                     'item_image', i.image,
+                    'item_in_stock', i.in_stock,
                     'sizes', (
                         SELECT JSON_ARRAYAGG(
                             JSON_OBJECT(

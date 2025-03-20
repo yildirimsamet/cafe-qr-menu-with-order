@@ -35,6 +35,21 @@ export const getItems = async (req, res) => {
     }
 }
 
+export const changeStockStatus = async (req, res) => {
+    const { id } = req.params
+    const { in_stock } = req.body
+    try {
+        const results = await itemsService.changeStockStatus({ id, in_stock })
+        res.json({
+            status: 200,
+            data: results
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: "Internal server error" })
+    }
+}
+
 export const addItem = async (req, res) => {
     const { name, description, category, sizes: sizesJson } = req.body
     const image = req.file ? req.file.filename : null

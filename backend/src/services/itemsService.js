@@ -15,6 +15,15 @@ export const getItems = async () => {
     }
 }
 
+export const changeStockStatus = async ({ id, in_stock }) => {
+    try {
+        const result = await itemsRepository.changeStockStatus({ id, in_stock })
+        return result
+    } catch (error) {
+        throw error
+    }
+}
+
 export const addItem = async ({ name, description, category, image, sizes }) => {
     try {
         const addItemResult = await itemsRepository.createItem({ 

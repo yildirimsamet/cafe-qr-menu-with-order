@@ -53,7 +53,7 @@ const io = new Server(server, {
     },
 });
 
-const apiNamespace = io.of('/api');
+const apiNamespace = io.of(process.env.NODE_ENV === 'development' ? '/' : '/api');
 
 apiNamespace.on("connection", (socket) => {
     console.log("API namespace connected");

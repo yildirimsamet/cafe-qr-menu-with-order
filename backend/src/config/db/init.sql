@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `items` (
     description TEXT,
     image VARCHAR(255),
     category_id INT NOT NULL,
+    in_stock BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES `categories`(id) ON DELETE RESTRICT
 );
@@ -120,45 +121,45 @@ VALUES
         1,
         'Pepperoni Pizza',
         'Lezzetli pepperoni pizza',
-        '',
+        'pizza1.avif',
         2
     ),
     (
         2,
         'Margherita Pizza',
         'Klasik margherita pizza',
-        '',
+        'pizza2.webp',
         2
     ),
     (
         3,
         'Türk Kahvesi',
         'Sıcak türk hahvesi kahve',
-        '',
+        'turkkahvesi.webp',
         1
     ),
     (
         4,
         'Cheese Cake Limon',
-        'Böğürtlenli cheesecake',
-        '',
+        'Limonlu cheesecake',
+        'limon.jpeg',
         3
     ),
     (
         5,
         'Cheese Cake Bögürtlen',
-        'Limonlu cheesecake',
-        '',
+        'Böğürtlenli cheesecake',
+        'bogurtlen.jpg',
         3
     ),
     (
         6,
         'Tuborg Gold',
         'Tuborg Gold Bira',
-        '',
+        'tuborg.webp',
         4
     ),
-    (7, 'Efes Pilsen ', 'Efes Bira', '', 4);
+    (7, 'Efes Pilsen ', 'Efes Bira', 'efes.webp', 4);
 
 INSERT INTO
     item_sizes (item_id, size_id, price)
@@ -186,7 +187,7 @@ VALUES
 INSERT INTO
     settings (`key`, `value`)
 VALUES
-    ('logo', 'default_logo.webp'),
+    ('logo', 'default_logo.png'),
     (
         'colors',
         '{

@@ -5,6 +5,7 @@ import moment from 'moment';
 import Swal from 'sweetalert2';
 import { useAppContext } from '@/app/context/appContext';
 import { useAuth } from '@/app/hooks/useAuth';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import axios from '@/app/lib/axios';
 import styles from './styles.module.scss';
 import 'moment/locale/tr';
@@ -14,8 +15,7 @@ const WaitingOrders = ({ waitingOrders, callback }) => {
     const { state : { settings }} = useAppContext();
     const openPopup = (orderGroupId) => {
         Swal.fire({
-            title:
-                '"Gönderilen siparişlere almak istediginizden emin misiniz?"',
+            title: 'Gönderilen siparişlere almak istediginizden emin misiniz?',
             showDenyButton: true,
             confirmButtonText: 'Evet',
             denyButtonText: 'Hayır',
@@ -26,6 +26,24 @@ const WaitingOrders = ({ waitingOrders, callback }) => {
                         status: 'send',
                         updatedBy: user?.username,
                     })
+                    .then(() => {
+                        callback();
+                    });
+            }
+        });
+    };
+
+    const handleCancelOrder = (orderGroupId) => {
+        console.log('run', orderGroupId)
+        Swal.fire({
+            title: 'Sipariş iptal edilecek emin misiniz?',
+            showDenyButton: true,
+            confirmButtonText: 'Evet',
+            denyButtonText: 'Hayır',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios
+                    .delete(`/orders/order_groups/${orderGroupId}`)
                     .then(() => {
                         callback();
                     });
@@ -46,6 +64,15 @@ const WaitingOrders = ({ waitingOrders, callback }) => {
                                 key={index}
                                 className={styles.waitingOrdersListItem}
                             >
+                                <div
+                                    className={styles.waitingOrdersListItemDelete}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleCancelOrder(order_group.order_group_id);
+                                    }}
+                                >
+                                    <DeleteForeverIcon />
+                                </div>
                                 <div className={styles.waitingOrdersListItemTitle}>
                                     Masa Adı: {order_group.tableName}
                                 </div>
