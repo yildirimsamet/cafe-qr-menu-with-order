@@ -15,6 +15,8 @@ import authRoute from "./routes/authRoute.js";
 import auth from "./middlewares/authMiddleware.js";
 import { createSuperAdmin } from "./services/superAdminService.js";
 import settingsRoute from "./routes/settingsRoute.js";
+import notificationRoute from "./routes/notificationRoute.js";
+import { createNotification } from "./services/notificationService.js";
 
 dotenv.config();
 
@@ -34,6 +36,7 @@ app.use('/sizes', auth('admin'), sizeRoute);
 app.use('/items', auth('admin'), itemsRoute);
 app.use('/menu', menuRoute);
 app.use('/settings',auth('guest'), settingsRoute);
+app.use('/notifications', notificationRoute);
 
 (async () => {
     try {
@@ -74,6 +77,16 @@ apiNamespace.on("connection", (socket) => {
         }
 
         socket.broadcast.emit("orders", data);
+    });
+
+    socket.on("notification", async (data, callback) => {
+        await createNotification(data);
+
+        if (typeof callback === "function") {
+            callback(data);
+        }
+
+        socket.broadcast.emit("notifications", data);
     });
 });
 

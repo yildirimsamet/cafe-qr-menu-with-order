@@ -14,11 +14,11 @@ import axios from '@/app/lib/axios';
 import EditUserModal from '../components/Edit/EditUserModal';
 import UserAddModel from '../components/UserAddModel';
 import { useAuthorization } from '../hooks/useAuthorization';
-import useNotificaion from '../hooks/useNotification';
+import useNotification from '../hooks/useNotification';
 import styles from './styles.module.scss';
 
 const Users = () => {
-    useNotificaion();
+    useNotification();
     const { user: loggedInUser } = useAuthorization({ authorization: 'admin' });
 
     const [users, setUsers] = useState([]);

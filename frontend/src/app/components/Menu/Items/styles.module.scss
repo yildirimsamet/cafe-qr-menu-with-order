@@ -3,10 +3,10 @@
 .items {
     z-index: 0;
     position: absolute;
-    top: 58px;
+    top: 64px;
     left: 100%;
     width: 100%;
-    height: calc(100vh - 65px);
+    height: calc(100vh - 74px);
     overflow-y: auto;
     background-color: var(--bg-1-dark);
     transition: all 0.3s ease;

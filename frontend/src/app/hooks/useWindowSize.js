@@ -1,5 +1,6 @@
 'use client';
 
+import { debounce } from '@/app/utils';
 import { useEffect, useState } from 'react';
 
 export function useWindowSize () {
@@ -22,15 +23,5 @@ export function useWindowSize () {
     }, []);
 
     return windowSize;
-}
-
-function debounce (fn, delay) {
-    let timer;
-    return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-            fn(...args);
-        }, delay);
-    };
 }
 

@@ -94,6 +94,14 @@ CREATE TABLE settings (
     `value` LONGTEXT
 );
 
+CREATE TABLE notifications (
+    id SERIAL PRIMARY KEY,
+    message TEXT,
+    type ENUM('message', 'call_waiter', 'bill_request') NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
+    table_slug VARCHAR(255) NOT NULL REFERENCES tables(slug) ON DELETE CASCADE
+);
+
 INSERT INTO
     `categories` (name)
 VALUES

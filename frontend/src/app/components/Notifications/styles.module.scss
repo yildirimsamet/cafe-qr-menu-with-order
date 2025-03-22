@@ -1,0 +1,45 @@
+.notifications {
+    width: 100%;
+    background-color: var(--bg-3);
+    height: 100vh;
+    overflow: hidden;
+
+    &Title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-4);
+        background-color: var(--bg-1-dark);
+        letter-spacing: 1.5px;
+        height: 55px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        width: 100%;
+        top: 0;
+    }
+
+    &List {
+        padding: 15px;
+        padding-bottom: 40px;
+        height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
+
+    &ListSticky {
+        height: calc(100vh - 30px);
+    }
+
+    &Empty {
+        font-size: 18px;
+        color: var(--text-1);
+        text-align: center;
+        padding: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+}

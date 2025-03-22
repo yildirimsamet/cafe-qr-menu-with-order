@@ -10,7 +10,7 @@ import NavBar from './components/Navbar';
 import 'sweetalert2/src/sweetalert2.scss';
 import { AuthProvider } from './context/authContext';
 
-export default function RootLayout ({ children }) {
+export default function RootLayout({ children }) {
     return (
         <html lang="tr">
             <body>
@@ -23,11 +23,9 @@ export default function RootLayout ({ children }) {
                             shallowRouting
                         >
                             <Loader />
-                            <div>
-                                <NavBar />
-                                {children}
-                                <ToastContainer />
-                            </div>
+                            <NavBar />
+                            {children}
+                            <ToastContainer />
                         </ProgressProvider>
                     </AuthProvider>
                 </AppWrapper>

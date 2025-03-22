@@ -5,20 +5,15 @@ import axios from '@/app/lib/axios';
 import SendOrders from '../components/SendOrders';
 import WaitingOrders from '../components/WaitingOrders';
 import { useAuthorization } from '../hooks/useAuthorization';
-import useNotificaion from '../hooks/useNotification';
+import useNotification from '../hooks/useNotification';
 import styles from './styles.module.scss';
+import Notifications from '../components/Notifications';
 
 const Orders = () => {
-    const { socket, notificationCallback } = useNotificaion();
+    const { socket, notificationCallback, subscribeToOrders, unsubscribeFromOrders } = useNotification();
     useAuthorization({ authorization: 'waiter' });
     const [waitingOrders, setWaitingOrders] = useState([]);
     const [sendOrders, setSendOrders] = useState([]);
-
-    const playSound = () => {
-        const audio = new Audio('/ding.mp3');
-
-        audio.play();
-    };
 
     const getOrders = async () => {
         try {
@@ -27,9 +22,18 @@ const Orders = () => {
             setWaitingOrders(data.data.waiting.reverse());
             setSendOrders(data.data.send.reverse());
         } catch (error) {
-        //
+            //
         }
     };
+
+
+    useEffect(() => {
+        subscribeToOrders(getOrders);
+
+        return () => {
+            unsubscribeFromOrders(getOrders);
+        };
+    }, [])
 
     let getOrdersInterval;
 
@@ -53,20 +57,25 @@ const Orders = () => {
 
     return (
         <div className={styles.orders}>
-            <WaitingOrders
-                waitingOrders={waitingOrders}
-                callback={() => {
-                orderGroupStatusChange();
-                getOrders();
-            }}
-            />
-            <SendOrders
-                sendOrders={sendOrders}
-                callback={() => {
-                orderGroupStatusChange();
-                getOrders();
-            }}
-            />
+            <div className={styles.ordersContent}>
+                <WaitingOrders
+                    waitingOrders={waitingOrders}
+                    callback={() => {
+                        orderGroupStatusChange();
+                        getOrders();
+                    }}
+                />
+                <SendOrders
+                    sendOrders={sendOrders}
+                    callback={() => {
+                        orderGroupStatusChange();
+                        getOrders();
+                    }}
+                />
+            </div>
+            <div className={styles.ordersNotifications}>
+                <Notifications />
+            </div>
         </div>
     );
 };

@@ -34,7 +34,6 @@ const WaitingOrders = ({ waitingOrders, callback }) => {
     };
 
     const handleCancelOrder = (orderGroupId) => {
-        console.log('run', orderGroupId)
         Swal.fire({
             title: 'Sipariş iptal edilecek emin misiniz?',
             showDenyButton: true,
@@ -121,7 +120,7 @@ const WaitingOrders = ({ waitingOrders, callback }) => {
                     })}
                 </div>
             ) : (
-                <div className={styles.waitingOrdersEmpty}>Bekleyen Sipariş Yok</div>
+                <div className={styles.waitingOrdersEmpty}>Bekleyen sipariş bulunmamaktadır.</div>
             )}
         </div>
     );

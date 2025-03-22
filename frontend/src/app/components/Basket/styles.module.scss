@@ -6,10 +6,10 @@
     top: 0;
     width: 100%;
     z-index: 999999999999;
-    height: 50px;
+    height: 64px;
     display: flex;
     justify-content: flex-end;
-    align-items: flex-end;
+    align-items: center;
     padding: 0 8px;
 
     &Blur::before {
@@ -17,7 +17,7 @@
         position: absolute;
         left: 0;
         top: 0;
-        bottom: -8px;
+        bottom: 0;
         right: 0;
         background: var(--bg-1-dark);
         z-index: -1;
@@ -25,24 +25,58 @@
 
     &Icon {
         position: relative;
+        margin-top: 8px;
+        margin-right: 5px;
 
         & svg {
-            width: 35px;
-            height: 35px;
+            width: 32px;
+            height: 32px;
             fill: var(--bg-2);
+        }
+    }
+
+    &Left {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-right: auto;
+        gap: 15px;
+
+        &Icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+
+            & svg {
+                width: 28px;
+                height: 28px;
+                fill: var(--bg-2);
+            }
+
+            & span {
+                font-size: 8px;
+                font-weight: bold;
+                color: var(--text-4);
+                letter-spacing: 1.3px;
+            }
         }
     }
 
     &Amount {
         position: absolute;
-        right: 0px;
-        top: 2px;
-        width: 20px;
-        height: 20px;
+        right: 2px;
+        top: 5px;
+        width: 18px;
+        height: 18px;
         border-radius: 50%;
         background-color: var(--danger);
         color: var(--text-3);
-        font-size: 12px;
+        font-size: 10px;
         font-weight: bold;
         display: flex;
         justify-content: center;
@@ -52,14 +86,14 @@
     &Items {
         border-top: 2px dashed var(--border-neutral);
         position: absolute;
-        top: 58px;
+        top: 64px;
         left: 100%;
         width: 100%;
         background: var(--bg-1-dark);
         padding: 25px;
         padding-top: 50px;
         padding-bottom: 85px;
-        height: calc(100vh - 60px);
+        height: calc(100vh - 74px);
         transition: all 0.3s ease;
         overflow-y: auto;
         overflow-x: hidden;

@@ -9,7 +9,7 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { useAuth } from '@/app/hooks/useAuth';
-import useNotificaion from '@/app/hooks/useNotification';
+import useNotification from '@/app/hooks/useNotification';
 import axios from '@/app/lib/axios';
 import { formatPrice } from '@/app/utils';
 import styles from './styles.module.scss';
@@ -18,7 +18,7 @@ import 'moment/locale/tr';
 const MySwal = withReactContent(Swal);
 
 const Table = ({ table, mutate }) => {
-    const { socket, notificationCallback } = useNotificaion();
+    const { socket, notificationCallback } = useNotification();
     const { user } = useAuth();
     const [isLastOrdersListOpen, setIsLastOrdersListOpen] = useState(false);
     const [lastOrders, setLastOrders] = useState([]);
