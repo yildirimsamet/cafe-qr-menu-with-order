@@ -4,10 +4,16 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/app/hooks/useAuth';
 import styles from './styles.module.scss';
+import { useWindowSize } from '@/app/hooks/useWindowSize';
+import { HiOutlineMenu } from "react-icons/hi";
+import { IoMdClose } from "react-icons/io";
+import { useState } from 'react';
 
 const NavLinks = ({ className }) => {
     const { user } = useAuth();
     const pathname = usePathname();
+    const { isMobile } = useWindowSize();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const routesForUsersRole = {
         'waiter': [{ path: '/tables', title: 'Masalar' }, { path: '/orders', title: 'Siparişler' }],
         'admin': [
@@ -21,12 +27,30 @@ const NavLinks = ({ className }) => {
             { path: '/orders', title: 'Siparişler' },
             { path: '/users', title: 'Kullanıcılar' },
             { path: '/edit', title: 'Düzenle' },
+            // { path: '/statistics', title: 'İstatistikler' },
             { path: '/settings', title: 'Ayarlar' },
         ],
     };
 
     return (
-        <div className={cn(styles.navLinks, className)}>
+        (isMobile ? (
+            <div className={styles.navLinksMobile}>
+                {isMobileMenuOpen ? <IoMdClose onClick={() => setIsMobileMenuOpen(false)} /> : <HiOutlineMenu onClick={() => setIsMobileMenuOpen(true)} />}
+                <div className={cn(styles.navLinksMobileMenuWrapper, { [styles.navLinksMobileMenuWrapper_open]: isMobileMenuOpen })}>
+                    {routesForUsersRole[user.role].map((route, index) => {
+                        return (
+                            <Link
+                                key={index}
+                                className={cn(styles.navLinksMobileMenuWrapperLink, { [styles.navLinksMobileMenuWrapperLink_active]: pathname === route.path })}
+                                href={route.path}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >{route.title}
+                            </Link>
+                        );
+                    })}
+                </div>
+            </div>
+        ) : (<div className={cn(styles.navLinks, className)}>
             {routesForUsersRole[user.role].map((route, index) => {
                 return (
                     <Link
@@ -37,7 +61,7 @@ const NavLinks = ({ className }) => {
                     </Link>
                 );
             })}
-        </div>
+        </div>))
     );
 };
 

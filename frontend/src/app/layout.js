@@ -13,7 +13,7 @@ import { AuthProvider } from './context/authContext';
 export default function RootLayout({ children }) {
     return (
         <html lang="tr">
-            <body>
+            <body suppressHydrationWarning>
                 <AppWrapper>
                     <AuthProvider>
                         <ProgressProvider

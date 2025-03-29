@@ -219,7 +219,7 @@ const Table = ({ table, mutate }) => {
                 })}
             >
                 <div className={styles.tableOrdersTitles}>
-                    <div className={styles.tableOrdersTitle}>Ürun</div>
+                    <div className={styles.tableOrdersTitle}>Ürün</div>
                     <div className={styles.tableOrdersTitle}>Boyut</div>
                     <div className={styles.tableOrdersTitle}>Adet</div>
                     <div className={styles.tableOrdersTitle}>Fiyat</div>
@@ -237,7 +237,7 @@ const Table = ({ table, mutate }) => {
                                 {item.item_size}
                             </div>
                             <div className={styles.tableOrdersItemQuantity}>
-                                {item.item_quantity}
+                                {item.item_quantity} ad.
                             </div>
                             <div className={styles.tableOrdersItemPrice}>
                                 {formatPrice(item.item_price)}₺

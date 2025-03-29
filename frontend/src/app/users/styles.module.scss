@@ -82,3 +82,13 @@
         }
     }
 }
+
+@media screen and (max-width: 1001px) {
+    .title, .topButtons {
+        margin-bottom: 15px;
+    }
+    
+    .topButtons {
+        padding: 0;
+    }
+}

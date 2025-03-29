@@ -97,7 +97,7 @@ const WaitingOrders = ({ waitingOrders, callback }) => {
                                                 />
                                                 {item.item_name}
                                             </div>
-                                            <div>{item.item_quantity}</div>
+                                            <div>{item.item_quantity} ad.</div>
                                             <div>{item.item_size}</div>
                                         </div>
                                     );

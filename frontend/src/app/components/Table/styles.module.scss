@@ -85,6 +85,10 @@
             &>:last-child {
                 justify-self: end;
             }
+
+            & > div:not(:last-child):not(:first-child) {
+                justify-self: center;
+            }
         }
 
         &Titles {
@@ -97,6 +101,10 @@
 
             &>:last-child {
                 justify-self: end;
+            }
+
+            & > div:not(:last-child):not(:first-child) {
+                justify-self: center;
             }
         }
 
@@ -119,7 +127,7 @@
         font-size: 16px;
         display: flex;
         justify-content: space-between;
-        margin: 10px 0;
+        margin: 10px 0 15px 0;
         color: var(--text-2-darker);
     }
 
@@ -228,4 +236,23 @@
 .lastOrdersPopupTitleTime {
     color: var(--text-4);
     font-size: 12px;
+}
+
+@media screen and (max-width: 1001px) {
+   .table {
+        &Header {
+            &Title {
+                font-size: 16px;
+            }
+        }
+        &Orders {
+            &Titles {
+                font-size: 14px;
+            }
+
+            &Item {
+                font-size: 12px;
+            }
+        }
+   }
 }

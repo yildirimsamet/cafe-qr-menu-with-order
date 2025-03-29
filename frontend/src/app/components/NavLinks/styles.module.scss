@@ -26,6 +26,57 @@
             border-bottom: 1px solid var(--text-accent-1);
         }
     }
+
+    &Mobile {
+        & svg {
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--bg-5);
+        }
+
+        &MenuWrapper {
+            position: fixed;
+            top: 70px;
+            width: 100%;
+            height: calc(100vh - 70px);
+            background-color: var(--bg-1-dark);
+            z-index: 2147483646;
+            padding: 25px;
+            padding-top: 75px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            left: -100%;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: column;
+            gap: 15px;
+
+            &Link {
+                text-decoration: none;
+                color: var(--text-3);
+                font-weight: bold;
+                font-size: 28px;
+                text-align: center;
+                transition: color 0.3s ease;
+                padding: 10px 15px;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    filter: brightness(1.4);
+                }
+
+                &_active {
+                    border: 1px solid var(--border-neutral);
+                    background: rgba(255,255,255, 0.08);
+                }
+            }
+
+            &_open {
+                left: 0;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 1001px) {

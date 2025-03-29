@@ -1,0 +1,21 @@
+.statistics {
+    &Title {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--text-4);
+        background-color: var(--bg-2-dark);
+        letter-spacing: 1.5px;
+        height: 55px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 24px;
+        position: relative;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+}
+
+@media screen and (max-width: 1001px) {
+    
+}
