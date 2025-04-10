@@ -1,16 +1,22 @@
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '@/app/hooks/useAuth';
+import  useCustomRouter  from '@/app/hooks/useCustomRouter';
 import styles from './styles.module.scss';
-import { useAuthorization } from '@/app/hooks/useAuthorization';
 
 const LoginForm = () => {
-    useAuthorization({ authorization: 'guest', redirectUrl: '/tables', redirectIfAuthanticated: true });
-    const { login } = useAuth({});
+    const router = useCustomRouter();
+    const { login, user } = useAuth({});
     const [formData, setFormData] = useState({
         username: 'superadmin',
         password: 'superadmin',
     });
+
+    useEffect(() => {
+        if (user) {
+            router.push('/tables');
+        }
+    }, [user]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
