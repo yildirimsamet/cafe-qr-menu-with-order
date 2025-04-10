@@ -1,0 +1,34 @@
+.tableOrderCount {
+    display: flex;
+    gap: 24px;
+    height: 400px;
+
+    &ChartWrapper {
+        flex: 1;
+    }
+
+    &DateRangeWrapper {
+        width: 380px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+    }
+}
+
+@media screen and (max-width: 1001px) {
+    .tableOrderCount {
+        flex-direction: column; // Stack vertically on smaller screens
+        height: auto; // Adjust height
+        gap: 16px; // Adjust gap
+
+        &ChartWrapper {
+            height: 300px; // Adjust chart height
+        }
+
+        &DateRangeWrapper {
+            width: 100%; // Make date range section full width
+            align-items: stretch; // Stretch items
+        }
+    }
+}

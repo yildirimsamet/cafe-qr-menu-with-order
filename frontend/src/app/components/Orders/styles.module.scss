@@ -1,0 +1,72 @@
+.orders {
+    display: flex;
+    gap: 24px;
+    padding: 0 15px 25px 15px;
+
+    &Left {
+        flex: 1;
+        overflow: hidden;
+        width: 100%;
+
+        &Empty {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-1);
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        &Title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-1);
+            text-align: center;
+        }
+
+        &List {
+            
+        }
+    }
+
+    &Right {
+        min-width: 380px;
+        width: 380px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+
+        &Select {
+            margin: 0 auto;
+            width: 338px;
+        }
+    }
+}
+
+@media screen and (max-width: 1001px) {
+    .orders {
+        flex-direction: column; // Stack vertically on smaller screens
+        gap: 16px; // Adjust gap
+        padding: 0 0 16px 0; // Adjust padding
+
+        &Left {
+            padding: 0 15px; // Add horizontal padding
+            &Title {
+                font-size: 20px; // Adjust title font size
+            }
+        }
+
+        &Right {
+            min-width: unset; // Remove min-width
+            width: 100%; // Make right section full width
+            padding: 0 15px; // Add horizontal padding
+
+            &Select {
+                width: 100%; // Make select full width
+            }
+        }
+    }
+}

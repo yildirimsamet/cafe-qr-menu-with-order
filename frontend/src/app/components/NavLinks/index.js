@@ -2,12 +2,12 @@
 import cn from 'classnames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useAuth } from '@/app/hooks/useAuth';
-import styles from './styles.module.scss';
-import { useWindowSize } from '@/app/hooks/useWindowSize';
-import { HiOutlineMenu } from "react-icons/hi";
-import { IoMdClose } from "react-icons/io";
 import { useState } from 'react';
+import { HiOutlineMenu } from 'react-icons/hi';
+import { IoMdClose } from 'react-icons/io';
+import { useAuth } from '@/app/hooks/useAuth';
+import { useWindowSize } from '@/app/hooks/useWindowSize';
+import styles from './styles.module.scss';
 
 const NavLinks = ({ className }) => {
     const { user } = useAuth();
@@ -27,27 +27,40 @@ const NavLinks = ({ className }) => {
             { path: '/orders', title: 'Siparişler' },
             { path: '/users', title: 'Kullanıcılar' },
             { path: '/edit', title: 'Düzenle' },
-            // { path: '/statistics', title: 'İstatistikler' },
+            { path: '/statistics', title: 'İstatistikler' },
             { path: '/settings', title: 'Ayarlar' },
         ],
     };
 
+    const exludedRoutesForMobile = ['/statistics'];
+
     return (
         (isMobile ? (
             <div className={styles.navLinksMobile}>
-                {isMobileMenuOpen ? <IoMdClose onClick={() => setIsMobileMenuOpen(false)} /> : <HiOutlineMenu onClick={() => setIsMobileMenuOpen(true)} />}
-                <div className={cn(styles.navLinksMobileMenuWrapper, { [styles.navLinksMobileMenuWrapper_open]: isMobileMenuOpen })}>
-                    {routesForUsersRole[user.role].map((route, index) => {
-                        return (
-                            <Link
-                                key={index}
-                                className={cn(styles.navLinksMobileMenuWrapperLink, { [styles.navLinksMobileMenuWrapperLink_active]: pathname === route.path })}
-                                href={route.path}
-                                onClick={() => setIsMobileMenuOpen(false)}
-                            >{route.title}
-                            </Link>
-                        );
-                    })}
+                {isMobileMenuOpen ?
+                    <IoMdClose onClick={() => setIsMobileMenuOpen(false)} /> :
+                    <HiOutlineMenu onClick={() => setIsMobileMenuOpen(true)} />}
+                <div
+                    className={cn(
+                        styles.navLinksMobileMenuWrapper,
+                        { [styles.navLinksMobileMenuWrapper_open]: isMobileMenuOpen },
+                    )}
+                >
+                    {routesForUsersRole[user.role]
+                        .filter(route => !exludedRoutesForMobile.includes(route.path)).map((route, index) => {
+                            return (
+                                <Link
+                                    key={index}
+                                    className={cn(
+                                        styles.navLinksMobileMenuWrapperLink,
+                                        { [styles.navLinksMobileMenuWrapperLink_active]: pathname === route.path },
+                                    )}
+                                    href={route.path}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                >{route.title}
+                                </Link>
+                            );
+                        })}
                 </div>
             </div>
         ) : (<div className={cn(styles.navLinks, className)}>

@@ -45,9 +45,10 @@ export const AuthProvider = ({ children }) => {
             });
     };
 
-    const logout = () => {
+    const logout = (navigate = '/login') => {
         Cookies.remove('token');
         setUser(null);
+        router.push(navigate);
     };
 
     const checkUser = async (cb) => {

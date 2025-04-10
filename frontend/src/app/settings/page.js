@@ -8,7 +8,7 @@ import useNotification from '../hooks/useNotification';
 
 const Settings = () => {
     useNotification();
-    useAuthorization({ authorization: 'superadmin' });
+    useAuthorization({ authorization: 'superadmin', redirectUrl: '/login' });
 
     return (
         <div>

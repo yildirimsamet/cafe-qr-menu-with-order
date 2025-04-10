@@ -10,7 +10,7 @@ const useCustomRouter = () => {
     const originalReplace = router.replace;
 
     router.push = (...args) => {
-        const pathname = args[0] || '/';
+        const pathname = args[0] || '/login';
 
         if (pathname !== window.location.pathname) {
             setState((prev) => ({ ...prev, loading: true }));
@@ -19,7 +19,7 @@ const useCustomRouter = () => {
     };
 
     router.replace = (...args) => {
-        const pathname = args[0] || '/';
+        const pathname = args[0] || '/login';
 
         if (pathname !== window.location.pathname) {
             setState((prev) => ({ ...prev, loading: true }));

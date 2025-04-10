@@ -19,7 +19,7 @@ import styles from './styles.module.scss';
 
 const Users = () => {
     useNotification();
-    const { user: loggedInUser } = useAuthorization({ authorization: 'admin' });
+    const { user: loggedInUser } = useAuthorization({ authorization: 'admin', redirectUrl: '/login' });
 
     const [users, setUsers] = useState([]);
     const [isUserEditModelOpened, setIsUserEditModelOpened] = useState(false);

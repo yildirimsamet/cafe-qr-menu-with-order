@@ -18,7 +18,7 @@ const MySwal = withReactContent(Swal);
 
 const Tables = () => {
     const { user } = useAuth();
-    useAuthorization({ authorization: 'waiter' });
+    useAuthorization({ authorization: 'waiter', redirectUrl: '/login' });
     const { isMobile } = useWindowSize();
     const { data: tables = [], mutate } = useSWR('/tables', async (url) => await axios.get(url).then((res) => res.data.data));
 

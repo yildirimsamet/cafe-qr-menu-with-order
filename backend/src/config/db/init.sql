@@ -74,10 +74,8 @@ CREATE TABLE order_groups (
     order_id INT REFERENCES orders(id) ON DELETE CASCADE,
     status VARCHAR(10) CHECK (status IN ('waiting', 'send')),
     note TEXT,
-    updated_by VARCHAR(255) REFERENCES users(username) ON DELETE
-    SET
-        NULL,
-        created_at TIMESTAMP DEFAULT NOW()
+    updated_by VARCHAR(255) REFERENCES users(username) ON DELETE SET NULL,
+    created_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE order_items (
@@ -85,7 +83,8 @@ CREATE TABLE order_items (
     order_group_id INT REFERENCES order_groups(id) ON DELETE CASCADE,
     item_id INT NOT NULL,
     item_size_id INT,
-    item_quantity INT NOT NULL CHECK (item_quantity > 0)
+    item_quantity INT NOT NULL CHECK (item_quantity > 0),
+    created_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE settings (

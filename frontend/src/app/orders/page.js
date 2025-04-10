@@ -11,7 +11,7 @@ import Notifications from '../components/Notifications';
 
 const Orders = () => {
     const { socket, notificationCallback, subscribeToOrders, unsubscribeFromOrders } = useNotification();
-    useAuthorization({ authorization: 'waiter' });
+    useAuthorization({ authorization: 'waiter', redirectUrl: '/login' });
     const [waitingOrders, setWaitingOrders] = useState([]);
     const [sendOrders, setSendOrders] = useState([]);
 

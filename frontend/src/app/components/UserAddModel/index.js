@@ -125,7 +125,7 @@ const UserAddModel = ({mutate, isUserAddModelOpened, setIsUserAddModelOpened }) 
                     fullWidth
                     margin="dense"
                 >
-                    <InputLabel>Role</InputLabel>
+                    <InputLabel>Rol</InputLabel>
                     <Select
                         label="Rol"
                         slotProps={{

@@ -7,7 +7,7 @@ import useCustomRouter from './useCustomRouter';
 
 export function useAuthorization ({
     authorization = '',
-    redirectUrl = '/',
+    redirectUrl = '/login',
 }) {
     const { user } = useAuth();
     const router = useCustomRouter();

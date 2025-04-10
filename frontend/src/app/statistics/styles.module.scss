@@ -13,9 +13,24 @@
         position: relative;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    
+
+    &Title:not(:first-child) {
+        margin-top: 24px;
+    }
 }
 
 @media screen and (max-width: 1001px) {
-    
+    .statistics {
+        padding: 0 15px; // Add padding for smaller screens
+
+        &Title {
+            font-size: 20px; // Reduce title font size
+            height: 45px; // Reduce title height
+            margin-bottom: 16px; // Adjust margin
+        }
+
+        &Title:not(:first-child) {
+            margin-top: 16px; // Adjust margin
+        }
+    }
 }

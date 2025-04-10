@@ -23,7 +23,7 @@ const NavBar = () => {
         logout();
     };
 
-    if (user) {
+    if (user && window?.location?.pathname !== '/') {
         return (
             <div className={styles.wrapper}>
                 <div className={cn(styles.wrapperInner, 'container')}>
@@ -44,9 +44,6 @@ const NavBar = () => {
                             anchorEl={anchorEl}
                             open={open}
                             onClose={handleClose}
-                            MenuListProps={{
-                                'aria-labelledby': 'basic-button',
-                            }}
                         >
                             <MenuItem onClick={handleLogout}>Çıkış</MenuItem>
                         </Menu>

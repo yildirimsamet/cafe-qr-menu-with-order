@@ -1,0 +1,47 @@
+.wrapper {
+    .productsSellCount {
+        display: flex;
+        gap: 24px;
+        height: 400px;
+
+        &Left {
+            flex: 1;
+        }
+
+        &Right {
+            width: 380px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+    }
+
+    &Select {
+        padding: 0 20px 0 45px;
+    }
+}
+
+@media screen and (max-width: 1001px) {
+    .wrapper {
+        .productsSellCount {
+            flex-direction: column; // Stack vertically on smaller screens
+            height: auto; // Adjust height
+            gap: 16px; // Adjust gap
+
+            &Left {
+                height: 300px; // Adjust chart height
+            }
+
+            &Right {
+                width: 100%; // Make right section full width
+                align-items: stretch; // Stretch items
+            }
+        }
+
+        &Select {
+            padding: 0 15px; // Adjust padding
+            width: 100%; // Make select full width
+        }
+    }
+}

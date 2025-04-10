@@ -1,22 +1,25 @@
+'use client';
+
+import Orders from '@/app/components/Orders';
+import ProductsSellCount from '@/app/components/ProductsSellCount';
+import TableOrderCount from '@/app/components/TableOrderCount';
+import { useAuthorization } from '../hooks/useAuthorization';
 import styles from './styles.module.scss';
-// import { LineChart } from '@mui/x-charts/LineChart';
 
 const Statistics = () => {
+    useAuthorization({
+        authorization: 'superadmin',
+        redirectUrl: '/tables',
+    });
+
     return (
         <div className={styles.statistics}>
-            <h1 className={styles.statisticsTitle}>İstatistikler</h1>
-            <div className='container'>
-                {/* <LineChart
-                    xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
-                    series={[
-                        {
-                            data: [2, 5.5, 2, 8.5, 1.5, 5],
-                        },
-                    ]}
-                    width={500}
-                    height={300}
-                /> */}
-            </div>
+            <h1 className={styles.statisticsTitle}>Satılan Ürün Sayısı</h1>
+            <ProductsSellCount />
+            <h1 className={styles.statisticsTitle}>Masa Sipariş Sayısı</h1>
+            <TableOrderCount />
+            <h1 className={styles.statisticsTitle}>Masa Sipariş Geçmişi</h1>
+            <Orders />
         </div>
     );
 };

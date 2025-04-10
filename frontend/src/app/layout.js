@@ -9,8 +9,10 @@ import Loader from './components/Loader';
 import NavBar from './components/Navbar';
 import 'sweetalert2/src/sweetalert2.scss';
 import { AuthProvider } from './context/authContext';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 
-export default function RootLayout({ children }) {
+export default function RootLayout ({ children }) {
     return (
         <html lang="tr">
             <body suppressHydrationWarning>

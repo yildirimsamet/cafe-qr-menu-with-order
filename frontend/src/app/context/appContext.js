@@ -48,9 +48,9 @@ export function AppWrapper ({ children }) {
       try {
         pathname = new URL(target.href).pathname;
       } catch (error) {
-        pathname = '/';
+        pathname = '/login';
       }
-  
+
       if (target && target.href && target.target !== '_blank' && pathname !== window.location.pathname) {
         setState((prev) => ({ ...prev, loading: true }));
       }

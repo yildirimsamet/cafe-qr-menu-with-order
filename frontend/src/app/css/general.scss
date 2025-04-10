@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth; /* Smooth scroll buraya eklendi */
+}
+
 body {
   background-color: var(--bg-3);
 }

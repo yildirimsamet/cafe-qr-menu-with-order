@@ -17,6 +17,7 @@ import { createSuperAdmin } from "./services/superAdminService.js";
 import settingsRoute from "./routes/settingsRoute.js";
 import notificationRoute from "./routes/notificationRoute.js";
 import { createNotification } from "./services/notificationService.js";
+import statisticsRoute from "./routes/statisticsRoute.js";
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.use('/sizes', auth('admin'), sizeRoute);
 app.use('/items', auth('admin'), itemsRoute);
 app.use('/menu', menuRoute);
 app.use('/settings',auth('guest'), settingsRoute);
+app.use('/statistics',auth('admin'), statisticsRoute);
 app.use('/notifications', notificationRoute);
 
 (async () => {

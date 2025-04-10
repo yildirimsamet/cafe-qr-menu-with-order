@@ -8,7 +8,7 @@ import useNotification from '../hooks/useNotification';
 
 const Edit = () => {
     useNotification();
-    useAuthorization({ authorization: 'admin' });
+    useAuthorization({ authorization: 'admin', redirectUrl: '/login' });
 
     return (
         <div>

@@ -1,0 +1,765 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --primary-color: #ff6b6b;
+    /* Canlı Mercan */
+    --secondary-color: #4ecdc4;
+    /* Turkuaz */
+    --dark-color: #2c3e50;
+    /* Koyu Mavi-Gri */
+    --light-color: #f8f9fa;
+    /* Çok Açık Gri */
+    --white-color: #ffffff;
+    --text-color: #34495e;
+    /* Koyu Gri-Mavi */
+    --border-radius: 12px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.landing-wrapper {
+    font-family: 'Poppins', sans-serif !important;
+    line-height: 1.7;
+    background-color: var(--light-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    /* Yatay kaydırmayı engelle */
+    /* scroll-behavior: smooth; Smooth scroll buradan kaldırıldı */
+}
+
+.landing-wrapper * {
+    font-family: 'Poppins', sans-serif !important;
+    scroll-behavior: smooth !important;
+}
+
+.landing-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.landing-wrapper section {
+    padding: 100px 0;
+}
+
+/* Header/Hero */
+.hero {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white-color);
+    text-align: center;
+    padding: 160px 0 120px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    /* Subtle background pattern */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    /* Daha büyük başlık */
+    font-weight: 800;
+    margin-bottom: 25px;
+    line-height: 1.2;
+    position: relative;
+    /* Animasyon için */
+    animation: fadeInDown 1s ease-out;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    /* Daha büyük başlık */
+    font-weight: 800;
+    margin-bottom: 25px;
+    line-height: 1.2;
+    position: relative;
+    /* Animasyon için */
+    animation: fadeInDown 1s ease-out;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    /* Animasyon için */
+    animation: fadeInUp 1s ease-out 0.3s;
+    animation-fill-mode: backwards;
+    /* Animasyon başlamadan önce gizle */
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 35px;
+    border-radius: 50px;
+    /* Yuvarlak buton */
+    text-decoration: none;
+    font-weight: 600;
+    transition: all var(--transition-speed) ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    position: relative;
+    /* Animasyon için */
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-primary {
+    background-color: var(--white-color);
+    color: var(--primary-color);
+    animation: fadeInUp 1s ease-out 0.6s;
+    animation-fill-mode: backwards;
+}
+
+.btn-primary:hover {
+    background-color: var(--light-color);
+    color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    margin-left: 15px;
+    animation: fadeInUp 1s ease-out 0.6s;
+    animation-fill-mode: backwards;
+}
+
+.btn-secondary:hover {
+    background-color: var(--text-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Genel Bölüm Başlığı */
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 60px;
+    color: var(--dark-color);
+    position: relative;
+}
+
+.section-title::after {
+    /* Başlık altına çizgi */
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--primary-color);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+/* Grid Sistemi */
+.grid {
+    display: grid;
+    gap: 30px;
+}
+
+.grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-top: 120px;
+}
+
+/* Kartlar */
+.card {
+    background: var(--white-color);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card svg {
+    /* İkonlar için */
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Özellikler Bölümü - Güncellenmiş Stiller */
+#features {
+    background-color: var(--light-color);
+    /* Arka planı açık gri yap */
+}
+
+.features {
+    background-color: var(--white-color);
+}
+
+.features .card {
+    text-align: left;
+    /* Bu kalsın */
+    box-shadow: none;
+    /* Gölgelendirmeyi kaldır */
+    border: 1px solid #e0e0e0;
+    /* İnce bir kenarlık ekle */
+    background-color: var(--white-color);
+    /* Kart arka planı beyaz kalsın */
+    transition: transform var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    /* Geçişi güncelle */
+}
+
+.features .card:hover {
+    transform: translateY(-5px);
+    /* Hover efektini biraz azalt */
+    border-color: var(--primary-color);
+    /* Hover'da kenarlık rengini değiştir */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    /* Hafif bir hover gölgesi ekle */
+}
+
+.features .card svg {
+    /* İkonları daire içine al */
+    background-color: rgba(255, 107, 107, 0.2);
+    /* Ana rengin açık tonu */
+    color: var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    /* flexbox ile ortala */
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+    padding: 10px;
+    /* İkon boyutunu ayarla */
+}
+
+/* Ekran Görüntüleri */
+.screenshots .screenshot-placeholder {
+    background-color: #e9ecef;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    color: #adb5bd;
+    font-style: italic;
+}
+
+.screenshot-placeholder img {
+    width: 350px;
+    transition: all var(--transition-speed) ease;
+}
+
+.screenshot-placeholder:hover img {
+    transform: scale(1.3);
+}
+
+
+/* Testimonials */
+.testimonials {
+    background-color: var(--secondary-color);
+}
+
+.testimonials .section-title {
+    color: var(--white-color);
+}
+
+.testimonials .card {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+}
+
+.testimonials .card i {
+    color: var(--white-color);
+    opacity: 0.8;
+}
+
+.testimonials .card h3 {
+    color: var(--white-color);
+    font-style: italic;
+    font-weight: 400;
+    margin-top: 15px;
+    font-size: 1rem;
+}
+
+.testimonials .card p {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* CTA Bölümü */
+.cta {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    text-align: center;
+    border-radius: var(--border-radius);
+    margin: 50px auto;
+    /* Üst ve altta boşluk */
+    padding: 80px 40px;
+    /* İç boşluk */
+}
+
+.cta h2 {
+    color: var(--white-color);
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+
+.cta .section-title::after {
+    background-color: var(--secondary-color);
+}
+
+.cta p {
+    max-width: 600px;
+    margin: 0 auto 40px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Form */
+#demo-form {
+    background: var(--white-color);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#demo-form h2 {
+    margin-bottom: 30px;
+}
+
+form input,
+form textarea,
+form button {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color var(--transition-speed) ease;
+}
+
+form input:focus,
+form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+    /* Odaklanma efekti */
+}
+
+form textarea {
+    resize: vertical;
+    /* Sadece dikey boyutlandırma */
+}
+
+form button {
+    background: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+form button:hover {
+    background: #e63946;
+    /* Biraz daha koyu kırmızı */
+    transform: translateY(-2px);
+}
+
+/* FAQ Bölümü */
+.faq {
+    background-color: var(--white-color);
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.faq-item {
+    border: 1px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    margin-bottom: 15px;
+    overflow: hidden;
+    /* İçeriğin taşmasını engelle */
+    background: var(--white-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.faq-question {
+    padding: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--light-color);
+    transition: background-color var(--transition-speed) ease;
+}
+
+.faq-question:hover {
+    background-color: #e9ecef;
+}
+
+.faq-question::after {
+    /* Açma/kapama ikonu */
+    content: '\f078';
+    /* Font Awesome down arrow */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    transition: transform var(--transition-speed) ease;
+}
+
+.faq-item.active .faq-question::after {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    padding: 20px;
+    display: none;
+    border-top: 1px solid #e0e0e0;
+    background: var(--white-color);
+    line-height: 1.8;
+}
+
+.faq-item.active .faq-answer {
+    display: block;
+    /* display: block; */ /* Artık max-height ile kontrol ediliyor */
+    animation: fadeIn 0.5s ease;
+    max-height: 0; /* Başlangıçta kapalı */
+    opacity: 0; /* Başlangıçta görünmez */
+    overflow: hidden; /* İçerik taşmasını engelle */
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out, opacity 0.5s ease-out; /* Yumuşak geçiş */
+    padding: 0 20px; /* Kapalıyken padding olmasın */
+}
+
+.faq-item.active .faq-answer {
+    /* display: block; */ /* Zaten block, transition için gerekli */
+    max-height: 500px; /* İçeriğe yetecek kadar yükseklik (ayarlanabilir) */
+    opacity: 1; /* Görünür yap */
+    padding: 20px; /* Açıkken padding ekle */
+}
+
+.faq-toggle-icon {
+    margin-left: 15px;
+    font-size: 1.2rem;
+    transition: transform var(--transition-speed) ease;
+    display: inline-block; /* Transform için */
+}
+
+.faq-item.active .faq-toggle-icon {
+     /* '+' iken '-' yapmak yerine 45 derece döndür */
+     /* Veya basitçe içeriği değiştir: content: '-'; */
+     /* Şimdilik rotasyon kalsın */
+     transform: rotate(180deg); /* Tam dönüş daha iyi olabilir */
+}
+
+/* Eski ::after kuralını kaldırıyoruz */
+.faq-question::after {
+    content: none;
+}
+
+
+/* Footer */
+footer {
+    background-color: var(--dark-color);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 50px 0;
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 80px;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+footer a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+}
+
+footer a:hover {
+    color: var(--white-color);
+}
+
+/* Footer Link Butonları */
+.link-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit; /* Üst elementin fontunu miras al */
+    color: var(--secondary-color); /* Footer link rengiyle aynı */
+    cursor: pointer;
+    text-decoration: none; /* Alt çizgiyi kaldır */
+    transition: color var(--transition-speed) ease;
+    vertical-align: baseline; /* Diğer metinlerle hizala */
+}
+
+.link-button:hover {
+    color: var(--white-color); /* Footer link hover rengiyle aynı */
+    text-decoration: underline; /* Hover'da alt çizgi ekle */
+}
+
+
+/* Animasyonlar */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Tasarım */
+@media (max-width: 992px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 120px 0 80px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        max-width: 90%;
+    }
+
+    section {
+        padding: 80px 0;
+    }
+
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    /* Tek sütun */
+    .screenshot-placeholder {
+        height: 150px;
+    }
+
+    .screenshot-placeholder img {
+        width: 250px;
+    }
+
+    .screenshot-placeholder:hover img {
+        transform: scale(1.2);
+    }
+
+    .card {
+        margin-bottom: 20px;
+    }
+
+    .cta {
+        padding: 60px 20px;
+    }
+
+    .cta h2 {
+        font-size: 1.8rem;
+    }
+
+    #demo-form {
+        padding: 30px;
+    }
+
+    footer {
+        padding: 40px 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        padding: 100px 0 60px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .btn {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+    }
+
+    .card {
+        padding: 25px;
+    }
+
+    .faq-question,
+    .faq-answer {
+        padding: 15px;
+    }
+}
+
+.card-order,
+.card-communication,
+.card-notification,
+.card-menu,
+.card-table,
+.card-user {
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+}
+
+.card-order {
+    background-image: url('/images/landing/QrOrder.png');
+}
+
+.card-communication {
+    background-image: url('/images/landing/Message.png');
+}
+
+.card-notification {
+    background-image: url('/images/landing/Notification.png');
+}
+
+.card-menu {
+    background-image: url('/images/landing/MenuManage.png');
+}
+
+.card-table {
+    background-image: url('/images/landing/TableManage.png');
+}
+
+.card-user {
+    background-image: url('/images/landing/UserRole.png');
+}
+
+.card .card-content {
+    background-color: rgba(0, 0, 0, 0.65);
+    padding: 30px;
+    border-radius: 10px;
+    color: var(--white-color);
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.card .card-content h3 {
+    color: var(--white-color);
+    font-weight: 600;
+    text-shadow: #fc0 1px 0 10px;
+}
+
+.card .card-content p {
+    color: white;
+    letter-spacing: 0.4px;
+    text-shadow: 1px 1px 2px rgb(190, 178, 178);
+    font-weight: 500;
+}
+
+.footer-contact {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-contact a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#demo-btn {
+    background-color: var(--secondary-color) !important;
+    color: var(--white-color) !important;
+}
+
+#demo-form button[type="submit"] {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}

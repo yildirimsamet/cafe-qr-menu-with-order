@@ -3,6 +3,7 @@ import connection from "../config/db/connection.js"
 export const getAllTables = async () => {
     const [results] = await connection.query(`
         SELECT 
+            t.id,
             t.slug AS table_slug,
             t.name AS table_name,
             t.slug AS table_slug,

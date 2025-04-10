@@ -9,6 +9,7 @@ export const getTables = async () => {
         results.forEach(row => {
             if (!tables[row.table_name]) {
                 tables[row.table_name] = {
+                    id: row.id,
                     table_name: row.table_name,
                     items: [],
                     order_id: row.order_id,

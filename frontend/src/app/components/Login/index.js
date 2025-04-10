@@ -6,8 +6,8 @@ import styles from './styles.module.scss';
 const LoginForm = () => {
     const { login } = useAuth({});
     const [formData, setFormData] = useState({
-        username: '',
-        password: '',
+        username: 'superadmin',
+        password: 'superadmin',
     });
 
     const handleChange = (e) => {
@@ -17,7 +17,7 @@ const LoginForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         try {
-            login(formData);
+            login(formData, '/tables');
         } catch (error) {
             console.error(error);
         }
