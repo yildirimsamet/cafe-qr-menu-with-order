@@ -21,16 +21,14 @@
 
 @media screen and (max-width: 1001px) {
     .statistics {
-        padding: 0 15px; // Add padding for smaller screens
-
         &Title {
-            font-size: 20px; // Reduce title font size
-            height: 45px; // Reduce title height
-            margin-bottom: 16px; // Adjust margin
+            font-size: 20px;
+            height: 45px;
+            margin-bottom: 16px;
         }
 
         &Title:not(:first-child) {
-            margin-top: 16px; // Adjust margin
+            margin-top: 16px;
         }
     }
 }

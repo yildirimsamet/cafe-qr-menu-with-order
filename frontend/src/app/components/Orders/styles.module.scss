@@ -25,10 +25,6 @@
             color: var(--text-1);
             text-align: center;
         }
-
-        &List {
-            
-        }
     }
 
     &Right {
@@ -48,24 +44,29 @@
 
 @media screen and (max-width: 1001px) {
     .orders {
-        flex-direction: column; // Stack vertically on smaller screens
-        gap: 16px; // Adjust gap
-        padding: 0 0 16px 0; // Adjust padding
+        flex-direction: column;
+        gap: 16px;
+        padding: 0 10px 16px 10px;
 
         &Left {
-            padding: 0 15px; // Add horizontal padding
+            padding: 0;
             &Title {
-                font-size: 20px; // Adjust title font size
+                font-size: 20px;
+            }
+
+            &Empty {
+                font-size: 20px;
+                height: 300px;
             }
         }
 
         &Right {
-            min-width: unset; // Remove min-width
-            width: 100%; // Make right section full width
-            padding: 0 15px; // Add horizontal padding
+            min-width: unset;
+            width: 100%;
+            padding: 0 10px;
 
             &Select {
-                width: 100%; // Make select full width
+                width: 100%;
             }
         }
     }

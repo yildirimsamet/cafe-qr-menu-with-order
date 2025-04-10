@@ -5,8 +5,10 @@ import { DateRange } from 'react-date-range';
 import Select from 'react-select';
 import axios from '@/app/lib/axios';
 import styles from './styles.module.scss';
+import { useWindowSize } from '@/app/hooks/useWindowSize';
 
 const ProductsSellCount = () => {
+    const { isMobile } = useWindowSize();
     const [selectionRange, setSelectionRange] = useState({
         startDate: new Date(new Date().getTime() + (3 * 60 * 60 * 1000)),
         endDate: new Date(new Date().getTime() + (3 * 60 * 60 * 1000)),
@@ -118,6 +120,7 @@ const ProductsSellCount = () => {
                                 scaleType: 'band',
                             },
                         ]}
+                        slotProps={{ legend: { hidden: isMobile } }}
                         series={
                             selectedProducts.map(i => {
                                 const [productId, sizeId] = i.value.split('-');

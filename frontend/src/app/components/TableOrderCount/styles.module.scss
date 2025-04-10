@@ -18,17 +18,22 @@
 
 @media screen and (max-width: 1001px) {
     .tableOrderCount {
-        flex-direction: column; // Stack vertically on smaller screens
-        height: auto; // Adjust height
-        gap: 16px; // Adjust gap
+        flex-direction: column;
+        height: auto;
+        gap: 16px;
+        padding: 0 15px;
 
         &ChartWrapper {
-            height: 300px; // Adjust chart height
+            height: 300px;
+
+            &Chart {
+                height: 300px;
+            }
         }
 
         &DateRangeWrapper {
-            width: 100%; // Make date range section full width
-            align-items: stretch; // Stretch items
+            width: 100%;
+            align-items: stretch;
         }
     }
 }

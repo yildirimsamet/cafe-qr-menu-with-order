@@ -8,6 +8,7 @@ import useCustomRouter from './useCustomRouter';
 export function useAuthorization ({
     authorization = '',
     redirectUrl = '/login',
+    redirectIfAuthanticated = false,
 }) {
     const { user } = useAuth();
     const router = useCustomRouter();
@@ -21,6 +22,12 @@ export function useAuthorization ({
             if (!loading &&
                 authorization &&
                 roleHierarchy.indexOf(user?.role) < roleHierarchy.indexOf(authorization)) {
+                if (router.pathname !== redirectUrl) {
+                    router.push(redirectUrl);
+                }
+            } else if (redirectIfAuthanticated &&
+                    user &&
+                    roleHierarchy.indexOf(user?.role) >= roleHierarchy.indexOf(authorization)) {
                 if (router.pathname !== redirectUrl) {
                     router.push(redirectUrl);
                 }

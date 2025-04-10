@@ -51,7 +51,11 @@ export function AppWrapper ({ children }) {
         pathname = '/login';
       }
 
-      if (target && target.href && target.target !== '_blank' && pathname !== window.location.pathname) {
+      if (target &&
+        target.href &&
+        target.target !== '_blank' &&
+        pathname !== window.location.pathname &&
+        !target.getAttribute('data-letitgo')) {
         setState((prev) => ({ ...prev, loading: true }));
       }
     };

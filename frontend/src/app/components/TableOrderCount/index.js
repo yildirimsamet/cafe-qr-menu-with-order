@@ -5,8 +5,10 @@ import styles from './styles.module.scss';
 import { tr } from 'date-fns/locale';
 import { DateRange } from 'react-date-range';
 import Select from 'react-select';
+import { useWindowSize } from '@/app/hooks/useWindowSize';
 
 const TableOrderCount = () => {
+    const { isMobile } = useWindowSize();
     const [selectionRange, setSelectionRange] = useState({
         startDate: new Date(new Date().getTime() + (3 * 60 * 60 * 1000)),
         endDate: new Date(new Date().getTime() + (3 * 60 * 60 * 1000)),
@@ -50,7 +52,6 @@ const TableOrderCount = () => {
                 return acc;
             }, {});
 
-            console.log('fixedTableOrderCount', fixedTableOrderCount);
             setTableOrderCount(fixedTableOrderCount);
         } catch (error) {
             //
@@ -64,6 +65,8 @@ const TableOrderCount = () => {
         <div className={styles.tableOrderCount}>
             <div className={styles.tableOrderCountChartWrapper}>
                 <BarChart
+                    height={isMobile ? 300 : 400}
+                    slotProps={{ legend: { hidden: isMobile } }}
                     colors={[
                         '#7cb342',
                         '#039be5',

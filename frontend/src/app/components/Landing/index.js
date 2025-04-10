@@ -65,6 +65,7 @@ const Landing = () => {
                         <a
                             href="#features"
                             className="btn btn-secondary"
+                            data-letitgo
                         >Özellikleri Keşfet</a>
                     </div>
                 </header>
@@ -242,6 +243,7 @@ const Landing = () => {
                                 id='demo-btn'
                                 href="#demo-form"
                                 className="btn btn-primary"
+                                data-letitgo
                             >Ücretsiz Demo Talep Et</a>
                         </div>
                     </div>
@@ -311,10 +313,14 @@ const Landing = () => {
                         <p className='footer-links'>
                             <button className='link-button'>Gizlilik Politikası</button> |
                             <button className='link-button'>Kullanım Koşulları</button> |
-                            <a href='#demo-form'>İletişim</a>
+                            <a
+                                data-letitgo
+                                href='#demo-form'
+                            >İletişim</a>
                         </p>
                         <p className="footer-contact">
                             <a
+                                data-letitgo
                                 href="https://instagram.com/cafeqrmenu_"
                                 target="_blank"
                                 rel="noreferrer"
@@ -322,13 +328,17 @@ const Landing = () => {
                                 <FontAwesomeIcon icon={faInstagram} /> cafeqrmenu_
                             </a>
                             <a
+                                data-letitgo
                                 href="mailto:iletisim@cafeqrmenu.online"
                                 target="_blank"
                                 rel="noreferrer"
                             >
                                 <FontAwesomeIcon icon={faEnvelope} /> iletisim@cafeqrmenu.online
                             </a>
-                            <a href="tel:+905531883326">
+                            <a
+                                data-letitgo
+                                href="tel:+905531883326"
+                            >
                                 <FontAwesomeIcon icon={faPhone} /> 0553 188 33 26
                             </a>
                         </p>

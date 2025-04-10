@@ -2,8 +2,10 @@ import { TextField, Button, Container, Typography, Box } from '@mui/material';
 import { useState } from 'react';
 import { useAuth } from '@/app/hooks/useAuth';
 import styles from './styles.module.scss';
+import { useAuthorization } from '@/app/hooks/useAuthorization';
 
 const LoginForm = () => {
+    useAuthorization({ authorization: 'guest', redirectUrl: '/tables', redirectIfAuthanticated: true });
     const { login } = useAuth({});
     const [formData, setFormData] = useState({
         username: 'superadmin',

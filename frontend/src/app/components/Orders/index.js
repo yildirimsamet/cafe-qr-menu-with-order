@@ -8,8 +8,10 @@ import axios from '@/app/lib/axios';
 import styles from './styles.module.scss';
 import './override.scss';
 import 'moment/locale/tr';
+import { useWindowSize } from '@/app/hooks/useWindowSize';
 
 const Orders = () => {
+    const { isMobile } = useWindowSize();
     const [tables, setTables] = useState([]);
     const [orders, setOrders] = useState(null);
     const [selectedTable, setSelectedTable] = useState(null);
@@ -24,7 +26,7 @@ const Orders = () => {
     const scroll = (direction) => {
         const container = scrollRef.current;
         if (!container) return;
-        const scrollAmount = 450;
+        const scrollAmount = isMobile ? 250 : 450;
         container.scrollBy({
             left: direction === 'left' ? -scrollAmount : scrollAmount,
             behavior: 'smooth',
@@ -101,10 +103,10 @@ const Orders = () => {
                     {'Bir masa seçiniz.'}
                 </div>}
                 <div className="order-grid-container">
-                    <FaChevronCircleLeft
+                    {!isMobile && <FaChevronCircleLeft
                         className="scroll-button left"
                         onClick={() => scroll('left')}
-                    />
+                    />}
                     <div
                         className="order-grid-scroll"
                         ref={scrollRef}
@@ -156,10 +158,10 @@ const Orders = () => {
                             </div>
                         ))}
                     </div>
-                    <FaChevronCircleRight
+                    {!isMobile && <FaChevronCircleRight
                         className="scroll-button right"
                         onClick={() => scroll('right')}
-                    />
+                    />}
                 </div>
             </div>
             <div className={styles.ordersRight}>

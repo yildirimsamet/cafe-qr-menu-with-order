@@ -25,23 +25,28 @@
 @media screen and (max-width: 1001px) {
     .wrapper {
         .productsSellCount {
-            flex-direction: column; // Stack vertically on smaller screens
-            height: auto; // Adjust height
-            gap: 16px; // Adjust gap
+            flex-direction: column;
+            height: auto;
+            gap: 16px;
+            padding: 0 15px;
 
             &Left {
-                height: 300px; // Adjust chart height
+                height: 300px;
+
+                &Chart {
+                    height: 300px;
+                }
             }
 
             &Right {
-                width: 100%; // Make right section full width
-                align-items: stretch; // Stretch items
+                width: 100%;
+                align-items: stretch;
             }
         }
 
         &Select {
-            padding: 0 15px; // Adjust padding
-            width: 100%; // Make select full width
+            padding: 0 8px;
+            width: 100%;
         }
     }
 }
