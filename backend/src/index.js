@@ -18,6 +18,7 @@ import settingsRoute from "./routes/settingsRoute.js";
 import notificationRoute from "./routes/notificationRoute.js";
 import { createNotification } from "./services/notificationService.js";
 import statisticsRoute from "./routes/statisticsRoute.js";
+import demoRequestRoute from "./routes/demoRequestRoute.js";
 
 dotenv.config();
 
@@ -39,6 +40,7 @@ app.use('/menu', menuRoute);
 app.use('/settings',auth('guest'), settingsRoute);
 app.use('/statistics',auth('admin'), statisticsRoute);
 app.use('/notifications', notificationRoute);
+app.use('/demo-requests', demoRequestRoute); // Add the new route here
 
 (async () => {
     try {

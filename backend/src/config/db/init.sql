@@ -101,6 +101,15 @@ CREATE TABLE notifications (
     table_slug VARCHAR(255) NOT NULL REFERENCES tables(slug) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS `demo_requests` (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    business_name VARCHAR(255),
+    email VARCHAR(255),
+    phone VARCHAR(20) NOT NULL,
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 INSERT INTO
     `categories` (name)
 VALUES

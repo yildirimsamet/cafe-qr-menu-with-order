@@ -278,20 +278,22 @@ const Table = ({ table, mutate }) => {
                 >
                     Siparişi Sonlandır
                 </button>
+                <Link
+                    target="_blank"
+                    href={`/table/${table.table_slug}`}
+                    className={styles.tableButtonsOrder}
+                >Masaya Sipariş Ver</Link>
+
+            </div>
+            <div className={styles.tableFooter}>
                 <button
-                    className={styles.tableButtonsQr}
+                    className={styles.tableFooterQr}
                     onClick={() =>
                         generateQRCode(table.table_name, table.table_slug)
                     }
                 >
                     QR Kod
                 </button>
-            </div>
-            <div className={styles.tableFooter}>
-                <Link
-                    href={`/table/${table.table_slug}`}
-                    className={styles.tableFooterOrder}
-                >Masaya Sipariş Ver</Link>
                 {(user?.role === 'admin' || user?.role === 'superadmin') && (
                     <div className={styles.tableFooterDelete}>
                         <button

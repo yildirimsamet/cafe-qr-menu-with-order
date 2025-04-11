@@ -2,16 +2,11 @@
 
 :root {
     --primary-color: #ff6b6b;
-    /* Canlı Mercan */
     --secondary-color: #4ecdc4;
-    /* Turkuaz */
     --dark-color: #2c3e50;
-    /* Koyu Mavi-Gri */
     --light-color: #f8f9fa;
-    /* Çok Açık Gri */
     --white-color: #ffffff;
     --text-color: #34495e;
-    /* Koyu Gri-Mavi */
     --border-radius: 12px;
     --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     --transition-speed: 0.3s;
@@ -24,13 +19,10 @@
 }
 
 .landing-wrapper {
-    font-family: 'Poppins', sans-serif !important;
     line-height: 1.7;
     background-color: var(--light-color);
     color: var(--text-color);
-    overflow-x: hidden;
-    /* Yatay kaydırmayı engelle */
-    /* scroll-behavior: smooth; Smooth scroll buradan kaldırıldı */
+    overflow: hidden;
 }
 
 .landing-wrapper * {
@@ -59,7 +51,6 @@
 }
 
 .hero::before {
-    /* Subtle background pattern */
     content: '';
     position: absolute;
     top: 0;
@@ -72,24 +63,18 @@
 
 .hero h1 {
     font-size: 3.5rem;
-    /* Daha büyük başlık */
     font-weight: 800;
     margin-bottom: 25px;
     line-height: 1.2;
     position: relative;
-    /* Animasyon için */
-    animation: fadeInDown 1s ease-out;
 }
 
 .hero h2 {
     font-size: 2.5rem;
-    /* Daha büyük başlık */
     font-weight: 800;
     margin-bottom: 25px;
     line-height: 1.2;
     position: relative;
-    /* Animasyon için */
-    animation: fadeInDown 1s ease-out;
 }
 
 .hero p {
@@ -99,10 +84,6 @@
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    /* Animasyon için */
-    animation: fadeInUp 1s ease-out 0.3s;
-    animation-fill-mode: backwards;
-    /* Animasyon başlamadan önce gizle */
 }
 
 .btn {
@@ -125,8 +106,6 @@
 .btn-primary {
     background-color: var(--white-color);
     color: var(--primary-color);
-    animation: fadeInUp 1s ease-out 0.6s;
-    animation-fill-mode: backwards;
 }
 
 .btn-primary:hover {
@@ -140,8 +119,6 @@
     background-color: var(--dark-color);
     color: var(--white-color);
     margin-left: 15px;
-    animation: fadeInUp 1s ease-out 0.6s;
-    animation-fill-mode: backwards;
 }
 
 .btn-secondary:hover {
@@ -162,7 +139,6 @@
 }
 
 .section-title::after {
-    /* Başlık altına çizgi */
     content: '';
     display: block;
     width: 60px;
@@ -172,7 +148,6 @@
     border-radius: 2px;
 }
 
-/* Grid Sistemi */
 .grid {
     display: grid;
     gap: 30px;
@@ -217,10 +192,8 @@
     line-height: 1.6;
 }
 
-/* Özellikler Bölümü - Güncellenmiş Stiller */
 #features {
     background-color: var(--light-color);
-    /* Arka planı açık gri yap */
 }
 
 .features {
@@ -229,45 +202,32 @@
 
 .features .card {
     text-align: left;
-    /* Bu kalsın */
     box-shadow: none;
-    /* Gölgelendirmeyi kaldır */
     border: 1px solid #e0e0e0;
-    /* İnce bir kenarlık ekle */
     background-color: var(--white-color);
-    /* Kart arka planı beyaz kalsın */
     transition: transform var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-    /* Geçişi güncelle */
 }
 
 .features .card:hover {
     transform: translateY(-5px);
-    /* Hover efektini biraz azalt */
     border-color: var(--primary-color);
-    /* Hover'da kenarlık rengini değiştir */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    /* Hafif bir hover gölgesi ekle */
 }
 
 .features .card svg {
-    /* İkonları daire içine al */
     background-color: rgba(255, 107, 107, 0.2);
-    /* Ana rengin açık tonu */
     color: var(--primary-color);
     border-radius: 50%;
     width: 40px;
     height: 40px;
     display: inline-flex;
-    /* flexbox ile ortala */
     align-items: center;
     justify-content: center;
     margin-bottom: 25px;
     font-size: 1.8rem;
     padding: 10px;
-    /* İkon boyutunu ayarla */
 }
 
-/* Ekran Görüntüleri */
 .screenshots .screenshot-placeholder {
     background-color: #e9ecef;
     height: 200px;
@@ -288,8 +248,22 @@
     transform: scale(1.3);
 }
 
+.screenshot-cta {
+    text-align: center;
+    margin-top: 40px;
 
-/* Testimonials */
+    & .btn-screenshot-cta {
+        margin-top: 55px;
+        background-color: var(--primary-color);
+        color: var(--white-color);
+
+        &:hover {
+            background-color: var(--white-color) !important;
+            color: var(--primary-color) !important;
+        }
+    }
+}
+
 .testimonials {
     background-color: var(--secondary-color);
 }
@@ -321,16 +295,13 @@
     font-weight: 600;
 }
 
-/* CTA Bölümü */
 .cta {
     background-color: var(--dark-color);
     color: var(--light-color);
     text-align: center;
     border-radius: var(--border-radius);
     margin: 50px auto;
-    /* Üst ve altta boşluk */
     padding: 80px 40px;
-    /* İç boşluk */
 }
 
 .cta h2 {
@@ -350,7 +321,6 @@
     opacity: 0.9;
 }
 
-/* Form */
 #demo-form {
     background: var(--white-color);
     padding: 40px;
@@ -386,12 +356,10 @@ form textarea:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
-    /* Odaklanma efekti */
 }
 
 form textarea {
     resize: vertical;
-    /* Sadece dikey boyutlandırma */
 }
 
 form button {
@@ -405,11 +373,9 @@ form button {
 
 form button:hover {
     background: #e63946;
-    /* Biraz daha koyu kırmızı */
     transform: translateY(-2px);
 }
 
-/* FAQ Bölümü */
 .faq {
     background-color: var(--white-color);
     padding-top: 80px;
@@ -421,7 +387,6 @@ form button:hover {
     border-radius: var(--border-radius);
     margin-bottom: 15px;
     overflow: hidden;
-    /* İçeriğin taşmasını engelle */
     background: var(--white-color);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
@@ -442,9 +407,7 @@ form button:hover {
 }
 
 .faq-question::after {
-    /* Açma/kapama ikonu */
     content: '\f078';
-    /* Font Awesome down arrow */
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     transition: transform var(--transition-speed) ease;
@@ -455,46 +418,35 @@ form button:hover {
 }
 
 .faq-answer {
-    padding: 20px;
-    display: none;
-    border-top: 1px solid #e0e0e0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    border-top: 1px solid transparent;
     background: var(--white-color);
     line-height: 1.8;
+    transition: max-height 0.4s ease-out, opacity 0.3s ease-in-out, padding 0.4s ease-out, border-color 0.4s ease-out;
 }
 
 .faq-item.active .faq-answer {
-    display: block;
-    /* display: block; */ /* Artık max-height ile kontrol ediliyor */
-    animation: fadeIn 0.5s ease;
-    max-height: 0; /* Başlangıçta kapalı */
-    opacity: 0; /* Başlangıçta görünmez */
-    overflow: hidden; /* İçerik taşmasını engelle */
-    transition: max-height 0.5s ease-out, padding 0.5s ease-out, opacity 0.5s ease-out; /* Yumuşak geçiş */
-    padding: 0 20px; /* Kapalıyken padding olmasın */
-}
-
-.faq-item.active .faq-answer {
-    /* display: block; */ /* Zaten block, transition için gerekli */
-    max-height: 500px; /* İçeriğe yetecek kadar yükseklik (ayarlanabilir) */
-    opacity: 1; /* Görünür yap */
-    padding: 20px; /* Açıkken padding ekle */
+    max-height: 500px;
+    opacity: 1;
+    padding: 20px;
+    border-top-color: #e0e0e0;
 }
 
 .faq-toggle-icon {
     margin-left: 15px;
     font-size: 1.2rem;
     transition: transform var(--transition-speed) ease;
-    display: inline-block; /* Transform için */
+    display: inline-block;
+    /* Transform için */
 }
 
 .faq-item.active .faq-toggle-icon {
-     /* '+' iken '-' yapmak yerine 45 derece döndür */
-     /* Veya basitçe içeriği değiştir: content: '-'; */
-     /* Şimdilik rotasyon kalsın */
-     transform: rotate(180deg); /* Tam dönüş daha iyi olabilir */
+    transform: rotate(180deg);
 }
 
-/* Eski ::after kuralını kaldırıyoruz */
 .faq-question::after {
     content: none;
 }
@@ -529,153 +481,18 @@ footer a:hover {
     background: none;
     border: none;
     padding: 0;
-    font: inherit; /* Üst elementin fontunu miras al */
-    color: var(--secondary-color); /* Footer link rengiyle aynı */
+    font: inherit;
+    color: var(--secondary-color);
     cursor: pointer;
-    text-decoration: none; /* Alt çizgiyi kaldır */
+    text-decoration: none;
     transition: color var(--transition-speed) ease;
-    vertical-align: baseline; /* Diğer metinlerle hizala */
+    vertical-align: baseline;
+    /* Diğer metinlerle hizala */
 }
 
 .link-button:hover {
-    color: var(--white-color); /* Footer link hover rengiyle aynı */
-    text-decoration: underline; /* Hover'da alt çizgi ekle */
-}
-
-
-/* Animasyonlar */
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-/* Responsive Tasarım */
-@media (max-width: 992px) {
-    .hero h1 {
-        font-size: 3rem;
-    }
-
-    .hero p {
-        font-size: 1.1rem;
-    }
-
-    .section-title {
-        font-size: 2.2rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero {
-        padding: 120px 0 80px;
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-        max-width: 90%;
-    }
-
-    .landing-wrapper section{
-        padding: 80px 0;
-    }
-
-    .grid-3 {
-        grid-template-columns: 1fr;
-    }
-
-    /* Tek sütun */
-    .screenshot-placeholder {
-        height: 150px;
-    }
-
-    .screenshot-placeholder img {
-        width: 250px;
-    }
-
-    .screenshot-placeholder:hover img {
-        transform: scale(1.2);
-    }
-
-    .card {
-        margin-bottom: 20px;
-    }
-
-    .cta {
-        padding: 60px 20px;
-    }
-
-    .cta h2 {
-        font-size: 1.8rem;
-    }
-
-    #demo-form {
-        padding: 30px;
-    }
-
-    footer {
-        padding: 40px 0;
-    }
-}
-
-@media (max-width: 576px) {
-    .hero {
-        padding: 100px 0 60px;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .btn {
-        padding: 12px 25px;
-        font-size: 0.9rem;
-    }
-
-    .section-title {
-        font-size: 1.8rem;
-        margin-bottom: 40px;
-    }
-
-    .card {
-        padding: 25px;
-    }
-
-    .faq-question,
-    .faq-answer {
-        padding: 15px;
-    }
+    color: var(--white-color);
+    text-decoration: underline;
 }
 
 .card-order,
@@ -762,4 +579,99 @@ footer a:hover {
     width: 100%;
     background-color: var(--primary-color);
     color: var(--white-color);
+}
+
+@media (max-width: 992px) {
+    .hero {
+        height: 100vh;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 120px 0 80px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        max-width: 90%;
+    }
+
+    .landing-wrapper section {
+        padding: 60px 0;
+    }
+
+    .grid-3 {
+        grid-template-columns: 1fr;
+        gap:65px;
+    }
+
+    .screenshots .screenshot-placeholder {
+        height: 130px;
+    }
+
+    .screenshots .screenshot-placeholder img {
+        width: 250px;
+    }
+
+    .card {
+        margin-bottom: 20px;
+    }
+
+    .cta {
+        padding: 60px 20px;
+    }
+
+    .cta h2 {
+        font-size: 1.8rem;
+    }
+
+    #demo-form {
+        padding: 30px;
+    }
+
+    footer {
+        padding: 40px 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        padding: 100px 0 60px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .btn {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+    }
+
+    .faq-question,
+    .faq-answer {
+        padding: 15px;
+    }
 }

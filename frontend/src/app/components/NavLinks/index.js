@@ -32,8 +32,6 @@ const NavLinks = ({ className }) => {
         ],
     };
 
-    const exludedRoutesForMobile = ['/statistics'];
-
     return (
         (isMobile ? (
             <div className={styles.navLinksMobile}>
@@ -46,8 +44,7 @@ const NavLinks = ({ className }) => {
                         { [styles.navLinksMobileMenuWrapper_open]: isMobileMenuOpen },
                     )}
                 >
-                    {routesForUsersRole[user.role]
-                        .filter(route => !exludedRoutesForMobile.includes(route.path)).map((route, index) => {
+                    {routesForUsersRole[user.role].map((route, index) => {
                             return (
                                 <Link
                                     key={index}

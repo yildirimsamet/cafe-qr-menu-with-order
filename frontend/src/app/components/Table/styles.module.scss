@@ -137,23 +137,38 @@
         margin-top: auto;
         margin-bottom: 5px;
 
-        & button {
+        & button, & a {
             flex: 1;
             padding: 10px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
             font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         &Finish {
             background-color: var(--warning);
             color: var(--text-3);
+            flex: 1;
         }
 
-        &Qr {
-            background-color: var(--bg-1-dark);
+        &Order {
+            flex: 1;
+            background: var(--success);
             color: var(--text-3);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
         }
     }
 
@@ -166,11 +181,11 @@
             background: var(--danger);
         }
 
-        &Order {
-            background: var(--success);
+        &Qr {
+            background: var(--bg-1-dark);
         }
 
-        &Order, &Delete &DeleteButton {
+        &Qr, &Delete &DeleteButton {
             font-size: 14px;
             color: var(--text-3);
             border: none;
@@ -178,10 +193,11 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            font-weight: 700;
+            font-weight: bold;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             float: right;
             margin-top: 8px;
+            
         }
     }
 }
@@ -251,6 +267,12 @@
             }
 
             &Item {
+                font-size: 12px;
+            }
+        }
+
+        &Buttons {
+            &Order, &Finish {
                 font-size: 12px;
             }
         }

@@ -30,8 +30,19 @@
 
 @media only screen and (max-width: 1001px) {
     .orders {
+        flex-direction: column; // Ana container'ı dikey yönde sırala
+
+        &Content {
+            min-width: 100%; // İçerik tam genişlik kaplasın
+            order: 1; // İçerik ilk sırada gelsin
+        }
+
         &Notifications {
-            display: none;
+            order: 2; // Bildirimler ikinci sırada (altta) gelsin
+            position: relative; // Sticky pozisyonunu kaldır
+            height: auto; // Yüksekliği içeriğe göre ayarla
+            width: 100%; // Tam genişlik kaplasın
+            margin-top: 20px; // Üstten boşluk ekle
         }
     }
 }

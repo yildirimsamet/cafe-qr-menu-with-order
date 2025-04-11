@@ -1,82 +1,183 @@
-'use client';
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import {
     faQrcode, faComments, faBell, faEdit, faChair, faUsersCog,
     faTachometerAlt, faMobileAlt, faChartLine, faCogs, faWifi, faHeadset,
-    faQuoteLeft, faEnvelope, faPhone,
+    faQuoteLeft, faEnvelope, faPhone, faArrowRight, faArrowDown,
 } from '@fortawesome/free-solid-svg-icons';
 import './styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
+import axios from '@/app/lib/axios';
+import FaqSection from './FaqSection';
 
 library.add(
     faQrcode, faComments, faBell, faEdit, faChair, faUsersCog,
     faTachometerAlt, faMobileAlt, faChartLine, faCogs, faWifi, faHeadset,
-    faQuoteLeft, faEnvelope, faPhone, faInstagram,
+    faQuoteLeft, faEnvelope, faPhone, faInstagram, faArrowRight, faArrowDown,
 );
 
-const Landing = () => {
-    const [activeFaq, setActiveFaq] = useState(null);
+const staggerContainer = {
+    hidden: { opacity: 1 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.2,
+            delayChildren: 0.1,
+        },
+    },
+};
 
-    const toggleFaq = (index) => {
-        setActiveFaq(activeFaq === index ? null : index);
+const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+};
+
+const slideInLeft = {
+    hidden: { opacity: 0, x: -100 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.6, -0.05, 0.01, 0.99] } },
+};
+
+const slideInRight = {
+    hidden: { opacity: 0, x: 100 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.6, -0.05, 0.01, 0.99] } },
+};
+
+const scaleUp = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: 'backOut' } },
+};
+
+const rotateScaleIn = {
+    hidden: { opacity: 0, scale: 0.5, rotate: -15 },
+    visible: { opacity: 1, scale: 1, rotate: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+};
+
+const Landing = () => {
+    const [formData, setFormData] = useState({
+        business: '',
+        email: '',
+        phone: '',
+        message: '',
+    });
+    const [formStatus, setFormStatus] = useState({ loading: false, success: null, error: null });
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const faqData = [
-        {
-            q: 'CafeQRMenü\'nün kurulumu zor mu?',
-            a: 'Hayır, kurulum oldukça basittir. Size özel admin paneliniz dakikalar içinde hazır olur ve hemen kullanmaya başlayabilirsiniz. Gerekli kurulumları biz sağlıyoruz.',
-        },
-        {
-            q: 'Mevcut sistemimizle entegre edilebilir mi?',
-            a: 'CafeQRMenü bağımsız bir sistem olarak çalışır ve kendi kafenize göre özelleştirilebilir.',
-        },
-        {
-            q: 'Müşterilerin uygulamayı indirmesi gerekiyor mu?',
-            a: 'Hayır, müşteriler herhangi bir uygulama indirmeden, sadece telefonlarının kamerasıyla QR kodu okutarak doğrudan menüye erişebilir ve sipariş verebilirler.',
-        },
-        {
-            q: 'Demo talep edebilir miyim?',
-            a: 'Evet, demo talep edebilirsiniz.',
-        },
-        {
-            q: 'Fiyatlandırma nasıl?',
-            a: 'Tek fiyat ömür boyu kullanım. Demo talebiniz sonrası size özel teklif sunulacaktır.',
-        },
-    ];
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setFormStatus({ loading: true, success: null, error: null });
+
+        if (!formData.phone) {
+            setFormStatus({ loading: false, success: false, error: 'Telefon numarası zorunludur.' });
+            return;
+        }
+
+        try {
+            const response = await axios.post('/demo-requests', formData);
+            if (response.status === 201) {
+                setFormStatus({ loading: false, success: true, error: null });
+                setFormData({ business: '', email: '', phone: '', message: '' });
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Başarıyla Gönderildi!',
+                    text: 'Demo talebiniz başarıyla gönderildi. En kısa sürede ekibimiz size dönüş yapacaktır.',
+                    confirmButtonText: 'Tamam',
+                });
+            } else {
+                setFormStatus({ loading: false, success: false, error: 'Form gönderilirken bir hata oluştu.' });
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata!',
+                    text: 'Form gönderilirken bir hata oluştu.',
+                    confirmButtonText: 'Tamam',
+                });
+            }
+        } catch (error) {
+            const errorMessage = error.response?.data?.error || error.message || 'Sunucu hatası, lütfen tekrar deneyin.';
+            setFormStatus({ loading: false, success: false, error: errorMessage });
+            Swal.fire({
+                icon: 'error',
+                title: 'Hata!',
+                text: errorMessage,
+                confirmButtonText: 'Tamam',
+            });
+        }
+    };
 
     return (
         <>
-            <div className='landing-wrapper'>
-                <header className="hero">
-                    <div className="landing-container">
-                        <h1>QR Kodla Siparişin Geleceği Burada</h1>
-                        <h2>Masadan Sipariş!</h2>
-                        <p>CafeQRMenü ile tanışın: Cafe ve restoranlar için tasarlanmış, sipariş süreçlerini
+            <motion.div
+                className='landing-wrapper'
+                initial="hidden"
+                animate="visible"
+                variants={staggerContainer}
+            >
+                <motion.header
+                    className="hero"
+                >
+                    <motion.div
+                        className="landing-container"
+                        initial="hidden"
+                        animate="visible"
+                        variants={staggerContainer}
+                    >
+                        <motion.h1 variants={fadeInUp}>QR Kodla Siparişin Geleceği Burada</motion.h1>
+                        <motion.h2
+                            variants={fadeInUp}
+                            transition={{ delay: 0.1 }}
+                        >Masadan Sipariş!</motion.h2>
+                        <motion.p
+                            variants={fadeInUp}
+                            transition={{ delay: 0.2 }}
+                        >CafeQRMenü ile tanışın: Cafe ve restoranlar için tasarlanmış, sipariş süreçlerini
                             dijitalleştiren, verimliliği artıran ve müşteri memnuniyetini zirveye taşıyan modern
-                            QR kodlu menü ve sipariş sistemi.</p>
-                        <Link
-                            href="/login"
-                            className="btn btn-primary"
-                        >Bir Göz Atın</Link>
-                        <a
+                            QR kodlu menü ve sipariş sistemi.</motion.p>
+                        <motion.a
                             href="#features"
                             className="btn btn-secondary"
                             data-letitgo
-                        >Özellikleri Keşfet</a>
-                    </div>
-                </header>
-                <section
+                            variants={scaleUp}
+                            transition={{ delay: 0.3 }}
+                            whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
+                            whileTap={{ scale: 0.9 }}
+                        >Özellikleri Keşfet <FontAwesomeIcon
+                            icon={faArrowDown}
+                            style={{ marginLeft: '8px' }}
+                        /></motion.a>
+
+                    </motion.div>
+                </motion.header>
+
+                <motion.section
                     id="features"
                     className="features"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.15 }}
+                    variants={staggerContainer}
                 >
                     <div className="landing-container">
-                        <h2 className="section-title">Öne Çıkan Özellikler</h2>
-                        <div className="grid grid-3">
-                            <div className="card card-order">
+                        <motion.h2
+                            className="section-title"
+                            variants={fadeInUp}
+                        >Öne Çıkan Özellikler</motion.h2>
+                        <motion.div
+                            className="grid grid-3"
+                            variants={staggerContainer}
+                        >
+                            <motion.div
+                                className="card card-order"
+                                variants={slideInLeft}
+                                whileHover={{ y: -8, scale: 1.03, transition: { duration: 0.2 } }}
+                            >
                                 <div className="card-content">
                                     <FontAwesomeIcon icon={faQrcode} />
                                     <h3>Akıllı QR Sipariş</h3>
@@ -85,8 +186,12 @@ const Landing = () => {
                                         sipariş verir.
                                     </p>
                                 </div>
-                            </div>
-                            <div className="card card-communication">
+                            </motion.div>
+                            <motion.div
+                                className="card card-communication"
+                                variants={scaleUp}
+                                whileHover={{ y: -8, scale: 1.03, transition: { duration: 0.2 } }}
+                            >
                                 <div className="card-content">
                                     <FontAwesomeIcon icon={faComments} />
                                     <h3>Masadan İletişim</h3>
@@ -94,8 +199,12 @@ const Landing = () => {
                                         notlar iletebilir.
                                     </p>
                                 </div>
-                            </div>
-                            <div className="card card-notification">
+                            </motion.div>
+                            <motion.div
+                                className="card card-notification"
+                                variants={slideInRight}
+                                whileHover={{ y: -8, scale: 1.03, transition: { duration: 0.2 } }}
+                            >
                                 <div className="card-content">
                                     <FontAwesomeIcon icon={faBell} />
                                     <h3>Anlık Bildirimler</h3>
@@ -103,8 +212,12 @@ const Landing = () => {
                                         görsel bildirim alın.
                                     </p>
                                 </div>
-                            </div>
-                            <div className="card card-menu">
+                            </motion.div>
+                            <motion.div
+                                className="card card-menu"
+                                variants={slideInLeft}
+                                whileHover={{ y: -8, scale: 1.03, transition: { duration: 0.2 } }}
+                            >
                                 <div className="card-content">
                                     <FontAwesomeIcon icon={faEdit} />
                                     <h3>Esnek Menü Yönetimi</h3>
@@ -112,8 +225,12 @@ const Landing = () => {
                                         düzenleyin veya kaldırın.
                                     </p>
                                 </div>
-                            </div>
-                            <div className="card card-table">
+                            </motion.div>
+                            <motion.div
+                                className="card card-table"
+                                variants={scaleUp}
+                                whileHover={{ y: -8, scale: 1.03, transition: { duration: 0.2 } }}
+                            >
                                 <div className="card-content">
                                     <FontAwesomeIcon icon={faChair} />
                                     <h3>Masa Yönetimi</h3>
@@ -122,8 +239,12 @@ const Landing = () => {
                                         yazdırın.
                                     </p>
                                 </div>
-                            </div>
-                            <div className="card card-user">
+                            </motion.div>
+                            <motion.div
+                                className="card card-user"
+                                variants={slideInRight}
+                                whileHover={{ y: -8, scale: 1.03, transition: { duration: 0.2 } }}
+                            >
                                 <div className="card-content">
                                     <FontAwesomeIcon icon={faUsersCog} />
                                     <h3>Kullanıcı Rolleri</h3>
@@ -131,220 +252,396 @@ const Landing = () => {
                                         yönetin.
                                     </p>
                                 </div>
-                            </div>
-                        </div>
+                            </motion.div>
+                        </motion.div>
                     </div>
-                </section>
-                <section className="benefits">
+                </motion.section>
+
+                <motion.section
+                    className="benefits"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.15 }}
+                    variants={staggerContainer}
+                >
                     <div className="landing-container">
-                        <h2 className="section-title">Neden CafeQRMenü?</h2>
-                        <div className="grid grid-3">
-                            <div className="card">
+                        <motion.h2
+                            className="section-title"
+                            variants={fadeInUp}
+                        >Neden CafeQRMenü?</motion.h2>
+                        <motion.div
+                            className="grid grid-3"
+                            variants={staggerContainer}
+                        >
+                            <motion.div
+                                className="card"
+                                variants={scaleUp}
+                                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                            >
                                 <FontAwesomeIcon icon={faTachometerAlt} />
                                 <h3>Hız Kazanın</h3>
                                 <p>Sipariş alma ve hazırlama süresini %50'ye varan oranlarda kısaltarak operasyonel
                                     verimliliği artırın.
                                 </p>
-                            </div>
-                            <div className="card">
+                            </motion.div>
+                            <motion.div
+                                className="card"
+                                variants={scaleUp}
+                                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                            >
                                 <FontAwesomeIcon icon={faMobileAlt} />
                                 <h3>Daima Güncel Menü</h3>
                                 <p>Kağıt menü masrafından kurtulun. Menünüzü dilediğiniz an, kolayca güncelleyin.</p>
-                            </div>
-                            <div className="card">
+                            </motion.div>
+                            <motion.div
+                                className="card"
+                                variants={scaleUp}
+                                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                            >
                                 <FontAwesomeIcon icon={faChartLine} />
                                 <h3>Anlık Takip</h3>
                                 <p>Gelen siparişleri anlık olarak takip edin, detaylı raporlarla işletmenizin
                                     performansını analiz edin.
                                 </p>
-                            </div>
-                            <div className="card">
+                            </motion.div>
+                            <motion.div
+                                className="card"
+                                variants={scaleUp}
+                                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                            >
                                 <FontAwesomeIcon icon={faCogs} />
                                 <h3>Kolay Yönetim</h3>
                                 <p>Kullanıcı dostu admin paneli ile tüm süreci (menü, masalar, siparişler) tek
                                     yerden yönetin.
                                 </p>
-                            </div>
-                            <div className="card">
+                            </motion.div>
+                            <motion.div
+                                className="card"
+                                variants={scaleUp}
+                                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                            >
                                 <FontAwesomeIcon icon={faWifi} />
                                 <h3>Temassız Deneyim</h3>
                                 <p>Müşterilerinize hijyenik ve modern bir sipariş deneyimi sunun.</p>
-                            </div>
-                            <div className="card">
+                            </motion.div>
+                            <motion.div
+                                className="card"
+                                variants={scaleUp}
+                                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                            >
                                 <FontAwesomeIcon icon={faHeadset} />
                                 <h3>7/24 Destek</h3>
                                 <p>
                                     İhtiyaç duyduğunuz her an yanınızda olan profesyonel destek ekibimizle güvendesiniz.
                                 </p>
-                            </div>
-                        </div>
+                            </motion.div>
+                        </motion.div>
                     </div>
-                </section>
-                <section className="screenshots">
+                </motion.section>
+
+                <motion.section
+                    className="screenshots"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.15 }}
+                    variants={staggerContainer}
+                >
                     <div className="landing-container">
-                        <h2 className="section-title">Uygulama Ekran Görüntüleri</h2>
-                        <div className="grid grid-3">
-                            <div className="screenshot-placeholder">
-                                <img
+                        <motion.h2
+                            className="section-title"
+                            variants={fadeInUp}
+                        >Uygulama Ekran Görüntüleri</motion.h2>
+                        <motion.div
+                            className="grid grid-3"
+                            variants={staggerContainer}
+                        >
+                            <motion.div
+                                className="screenshot-placeholder"
+                                variants={rotateScaleIn}
+                            >
+                                <motion.img
                                     src="/images/landing/DesktopTablesMockup.png"
                                     alt="Admin Masalar Ekranı Görseli"
+                                    whileHover={{ scale: 1.4, rotate: -3 }}
                                 />
-                            </div>
-                            <div className="screenshot-placeholder">
-                                <img
+                            </motion.div>
+                            <motion.div
+                                className="screenshot-placeholder"
+                                variants={rotateScaleIn}
+                                transition={{ delay: 0.1 }}
+                            >
+                                <motion.img
                                     src="/images/landing/MobileThreeMockup.png"
                                     alt="Mobil Menü Ekranı Görseli"
+                                    whileHover={{ scale: 1.4, rotate: 0 }}
                                 />
-                            </div>
-                            <div className="screenshot-placeholder">
-                                <img
+                            </motion.div>
+                            <motion.div
+                                className="screenshot-placeholder"
+                                variants={rotateScaleIn}
+                                transition={{ delay: 0.2 }}
+                            >
+                                <motion.img
                                     src="/images/landing/DesktopOrdersMockup.png"
                                     alt="Admin Sipariş Ekranı Görseli"
+                                    whileHover={{ scale: 1.4, rotate: 3 }}
                                 />
-                            </div>
-                        </div>
+                            </motion.div>
+                        </motion.div>
+                        <motion.div
+                            className="screenshot-cta"
+                            variants={fadeInUp}
+                        >
+                            <Link
+                                href="/login"
+                                passHref
+                                legacyBehavior
+                            >
+                                <motion.a
+                                    target="_blank"
+                                    className="btn btn-screenshot-cta"
+                                    whileHover={{ scale: 1.1, y: -5, boxShadow: '0 10px 20px rgba(0,0,0,0.2)', color: 'var(--primary-color)', backgroundColor: 'var(--white-color)' }}
+                                    whileTap={{ scale: 0.9 }}
+                                >
+                                    Bir Göz Atın <FontAwesomeIcon
+                                        icon={faArrowRight}
+                                        style={{ marginLeft: '8px' }}
+                                    />
+                                </motion.a>
+                            </Link>
+                        </motion.div>
                     </div>
-                </section>
-                <section className="testimonials">
+                </motion.section>
+
+                <motion.section
+                    className="testimonials"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.15 }}
+                    variants={staggerContainer}
+                >
                     <div className="landing-container">
-                        <h2 className="section-title">Müşterilerimiz Ne Diyor?</h2>
-                        <div className="grid grid-3">
-                            <div className="card">
+                        <motion.h2
+                            className="section-title"
+                            variants={fadeInUp}
+                        >Müşterilerimiz Ne Diyor?</motion.h2>
+                        <motion.div
+                            className="grid grid-3"
+                            variants={staggerContainer}
+                        >
+                            <motion.div
+                                className="card"
+                                variants={slideInLeft}
+                            >
                                 <FontAwesomeIcon icon={faQuoteLeft} />
                                 <p>“Cafeqrmenu sayesinde sipariş hataları neredeyse sıfıra indi. Garsonlarımız artık
                                     daha verimli.”
                                 </p>
                                 <h3>– Fincan Hikayesi</h3>
-                            </div>
-                            <div className="card">
+                            </motion.div>
+                            <motion.div
+                                className="card"
+                                variants={fadeInUp}
+                            >
                                 <FontAwesomeIcon icon={faQuoteLeft} />
                                 <p>“Özellikle yoğun saatlerde QR kodla sipariş almak büyük kolaylık sağlıyor.
                                     Müşterilerimiz de çok memnun.”
                                 </p>
                                 <h3>– Kahve Notası</h3>
-                            </div>
-                            <div className="card">
+                            </motion.div>
+                            <motion.div
+                                className="card"
+                                variants={slideInRight}
+                            >
                                 <FontAwesomeIcon icon={faQuoteLeft} />
                                 <p>“Admin paneli çok kullanışlı. Menüyü güncellemek veya raporları incelemek
                                     saniyeler sürüyor.”
                                 </p>
                                 <h3>– Gece Demliği</h3>
-                            </div>
-                        </div>
+                            </motion.div>
+                        </motion.div>
                     </div>
-                </section>
-                <section className="cta-container">
+                </motion.section>
+
+                <motion.section
+                    className="cta-container"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={scaleUp}
+                >
                     <div className="landing-container">
-                        <div className="cta">
-                            <h2 className="section-title">İşletmenizi Geleceğe Taşıyın!</h2>
-                            <p>CafeQRMenü'nün sunduğu avantajları kendiniz deneyimleyin. Hemen demo talep edin,
-                                işletmenizi dijitalleştirmenin keyfini çıkarın.</p>
-                            <a
+                        <motion.div
+                            className="cta"
+                            variants={staggerContainer}
+                        >
+                            <motion.h2
+                                className="section-title"
+                                variants={fadeInUp}
+                            >İşletmenizi Geleceğe Taşıyın!</motion.h2>
+                            <motion.p
+                                variants={fadeInUp}
+                                transition={{ delay: 0.1 }}
+                            >CafeQRMenü'nün sunduğu avantajları kendiniz deneyimleyin. Hemen demo talep edin,
+                                işletmenizi dijitalleştirmenin keyfini çıkarın.</motion.p>
+                            <motion.a
                                 id='demo-btn'
                                 href="#demo-form"
                                 className="btn btn-primary"
                                 data-letitgo
-                            >Ücretsiz Demo Talep Et</a>
-                        </div>
+                                variants={fadeInUp}
+                                transition={{ delay: 0.2 }}
+                                whileHover={{ scale: 1.1, y: -5, boxShadow: '0 10px 20px rgba(0,0,0,0.2)' }}
+                                whileTap={{ scale: 0.9 }}
+                            >Ücretsiz Demo Talep Et</motion.a>
+                        </motion.div>
                     </div>
-                </section>
-                <section id="demo-form">
+                </motion.section>
+
+                <motion.section
+                    id="demo-form"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.15 }}
+                    variants={staggerContainer}
+                >
                     <div className="landing-container">
-                        <h2 className="section-title">Demo Başvurusu</h2>
-                        <form>
-                            <input
+                        <motion.h2
+                            className="section-title"
+                            variants={fadeInUp}
+                        >Demo Başvurusu</motion.h2>
+                        <motion.form
+                            onSubmit={handleSubmit}
+                            variants={staggerContainer}
+                        >
+                            <motion.input
                                 type="text"
                                 name="business"
-                                placeholder="İşletme Adı *"
-                                required
+                                value={formData.business} // Bind value
+                                onChange={handleInputChange} // Add onChange
+                                variants={slideInLeft}
+                                placeholder="İşletme Adı (isteğe bağlı)"
                             />
-                            <input
+                            <motion.input
                                 type="email"
                                 name="email"
-                                placeholder="E-posta Adresiniz *"
-                                required
+                                placeholder="E-posta Adresiniz (isteğe bağlı)"
+                                value={formData.email} // Bind value
+                                onChange={handleInputChange} // Add onChange
+                                variants={slideInRight}
                             />
-                            <input
+                            <motion.input
                                 type="tel"
                                 name="phone"
+                                value={formData.phone} // Bind value
+                                onChange={handleInputChange} // Add onChange
                                 placeholder="Telefon Numaranız *"
                                 required
+                                variants={slideInLeft}
                             />
-                            <textarea
+                            <motion.textarea
                                 name="message"
-                                rows="5"
+                                rows="3"
                                 placeholder="Eklemek istediğiniz bir mesaj var mı? (isteğe bağlı)"
+                                value={formData.message}
+                                onChange={handleInputChange}
+                                variants={slideInRight}
                             />
-                            <button
+                            <motion.button
                                 type="submit"
                                 className="btn btn-primary"
+                                disabled={formStatus.loading}
+                                variants={scaleUp}
+                                whileHover={{ scale: 1.1, y: -5, boxShadow: '0 10px 20px rgba(0,0,0,0.2)' }}
+                                whileTap={{ scale: 0.9 }}
                             >
-                                Demo Talebini
-                                Gönder
-                            </button>
-                        </form>
+                                {formStatus.loading ? 'Gönderiliyor...' : 'Demo Talebini Gönder'}
+                            </motion.button>
+                        </motion.form>
                     </div>
-                </section>
-                <section className="faq">
+                </motion.section>
+
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.1 }}
+                    variants={fadeInUp}
+                >
+                    <FaqSection />
+                </motion.div>
+
+                <motion.footer
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.1 }}
+                    variants={fadeInUp}
+                >
                     <div className="landing-container">
-                        <h2 className="section-title">Sıkça Sorulan Sorular</h2>
-                        {faqData.map((faq, index) => (
-                            <div
-                                key={index}
-                                className={`faq-item ${activeFaq === index ? 'active' : ''}`}
-                            >
-                                <div
-                                    className="faq-question"
-                                    onClick={() => toggleFaq(index)}
-                                >
-                                    {faq.q}
-                                    <span className="faq-toggle-icon">{activeFaq === index ? '-' : '+'}</span>
-                                </div>
-                                {activeFaq === index && (
-                                    <div className="faq-answer">{faq.a}</div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                </section>
-                <footer>
-                    <div className="landing-container">
-                        <p className="footer-text">&copy; 2025 CafeQRMenü. Tüm hakları saklıdır.</p>
-                        <p className='footer-links'>
-                            <button className='link-button'>Gizlilik Politikası</button> |
-                            <button className='link-button'>Kullanım Koşulları</button> |
-                            <a
+                        <motion.p
+                            className="footer-text"
+                            variants={fadeInUp}
+                        >&copy; 2025 CafeQRMenü. Tüm hakları saklıdır.</motion.p>
+                        <motion.p
+                            className='footer-links'
+                            variants={fadeInUp}
+                            transition={{ delay: 0.1 }}
+                        >
+                            <motion.button
+                                className='link-button'
+                                whileHover={{ scale: 1.1, color: 'var(--white-color)' }}
+                                whileTap={{ scale: 0.9 }}
+                            >Gizlilik Politikası</motion.button> |
+                            <motion.button
+                                className='link-button'
+                                whileHover={{ scale: 1.1, color: 'var(--white-color)' }}
+                                whileTap={{ scale: 0.9 }}
+                            >Kullanım Koşulları</motion.button> |
+                            <motion.a
+                                className='link-button'
                                 data-letitgo
                                 href='#demo-form'
-                            >İletişim</a>
-                        </p>
-                        <p className="footer-contact">
-                            <a
+                                style={{ display: 'inline-block' }}
+                                whileHover={{ scale: 1.1, color: 'var(--white-color)' }}
+                                whileTap={{ scale: 0.9 }}
+                            >İletişim</motion.a>
+                        </motion.p>
+                        <motion.p
+                            className="footer-contact"
+                            variants={fadeInUp}
+                            transition={{ delay: 0.2 }}
+                        >
+                            <motion.a
                                 data-letitgo
                                 href="https://instagram.com/cafeqrmenu_"
+                                whileHover={{ scale: 1.2, rotate: 5 }}
+                                whileTap={{ scale: 0.9 }}
                                 target="_blank"
                                 rel="noreferrer"
                             >
                                 <FontAwesomeIcon icon={faInstagram} /> cafeqrmenu_
-                            </a>
-                            <a
+                            </motion.a>
+                            <motion.a
                                 data-letitgo
                                 href="mailto:iletisim@cafeqrmenu.online"
+                                whileHover={{ scale: 1.2, rotate: -5 }}
+                                whileTap={{ scale: 0.9 }}
                                 target="_blank"
                                 rel="noreferrer"
                             >
                                 <FontAwesomeIcon icon={faEnvelope} /> iletisim@cafeqrmenu.online
-                            </a>
-                            <a
+                            </motion.a>
+                            <motion.a
                                 data-letitgo
                                 href="tel:+905531883326"
+                                whileHover={{ scale: 1.2, rotate: 5 }}
+                                whileTap={{ scale: 0.9 }}
                             >
                                 <FontAwesomeIcon icon={faPhone} /> 0553 188 33 26
-                            </a>
-                        </p>
+                            </motion.a>
+                        </motion.p>
                     </div>
-                </footer>
-            </div>
+                </motion.footer>
+            </motion.div>
         </>
     );
 };
