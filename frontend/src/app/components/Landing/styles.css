@@ -710,19 +710,20 @@ strong {
     }
 
     .hero {
-        padding: 30px 0 40px;
+        padding: 25px 0 40px;
     }
 
     .hero h1 {
-        font-size: 32px;
+        font-size: 26px;
     }
 
     .hero h2 {
-        font-size: 22px;
+        font-size: 18px;
     }
 
     .hero p {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
+        font-size: 14px;
     }
 
     .btn {
