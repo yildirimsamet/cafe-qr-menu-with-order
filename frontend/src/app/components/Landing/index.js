@@ -3,7 +3,7 @@ import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import {
     faQrcode, faComments, faBell, faEdit, faChair, faUsersCog,
     faTachometerAlt, faMobileAlt, faChartLine, faCogs, faWifi, faHeadset,
-    faQuoteLeft, faEnvelope, faPhone, faArrowRight, faArrowDown,
+    faQuoteLeft, faEnvelope, faPhone, faArrowRight, faArrowDown, faEye, faGift,
 } from '@fortawesome/free-solid-svg-icons';
 import './styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,7 +17,7 @@ import FaqSection from './FaqSection';
 library.add(
     faQrcode, faComments, faBell, faEdit, faChair, faUsersCog,
     faTachometerAlt, faMobileAlt, faChartLine, faCogs, faWifi, faHeadset,
-    faQuoteLeft, faEnvelope, faPhone, faInstagram, faArrowRight, faArrowDown,
+    faQuoteLeft, faEnvelope, faPhone, faInstagram, faArrowRight, faArrowDown, faEye, faGift,
 );
 
 const staggerContainer = {
@@ -129,30 +129,69 @@ const Landing = () => {
                         animate="visible"
                         variants={staggerContainer}
                     >
-                        <motion.h1 variants={fadeInUp}>QR Kodla Siparişin Geleceği Burada</motion.h1>
-                        <motion.h2
-                            variants={fadeInUp}
-                            transition={{ delay: 0.1 }}
-                        >Masadan Sipariş!</motion.h2>
-                        <motion.p
-                            variants={fadeInUp}
-                            transition={{ delay: 0.2 }}
-                        >CafeQRMenü ile tanışın: Cafe ve restoranlar için tasarlanmış, sipariş süreçlerini
-                            dijitalleştiren, verimliliği artıran ve müşteri memnuniyetini zirveye taşıyan modern
-                            QR kodlu menü ve sipariş sistemi.</motion.p>
-                        <motion.a
-                            href="#features"
-                            className="btn btn-secondary"
-                            data-letitgo
-                            variants={scaleUp}
-                            transition={{ delay: 0.3 }}
-                            whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
-                            whileTap={{ scale: 0.9 }}
-                        >Özellikleri Keşfet <FontAwesomeIcon
-                            icon={faArrowDown}
-                            style={{ marginLeft: '8px' }}
-                        /></motion.a>
-
+                        <motion.div>
+                            <motion.h1 variants={fadeInUp}>Kare Kod Menü ile Siparişin Geleceği: CafeQRMenü</motion.h1>
+                            <motion.h2
+                                variants={fadeInUp}
+                                transition={{ delay: 0.1 }}
+                            >Kolay ve Hızlı Kare Kod Menü Oluşturma</motion.h2>
+                            <motion.p
+                                variants={fadeInUp}
+                                transition={{ delay: 0.2 }}
+                            >CafeQRMenü ile tanışın: Cafe ve restoranlar için tasarlanmış, <strong>kare kod menü oluşturma</strong> süreçlerini
+                                dijitalleştiren, verimliliği artıran ve müşteri memnuniyetini zirveye taşıyan modern
+                                <strong>QR kodlu menü</strong> ve sipariş sistemi. <strong>QR menü fiyat</strong> avantajlarını keşfedin.</motion.p>
+                        </motion.div>
+                        <motion.div>
+                            <motion.div
+                                className="screenshot-cta cta-top"
+                                variants={fadeInUp}
+                            >
+                                <Link
+                                    href="/login"
+                                    passHref
+                                    legacyBehavior
+                                >
+                                    <motion.a
+                                        target="_blank"
+                                        className="btn btn-screenshot-cta"
+                                        whileHover={{ scale: 1.1, y: -5, boxShadow: '0 10px 20px rgba(0,0,0,0.2)', color: 'var(--primary-color)', backgroundColor: 'var(--white-color)' }}
+                                        whileTap={{ scale: 0.9 }}
+                                    >
+                                        Bir Göz Atın <FontAwesomeIcon
+                                            icon={faEye} //eye icon
+                                            style={{ marginLeft: '8px' }}
+                                        />
+                                    </motion.a>
+                                </Link>
+                                <motion.a
+                                    id='demo-btn'
+                                    href="#demo-form"
+                                    className="btn btn-secondary"
+                                    variants={scaleUp}
+                                    transition={{ delay: 0.3 }}
+                                    whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
+                                    whileTap={{ scale: 0.9 }}
+                                >
+                                    Demo Talep Et <FontAwesomeIcon
+                                        icon={faGift}
+                                        style={{ marginLeft: '8px' }}
+                                    />
+                                </motion.a>
+                            </motion.div>
+                            <motion.a
+                                href="#features"
+                                className="btn btn-secondary"
+                                data-letitgo
+                                variants={scaleUp}
+                                transition={{ delay: 0.3 }}
+                                whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
+                                whileTap={{ scale: 0.9 }}
+                            >Özellikleri Keşfet <FontAwesomeIcon
+                                icon={faArrowDown}
+                                style={{ marginLeft: '8px' }}
+                            /></motion.a>
+                        </motion.div>
                     </motion.div>
                 </motion.header>
 
@@ -180,10 +219,10 @@ const Landing = () => {
                             >
                                 <div className="card-content">
                                     <FontAwesomeIcon icon={faQrcode} />
-                                    <h3>Akıllı QR Sipariş</h3>
+                                    <h3>Akıllı Kare Kod Menü ile Sipariş</h3>
                                     <p>
-                                        Müşteriler masalarındaki QR kodu okutarak saniyeler içinde menüye ulaşır ve
-                                        sipariş verir.
+                                        Müşteriler masalarındaki <strong>kare kod menü</strong>yü okutarak saniyeler içinde menüye ulaşır ve
+                                        sipariş verir. <strong>QR menü oluşturma</strong> hiç bu kadar kolay olmamıştı.
                                     </p>
                                 </div>
                             </motion.div>
@@ -268,7 +307,7 @@ const Landing = () => {
                         <motion.h2
                             className="section-title"
                             variants={fadeInUp}
-                        >Neden CafeQRMenü?</motion.h2>
+                        >Neden CafeQRMenü ile Kare Kod Menü Kullanmalısınız?</motion.h2>
                         <motion.div
                             className="grid grid-3"
                             variants={staggerContainer}
@@ -291,7 +330,7 @@ const Landing = () => {
                             >
                                 <FontAwesomeIcon icon={faMobileAlt} />
                                 <h3>Daima Güncel Menü</h3>
-                                <p>Kağıt menü masrafından kurtulun. Menünüzü dilediğiniz an, kolayca güncelleyin.</p>
+                                <p>Kağıt menü masrafından kurtulun. <strong>Kare kod menü</strong>nüzü dilediğiniz an, uygun <strong>qr menü fiyat</strong> seçenekleriyle kolayca güncelleyin.</p>
                             </motion.div>
                             <motion.div
                                 className="card"
@@ -350,7 +389,7 @@ const Landing = () => {
                         <motion.h2
                             className="section-title"
                             variants={fadeInUp}
-                        >Uygulama Ekran Görüntüleri</motion.h2>
+                        >Uygulama Ekran Görüntüleri: Kare Kod Menü Yönetimi</motion.h2>
                         <motion.div
                             className="grid grid-3"
                             variants={staggerContainer}
@@ -361,7 +400,7 @@ const Landing = () => {
                             >
                                 <motion.img
                                     src="/images/landing/DesktopTablesMockup.png"
-                                    alt="Admin Masalar Ekranı Görseli"
+                                    alt="CafeQRMenü Admin Paneli - Kare Kod Menü Masa Yönetimi Ekranı"
                                     whileHover={{ scale: 1.4, rotate: -3 }}
                                 />
                             </motion.div>
@@ -372,7 +411,7 @@ const Landing = () => {
                             >
                                 <motion.img
                                     src="/images/landing/MobileThreeMockup.png"
-                                    alt="Mobil Menü Ekranı Görseli"
+                                    alt="CafeQRMenü Mobil Müşteri Arayüzü - Kare Kod Menü Görünümü"
                                     whileHover={{ scale: 1.4, rotate: 0 }}
                                 />
                             </motion.div>
@@ -383,7 +422,7 @@ const Landing = () => {
                             >
                                 <motion.img
                                     src="/images/landing/DesktopOrdersMockup.png"
-                                    alt="Admin Sipariş Ekranı Görseli"
+                                    alt="CafeQRMenü Admin Paneli - Gelen Kare Kod Menü Siparişleri Ekranı"
                                     whileHover={{ scale: 1.4, rotate: 3 }}
                                 />
                             </motion.div>
@@ -478,12 +517,12 @@ const Landing = () => {
                             <motion.h2
                                 className="section-title"
                                 variants={fadeInUp}
-                            >İşletmenizi Geleceğe Taşıyın!</motion.h2>
+                            >İşletmenizi Kare Kod Menü ile Geleceğe Taşıyın!</motion.h2>
                             <motion.p
                                 variants={fadeInUp}
                                 transition={{ delay: 0.1 }}
-                            >CafeQRMenü'nün sunduğu avantajları kendiniz deneyimleyin. Hemen demo talep edin,
-                                işletmenizi dijitalleştirmenin keyfini çıkarın.</motion.p>
+                            >CafeQRMenü'nün sunduğu <strong>kare kod menü</strong> avantajlarını kendiniz deneyimleyin. Hemen <strong>qr menü oluşturma</strong> için demo talep edin,
+                                işletmenizi dijitalleştirmenin keyfini çıkarın. Uygun <strong>qr menü fiyat</strong> seçeneklerimizi inceleyin.</motion.p>
                             <motion.a
                                 id='demo-btn'
                                 href="#demo-form"
@@ -509,7 +548,7 @@ const Landing = () => {
                         <motion.h2
                             className="section-title"
                             variants={fadeInUp}
-                        >Demo Başvurusu</motion.h2>
+                        >Ücretsiz Kare Kod Menü Demo Başvurusu</motion.h2>
                         <motion.form
                             onSubmit={handleSubmit}
                             variants={staggerContainer}

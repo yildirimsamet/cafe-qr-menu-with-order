@@ -156,6 +156,7 @@
 .grid-3 {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     margin-top: 120px;
+    gap: 20px;
 }
 
 /* Kartlar */
@@ -188,7 +189,7 @@
 }
 
 .card p {
-    font-size: 0.95rem;
+    font-size: 14px;
     line-height: 1.6;
 }
 
@@ -476,7 +477,6 @@ footer a:hover {
     color: var(--white-color);
 }
 
-/* Footer Link Butonları */
 .link-button {
     background: none;
     border: none;
@@ -487,7 +487,6 @@ footer a:hover {
     text-decoration: none;
     transition: color var(--transition-speed) ease;
     vertical-align: baseline;
-    /* Diğer metinlerle hizala */
 }
 
 .link-button:hover {
@@ -544,6 +543,7 @@ footer a:hover {
     color: var(--white-color);
     font-weight: 600;
     text-shadow: #fc0 1px 0 10px;
+    font-size: 18px;
 }
 
 .card .card-content p {
@@ -551,6 +551,9 @@ footer a:hover {
     letter-spacing: 0.4px;
     text-shadow: 1px 1px 2px rgb(190, 178, 178);
     font-weight: 500;
+    font-size: 14px;
+    height: 120px;
+
 }
 
 .footer-contact {
@@ -581,9 +584,36 @@ footer a:hover {
     color: var(--white-color);
 }
 
+.cta-top {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.cta-top a {
+    margin-top: 15px !important;
+}
+
+strong {
+    font-weight: bold;
+}
+
 @media (max-width: 992px) {
     .hero {
         height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .landing-container {
+        padding: 50px 15px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
     }
 
     .hero h1 {
@@ -594,14 +624,24 @@ footer a:hover {
         font-size: 1.1rem;
     }
 
+    .hero h2 {
+        font-size: 26px;
+    }
+
     .section-title {
         font-size: 2.2rem;
+    }
+
+    .cta-top {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 
 @media (max-width: 768px) {
     .hero {
-        padding: 120px 0 80px;
+        padding: 30px 0 50px;
     }
 
     .hero h1 {
@@ -619,7 +659,12 @@ footer a:hover {
 
     .grid-3 {
         grid-template-columns: 1fr;
-        gap:65px;
+        gap: 65px;
+        margin-top: 60px;
+    }
+
+    .benefits .grid-3 {
+        gap: 35px;
     }
 
     .screenshots .screenshot-placeholder {
@@ -649,15 +694,35 @@ footer a:hover {
     footer {
         padding: 40px 0;
     }
+
+    .cta-top a {
+        padding: 12px 18px !important;
+    }
+
+    #features {
+        padding-bottom: 0;
+    }
 }
 
 @media (max-width: 576px) {
+    .landing-container {
+        padding: 10px 15px;
+    }
+
     .hero {
-        padding: 100px 0 60px;
+        padding: 30px 0 40px;
     }
 
     .hero h1 {
-        font-size: 2rem;
+        font-size: 32px;
+    }
+
+    .hero h2 {
+        font-size: 22px;
+    }
+
+    .hero p {
+        margin-bottom: 20px;
     }
 
     .btn {
@@ -665,9 +730,15 @@ footer a:hover {
         font-size: 0.9rem;
     }
 
+    .cta-top a,
+    .cta-top+a {
+        padding: 10px 14px;
+        font-size: 12px;
+    }
+
     .section-title {
         font-size: 1.8rem;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
     }
 
     .faq-question,
