@@ -91,6 +91,19 @@ const Landing = () => {
                     text: 'Demo talebiniz başarıyla gönderildi. En kısa sürede ekibimiz size dönüş yapacaktır.',
                     confirmButtonText: 'Tamam',
                 });
+
+                if (typeof window !== 'undefined' && window.gtag) {
+                    window.gtag('event', 'conversion', {
+                        'send_to': 'AW-472856526/C6G6CJij2bcaEM7vvOEB',
+                        'value': 1.0,
+                        'currency': 'TRY',
+                        'event_callback': () => {
+ console.log('GTag conversion reported.');
+},
+                    });
+                } else {
+                    console.warn('GTag function not found.');
+                }
             } else {
                 setFormStatus({ loading: false, success: false, error: 'Form gönderilirken bir hata oluştu.' });
                 Swal.fire({
