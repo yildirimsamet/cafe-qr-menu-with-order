@@ -19,10 +19,6 @@ services:
       target: ${NODE_ENV:-development}
     environment:
       - NODE_ENV=${NODE_ENV}
-      - DB_HOST=mysql
-      - DB_USER=root
-      - DB_PASSWORD=root
-      - DB_NAME=cafe
     depends_on:
       mysql:
         condition: service_healthy
@@ -31,6 +27,25 @@ services:
       - /app/node_modules
     ports:
       - "5000:5000"
+    command: >
+      sh -c "
+        echo 'Database is healthy, running migrations...'
+        npx knex migrate:latest --knexfile ./knexfile.js
+        MIGRATE_EXIT_CODE=$$?
+        if [ $$MIGRATE_EXIT_CODE -ne 0 ]; then
+          echo \"Database migrations failed with exit code $$MIGRATE_EXIT_CODE.\"
+          exit $$MIGRATE_EXIT_CODE
+        fi
+        echo 'Database migrations completed successfully.'
+
+        echo 'Starting application...'
+        # NODE_ENV'ye göre doğru başlatma komutunu seç
+        if [ \"$${NODE_ENV}\" = \"production\" ]; then
+          exec node src/index.js
+        else
+          exec npm run dev
+        fi
+      "
 
   mysql:
     image: mysql:8.0
@@ -50,7 +65,6 @@ services:
       - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
-      - ./backend/src/config/db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   db_data:

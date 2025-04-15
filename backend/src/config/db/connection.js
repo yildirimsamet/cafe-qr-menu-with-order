@@ -1,12 +1,14 @@
 import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const createConnection = async () => {
   try {
     const connection = await mysql.createConnection({
-      host: 'mysql',
-      user: 'root',
-      database: 'cafe',
-      password: 'root',
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      database: process.env.DB_NAME,
+      password: process.env.DB_PASSWORD,
       connectTimeout: 0,
       waitForConnections: true,
       multipleStatements: true,
@@ -19,7 +21,7 @@ const createConnection = async () => {
       } catch (err) {
         console.error('Keep-alive sorgusu başarısız:', err);
       }
-    }, 5 * 60 * 1000); // 5 dakika
+    }, 5 * 60 * 1000);
 
     connection.on('error', async (err) => {
       if (err.code === 'PROTOCOL_CONNECTION_LOST') {

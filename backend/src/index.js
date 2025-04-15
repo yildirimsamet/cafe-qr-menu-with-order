@@ -13,7 +13,6 @@ import sizeRoute from "./routes/sizeRoute.js";
 import itemsRoute from "./routes/itemsRoute.js";
 import authRoute from "./routes/authRoute.js";
 import auth from "./middlewares/authMiddleware.js";
-import { createSuperAdmin } from "./services/superAdminService.js";
 import settingsRoute from "./routes/settingsRoute.js";
 import notificationRoute from "./routes/notificationRoute.js";
 import { createNotification } from "./services/notificationService.js";
@@ -40,15 +39,7 @@ app.use('/menu', menuRoute);
 app.use('/settings',auth('guest'), settingsRoute);
 app.use('/statistics',auth('admin'), statisticsRoute);
 app.use('/notifications', notificationRoute);
-app.use('/demo-requests', demoRequestRoute); // Add the new route here
-
-(async () => {
-    try {
-        await createSuperAdmin();
-    } catch (error) {
-        console.error("Error creating admin user:", error);
-    }
-})();
+app.use('/demo-requests', demoRequestRoute);
 
 const server = createServer(app);
 
