@@ -121,22 +121,6 @@ export default function RootLayout ({ children }) {
                     content="#ffffff"
                 />
             </head>
-            <Script
-                id='gtag-base'
-                strategy='afterInteractive'
-                src='https://www.googletagmanager.com/gtag/js?id=AW-472856526'
-            />
-            <Script
-                id='gtag-init'
-                strategy='afterInteractive'
-            >
-                {`
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', 'AW-472856526');
-                `}
-            </Script>
             <body suppressHydrationWarning>
                 {/* Google Tag Manager (noscript) */}
                 <noscript>
