@@ -1,0 +1,86 @@
+.cookieConsentContainer {
+    background: linear-gradient(to right, #4a4a4a, #333) !important;
+    color: #f1f1f1 !important;
+    font-size: 16px !important;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2) !important;
+    border-top: 1px solid #555 !important;
+    padding: 15px !important;
+    align-items: center !important;
+    z-index: 1000 !important;
+}
+
+.content {
+    margin: 0 !important;
+    flex-grow: 1 !important;
+    margin-right: 15px !important;
+}
+
+.buttonWrapper {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.button {
+    background: #c55c1e !important;
+    color: white !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    border-radius: 5px !important;
+    padding: 10px 15px !important;
+    border: none !important;
+    cursor: pointer !important;
+    margin-left: 10px !important;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background: darken(#c55c1e, 10%) !important;
+    }
+}
+
+.declineButton {
+    background: #7b838a !important;
+    color: white !important;
+    font-size: 13px !important;
+    border-radius: 5px !important;
+    padding: 10px 12px !important;
+    border: none !important;
+    cursor: pointer !important;
+    margin-left: 10px !important;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background: darken(#6c757d, 10%) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .cookieConsentContainer {
+        padding: 20px !important;
+        font-size: 16px !important;
+        text-align: center;
+    }
+
+    .content {
+        margin-right: 0 !important;
+        margin-bottom: 20px !important;
+        line-height: 1.3;
+    }
+
+    .buttonWrapper {
+        flex-direction: column !important;
+        width: 100% !important;
+        align-items: stretch !important;
+    }
+
+    .button,
+    .declineButton {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 12px 15px !important;
+        margin: 0 !important;
+
+        &:not(:last-child) {
+            margin-bottom: 10px !important;
+        }
+    }
+}

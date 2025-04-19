@@ -5,6 +5,7 @@ import '@/app/css/general.scss';
 import { AppProgressProvider as ProgressProvider } from '@bprogress/next';
 import Script from 'next/script';
 import { AppWrapper } from '@/app/context/appContext';
+import CookieConsentBanner from './components/CookieConsentBanner';
 import Loader from './components/Loader';
 import NavBar from './components/Navbar';
 import 'sweetalert2/src/sweetalert2.scss';
@@ -21,7 +22,27 @@ export default function RootLayout ({ children }) {
                     name="description"
                     content="Kolay ve Hızlı Kare Kod Menü Oluşturma!"
                 />
-                {/* Google Tag Manager */}
+                <Script
+                    id="gtm-consent-default"
+                    strategy="beforeInteractive"
+                >
+                    {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('consent', 'default', {
+                            'analytics_storage': 'denied',
+                            // Gerekirse diğer varsayılanları da 'denied' olarak ayarlayın
+                            // 'ad_storage': 'denied',
+                            // 'ad_user_data': 'denied',
+                            // 'ad_personalization': 'denied',
+                            'wait_for_update': 500 // Kullanıcı etkileşimini beklemek için ms
+                        });
+                        // Onaylanmışsa dataLayer'a push et
+                        // Bu kısım, sayfa yeniden yüklendiğinde önceki onayı uygulamak için
+                        // CookieConsent bileşeninin çerezini kontrol ederek genişletilebilir.
+                        // Şimdilik basit tutuyoruz.
+                    `}
+                </Script>
                 <Script
                     id="google-tag-manager"
                     strategy="afterInteractive"
@@ -144,6 +165,7 @@ export default function RootLayout ({ children }) {
                             <Loader />
                             <NavBar />
                             {children}
+                            <CookieConsentBanner />
                         </ProgressProvider>
                     </AuthProvider>
                 </AppWrapper>
